@@ -1,0 +1,8 @@
+							Snake3D
+							   |
+       ---------------------------------------------------------------
+       |             |            |         |           |            |
+   <GameOver>  <Pause menu>  <The snake>  <Grid>  <Apple system>  <Camera>   
+
+
+*Resource manager   
