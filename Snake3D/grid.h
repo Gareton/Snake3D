@@ -30,7 +30,7 @@ private:
 	void addXLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addYLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addZLine(const gmt::vec3& p1, const gmt::vec3& p2);
-	void addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, sk_float ratio);
+	void addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord);
 	void addRectangle(const gmt::vec3& p1, const gmt::vec3& p2); // adds rectangle in a plane with opposing points p1 and p2
 
 	const gmt::vec3 _position;
@@ -40,6 +40,7 @@ private:
 	const sk_uint _height;
 	const sk_uint _length;
 	const sk_float _thickness;
+	const sk_float _borderRatio = 0.4f;
 	const gmt::vec4 _color;
 	VertexManager _vertexManager;
 	Shader _shader;

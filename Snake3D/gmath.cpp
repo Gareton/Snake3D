@@ -127,7 +127,7 @@ namespace gmt
 			return x < o.x;
 
 		if (y != o.y)
-			return y < o.z;
+			return y < o.y;
 
 		return z < o.z;
 	}
@@ -138,7 +138,7 @@ namespace gmt
 			return x > o.x;
 
 		if (y != o.y)
-			return y > o.z;
+			return y > o.y;
 
 		return z > o.z;
 	}

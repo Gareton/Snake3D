@@ -29,7 +29,7 @@ Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
 
 	_centerPosition = gmt::vec3{ 0.5f * width, 0.5f * height, 0.5f * length } * cubeSize;
 
-	std::vector<sk_uint> attributeCounts = {3, 2, 1};
+	std::vector<sk_uint> attributeCounts = {3, 2};
 
 	_vertexManager.init(_verticies, _indicies, attributeCounts);
 }
@@ -194,14 +194,13 @@ void Grid::addZLine(const gmt::vec3& p1, const gmt::vec3& p2)
 	addRectangle(rectanglePoint1, rectanglePoint2);
 }
 
-void Grid::addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, sk_float ratio)
+void Grid::addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord)
 {
 	_verticies.push_back(p.x);
 	_verticies.push_back(p.y);
 	_verticies.push_back(p.z);
 	_verticies.push_back(borderCoord.x);
 	_verticies.push_back(borderCoord.y);
-	_verticies.push_back(ratio);
 	_indicies.push_back(_indicies.size());
 }
 
@@ -210,40 +209,46 @@ void Grid::addRectangle(const gmt::vec3& p1, const gmt::vec3& p2)
 	gmt::vec3 p3;
 	gmt::vec3 p4;
 
-	sk_float len1 = 1.0f;
-	sk_float len2 = 1.0f;
+	sk_float w = 1.0f;
+	sk_float h = 1.0f;
 
 	if (p1.x == p2.x)
 	{
 		p3 = { p1.x, p1.y, p2.z };
 		p4 = { p1.x, p2.y, p1.z };
-		len1 = abs(p1.y - p2.y);
-		len2 = abs(p1.z - p2.z);
+		w = abs(p1.y - p2.y);
+		h = abs(p1.z - p2.z);
 	}
 	else if (p1.y == p2.y)
 	{
 		p3 = { p1.x, p1.y, p2.z };
 		p4 = { p2.x, p1.y, p1.z };
-		len1 = abs(p1.x - p2.x);
-		len2 = abs(p1.z - p2.z);
+		w = abs(p1.x - p2.x);
+		h = abs(p1.z - p2.z);
 	}
 	else
 	{
 		p3 = { p1.x, p2.y, p1.z };
 		p4 = { p2.x, p1.y, p1.z };
-		len1 = abs(p1.y - p2.y);
-		len2 = abs(p1.x - p2.x);
+		w = abs(p1.x - p2.x);
+		h = abs(p1.y - p2.y);
 	}
 
-	if (len1 < len2)
-		std::swap(len1, len2);
+	sk_float borderLength = _borderRatio * _thickness;
 
-	sk_float ratio = len2 / len1;
+	sk_float lbx = borderLength / (2.0f * borderLength - w);
+	sk_float rbx = 1.0f - lbx;
+	sk_float lby = borderLength / (2.0f * borderLength - h);
+	sk_float rby = 1.0f - lby;
 
-	addVertex(p1, {0.0f, 0.0f}, ratio);
-	addVertex(p2, {1.0f, 1.0f}, ratio);
-	addVertex(p3, {1.0f, 0.0f}, ratio);
-	addVertex(p1, {0.0f, 0.0f}, ratio);
-	addVertex(p2, {1.0f, 1.0f}, ratio);
-	addVertex(p4, {0.0f, 1.0f}, ratio);
+	std::vector<gmt::vec3> points = { p1, p2, p3, p4 };
+
+	sort(points.begin(), points.end());
+
+	addVertex(points[0], {lbx, lby});
+	addVertex(points[1], {lbx, rby});
+	addVertex(points[2], {rbx, lby});
+	addVertex(points[1], {lbx, rby});
+	addVertex(points[2], {rbx, lby});
+	addVertex(points[3], {rbx, rby});
 }
