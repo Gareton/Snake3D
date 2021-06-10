@@ -2,19 +2,20 @@
 #define FILE_LOADER_H
 #include <string>
 #include <vector>
+#include "skTypes.h"
 
 struct Image
 {
-	Image(const std::vector<unsigned char> &data_, size_t width_, size_t height_, 
-		  size_t _channelsCount = 3);
-	Image(const unsigned char *data_, size_t width_, size_t height_, 
-		  size_t _channelsCount = 3);
-	Image(std::vector<unsigned char> &&data_, size_t width_, size_t height_, 
-		  size_t _channelsCount = 3);
+	Image(const std::vector<sk_uchar> &data_, sk_uint width_, sk_uint height_, 
+		  sk_uint _channelsCount = 3);
+	Image(const sk_uchar *data_, sk_uint width_, sk_uint height_, 
+		  sk_uint _channelsCount = 3);
+	Image(std::vector<sk_uchar> &&data_, sk_uint width_, sk_uint height_, 
+		  sk_uint _channelsCount = 3);
 
-	std::vector<unsigned char> data;
-	size_t width, height;
-	size_t channelsCount;
+	std::vector<sk_uchar> data;
+	sk_uint width, height;
+	sk_uint channelsCount;
 };
 
 std::string loadFromFile(const std::string& path);

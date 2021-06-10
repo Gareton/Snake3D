@@ -2,12 +2,13 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "file_loader.h"
+#include "skTypes.h"
 
 Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 {
 	_programId = glCreateProgram();
-	GLuint vertexShader = genVertexShader(loadFromFile(vertexShaderPath));
-	GLuint fragmentShader = genFragmentShader(loadFromFile(fragmentShaderPath));
+	sk_uint vertexShader = genVertexShader(loadFromFile(vertexShaderPath));
+	sk_uint fragmentShader = genFragmentShader(loadFromFile(fragmentShaderPath));
 
 	glAttachShader(_programId, vertexShader);
 	glAttachShader(_programId, fragmentShader);
@@ -16,7 +17,7 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	GLint success = 0;
+	sk_int success = 0;
 
 	glGetProgramiv(_programId, GL_LINK_STATUS, &success);
 
@@ -50,12 +51,12 @@ void Shader::setUniform(const std::string& name, const gmt::vec4& v) const
 	glUniform4f(glGetUniformLocation(_programId, &name[0]), v.x, v.y, v.z, v.w);
 }
 
-void Shader::setUniform(const std::string& name, GLfloat x) const
+void Shader::setUniform(const std::string& name, sk_float x) const
 {
 	glUniform1f(glGetUniformLocation(_programId, &name[0]), x);
 }
 
-void Shader::setUniform(const std::string& name, GLuint x) const
+void Shader::setUniform(const std::string& name, sk_uint x) const
 {
 	glUniform1i(glGetUniformLocation(_programId, &name[0]), x);
 }
@@ -78,16 +79,16 @@ void Shader::setUniform(const std::string& name, const gmt::mat4& m) const
 		1, GL_TRUE, &(m.get(0, 0)));
 }
 
-bool Shader::genShader(GLuint& id, GLenum type, const std::string& source)
+bool Shader::genShader(sk_uint& id, GLenum type, const std::string& source)
 {
 	id = glCreateShader(type);
 
-	const GLchar *buf = &source[0];
+	const sk_char *buf = &source[0];
 
 	glShaderSource(id, 1, &buf, NULL);
 	glCompileShader(id);
 
-	GLint success = 0;
+	sk_int success = 0;
 
 	glGetShaderiv(id, GL_COMPILE_STATUS, &success);
 
@@ -100,9 +101,9 @@ bool Shader::genShader(GLuint& id, GLenum type, const std::string& source)
 	return true;
 }
 
-GLuint Shader::genVertexShader(const std::string& source)
+sk_uint Shader::genVertexShader(const std::string& source)
 {
-	GLuint id = 0;
+	sk_uint id = 0;
 	
 	if (!genShader(id, GL_VERTEX_SHADER, source))
 	{
@@ -115,9 +116,9 @@ GLuint Shader::genVertexShader(const std::string& source)
 	return id;
 }
 
-GLuint Shader::genFragmentShader(const std::string& source)
+sk_uint Shader::genFragmentShader(const std::string& source)
 {
-	GLuint id = 0;
+	sk_uint id = 0;
 
 	if (!genShader(id, GL_FRAGMENT_SHADER, source))
 	{

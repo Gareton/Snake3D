@@ -1,7 +1,7 @@
 #include "window.h"
 
-Window::Window(size_t windowWidth,
-			   size_t windowHeight,
+Window::Window(sk_uint windowWidth,
+			   sk_uint windowHeight,
 			   const std::string& windowTitle)
 	: _windowWidth(windowWidth), _windowHeight(windowHeight), _windowTitle(windowTitle), _isValid(true)
 {
@@ -55,22 +55,22 @@ GLFWwindow* Window::getWindowPtr()
 	return _window;
 }
 
-size_t Window::getWindowWidth()
+sk_uint Window::getWindowWidth()
 {
 	return _windowWidth;
 }
 
-size_t Window::getWindowHeight()
+sk_uint Window::getWindowHeight()
 {
 	return _windowHeight;
 }
 
-void Window::setWindowWidth(size_t width)
+void Window::setWindowWidth(sk_uint width)
 {
 	_windowWidth = width;
 }
 
-void Window::setWindowHeight(size_t height)
+void Window::setWindowHeight(sk_uint height)
 {
 	_windowHeight = height;
 }

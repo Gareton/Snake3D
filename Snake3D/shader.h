@@ -3,6 +3,7 @@
 #include <string>
 #include <glad/glad.h>
 #include "gmath.h"
+#include "skTypes.h"
 
 
 class Shader {
@@ -14,20 +15,20 @@ public:
 	void setUniform(const std::string& name, const gmt::vec2& v) const;
 	void setUniform(const std::string& name, const gmt::vec3& v) const;
 	void setUniform(const std::string& name, const gmt::vec4& v) const;
-	void setUniform(const std::string& name, GLfloat x) const;
-	void setUniform(const std::string& name, GLuint x) const;
+	void setUniform(const std::string& name, sk_float x) const;
+	void setUniform(const std::string& name, sk_uint x) const;
 	void setUniform(const std::string& name, const gmt::mat2& m) const;
 	void setUniform(const std::string& name, const gmt::mat3& m) const;
 	void setUniform(const std::string& name, const gmt::mat4& m) const;
 private:
-	bool genShader(GLuint& id, GLenum type, const std::string& source);
-	GLuint genVertexShader(const std::string& source);
-	GLuint genFragmentShader(const std::string& source);
+	bool genShader(sk_uint& id, GLenum type, const std::string& source);
+	sk_uint genVertexShader(const std::string& source);
+	sk_uint genFragmentShader(const std::string& source);
 
-	static const GLuint _infoLogSize = 512;
+	static const sk_uint _infoLogSize = 512;
 
-	GLuint _programId;
-	GLchar _infoLog[_infoLogSize];
+	sk_uint _programId;
+	sk_char _infoLog[_infoLogSize];
 };
 
 #endif

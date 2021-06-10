@@ -3,33 +3,33 @@
 #include <GLFW/glfw3.h>
 #include "file_loader.h"
 
-Grid::Grid(const gmt::vec3& position, float_t cubeSize,
-	size_t width, size_t height, size_t length,
-	float_t thickness, const gmt::vec4& color)
+Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
+	sk_uint width, sk_uint height, sk_uint length,
+	sk_float thickness, const gmt::vec4& color)
 
 	:_position(position), _cubeSize(cubeSize),
 	_width(width), _height(height), _length(length),
 	_thickness(thickness), _color(color),
 	_shader("shaders/gridShader.vs", "shaders/gridShader.fs")
 {	
-	for (size_t z = 0; z <= length; ++z)
-		for (size_t y = 0; y <= height; ++y)
+	for (sk_uint z = 0; z <= length; ++z)
+		for (sk_uint y = 0; y <= height; ++y)
 			addLine(gmt::vec3{ 0.0f, 1.0f * y, 1.0f * z } * cubeSize, 
 				    gmt::vec3{ 1.0f * width, 1.0f * y, 1.0f * z } * cubeSize);
 
-	for (size_t z = 0; z <= length; ++z)
-		for (size_t x = 0; x <= width; ++x)
+	for (sk_uint z = 0; z <= length; ++z)
+		for (sk_uint x = 0; x <= width; ++x)
 			addLine(gmt::vec3{ 1.0f * x, 0.0f, 1.0f * z } * cubeSize,
 				gmt::vec3{ 1.0f * x, 1.0f * height, 1.0f * z } * cubeSize);
 
-	for (size_t x = 0; x <= width; ++x)
-		for (size_t y = 0; y <= height; ++y)
+	for (sk_uint x = 0; x <= width; ++x)
+		for (sk_uint y = 0; y <= height; ++y)
 			addLine(gmt::vec3{ 1.0f * x, 1.0f * y, 0.0f} * cubeSize,
 				gmt::vec3{ 1.0f * x, 1.0f * y, 1.0f * length } * cubeSize);
 
 	_centerPosition = gmt::vec3{ 0.5f * width, 0.5f * height, 0.5f * length } * cubeSize;
 
-	std::vector<GLuint> attributeCounts = {3, 2, 1};
+	std::vector<sk_uint> attributeCounts = {3, 2, 1};
 
 	_vertexManager.init(_verticies, _indicies, attributeCounts);
 }
@@ -48,23 +48,23 @@ void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	_vertexManager.draw();
 }
 
-void Grid::update(double_t deltaTime)
+void Grid::update(sk_double deltaTime)
 {
 
 }
 
-float_t Grid::getCubeSize() const
+sk_float Grid::getCubeSize() const
 {
 	return _cubeSize;
 }
 
 gmt::vec3i Grid::worldToGridCoordinate(gmt::vec3 coord) const
 {
-	float_t halfCubeSize = _cubeSize * 0.5f;
+	sk_float halfCubeSize = _cubeSize * 0.5f;
 	coord -= getOrigin();
-	int x = (coord.x - halfCubeSize) / _cubeSize;
-	int y = (coord.y - halfCubeSize) / _cubeSize;
-	int z = (coord.z - halfCubeSize) / _cubeSize;
+	sk_int x = (coord.x - halfCubeSize) / _cubeSize;
+	sk_int y = (coord.y - halfCubeSize) / _cubeSize;
+	sk_int z = (coord.z - halfCubeSize) / _cubeSize;
 
 	return gmt::vec3i{ x, y, z };
 }
@@ -84,17 +84,17 @@ gmt::vec3 Grid::getOrigin() const
 	return _position - _centerPosition;
 }
 
-float_t Grid::getWidth() const
+sk_float Grid::getWidth() const
 {
 	return _width;
 }
 
-float_t Grid::getHeight() const
+sk_float Grid::getHeight() const
 {
 	return _height;
 }
 
-float_t Grid::getLength() const
+sk_float Grid::getLength() const
 {
 	return _length;
 }
@@ -118,7 +118,7 @@ void Grid::addLine(const gmt::vec3& p1, const gmt::vec3& p2)
 
 void Grid::addXLine(const gmt::vec3& p1, const gmt::vec3& p2)
 {
-	for(int32_t i = -1; i <= 1; i += 2)
+	for(sk_int i = -1; i <= 1; i += 2)
 	{
 		gmt::vec3 rectanglePoint1(p1.x, p1.y + i * _thickness, p1.z + _thickness);
 		gmt::vec3 rectanglePoint2(p2.x, p1.y + i * _thickness, p1.z - _thickness);
@@ -144,7 +144,7 @@ void Grid::addXLine(const gmt::vec3& p1, const gmt::vec3& p2)
 
 void Grid::addYLine(const gmt::vec3& p1, const gmt::vec3& p2)
 {
-	for (int32_t i = -1; i <= 1; i += 2)
+	for (sk_int i = -1; i <= 1; i += 2)
 	{
 		gmt::vec3 rectanglePoint1(p1.x + i * _thickness, p1.y, p1.z + _thickness);
 		gmt::vec3 rectanglePoint2(p1.x + i * _thickness, p2.y, p1.z - _thickness);
@@ -170,7 +170,7 @@ void Grid::addYLine(const gmt::vec3& p1, const gmt::vec3& p2)
 
 void Grid::addZLine(const gmt::vec3& p1, const gmt::vec3& p2)
 {
-	for (int32_t i = -1; i <= 1; i += 2)
+	for (sk_int i = -1; i <= 1; i += 2)
 	{
 		gmt::vec3 rectanglePoint1(p1.x + _thickness, p1.y + i * _thickness, p1.z);
 		gmt::vec3 rectanglePoint2(p1.x - _thickness, p1.y + i * _thickness, p2.z);
@@ -194,7 +194,7 @@ void Grid::addZLine(const gmt::vec3& p1, const gmt::vec3& p2)
 	addRectangle(rectanglePoint1, rectanglePoint2);
 }
 
-void Grid::addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, float_t ratio)
+void Grid::addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, sk_float ratio)
 {
 	_verticies.push_back(p.x);
 	_verticies.push_back(p.y);
@@ -210,8 +210,8 @@ void Grid::addRectangle(const gmt::vec3& p1, const gmt::vec3& p2)
 	gmt::vec3 p3;
 	gmt::vec3 p4;
 
-	float_t len1 = 1.0f;
-	float_t len2 = 1.0f;
+	sk_float len1 = 1.0f;
+	sk_float len2 = 1.0f;
 
 	if (p1.x == p2.x)
 	{
@@ -238,7 +238,7 @@ void Grid::addRectangle(const gmt::vec3& p1, const gmt::vec3& p2)
 	if (len1 < len2)
 		std::swap(len1, len2);
 
-	float_t ratio = len2 / len1;
+	sk_float ratio = len2 / len1;
 
 	addVertex(p1, {0.0f, 0.0f}, ratio);
 	addVertex(p2, {1.0f, 1.0f}, ratio);

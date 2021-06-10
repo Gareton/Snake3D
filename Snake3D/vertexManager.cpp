@@ -6,42 +6,42 @@ VertexManager::VertexManager()
 
 }
 
-void VertexManager::init(const std::vector<GLfloat>& verticies, const std::vector<GLuint>& indicies,
-						 const std::vector<GLuint>& attributeCounts)
+void VertexManager::init(const std::vector<sk_float>& verticies, const std::vector<sk_uint>& indicies,
+						 const std::vector<sk_uint>& attributeCounts)
 {
 	if (verticies.empty() || indicies.empty() || attributeCounts.empty())
 		throw std::runtime_error("ERROR::GAME::VERTEX_MANAGER::INIT_FAILED");
 
-	GLuint vertexArrayID = 0;
+	sk_uint vertexArrayID = 0;
 
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);
 
-	GLuint vertexBufferID = 0;
+	sk_uint vertexBufferID = 0;
 
 	glGenBuffers(1, &vertexBufferID);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
 	glBufferData(GL_ARRAY_BUFFER, verticies.size() * sizeof(verticies[0]), &verticies[0], GL_STATIC_DRAW);
 
-	GLuint offset = 0;
-	GLuint stride = std::accumulate(attributeCounts.begin(), attributeCounts.end(), static_cast<size_t>(0));
+	sk_uint offset = 0;
+	sk_uint stride = std::accumulate(attributeCounts.begin(), attributeCounts.end(), static_cast<sk_uint>(0));
 
-	for (size_t i = 0; i < attributeCounts.size(); ++i)
+	for (sk_uint i = 0; i < attributeCounts.size(); ++i)
 	{
-		GLuint size = attributeCounts[i];
+		sk_uint size = attributeCounts[i];
 
-		glVertexAttribPointer(static_cast<GLuint>(i),
+		glVertexAttribPointer(static_cast<sk_uint>(i),
 			size,
 			GL_FLOAT,
 			GL_FALSE,
-			stride * static_cast<GLuint>(sizeof(GLfloat)),
-			reinterpret_cast<void *>(sizeof(GLfloat) * static_cast<size_t>(offset)));
-		glEnableVertexAttribArray(static_cast<GLuint>(i));
+			stride * static_cast<sk_uint>(sizeof(sk_float)),
+			reinterpret_cast<void *>(sizeof(sk_float) * static_cast<sk_uint>(offset)));
+		glEnableVertexAttribArray(static_cast<sk_uint>(i));
 
 		offset += size;
 	}
 
-	GLuint elementBufferID = 0;
+	sk_uint elementBufferID = 0;
 
 	glGenBuffers(1, &elementBufferID);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferID);

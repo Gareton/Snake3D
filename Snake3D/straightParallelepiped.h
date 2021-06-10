@@ -3,6 +3,7 @@
 #include "drawable.h"
 #include "shader.h"
 #include "vertexManager.h"
+#include "skTypes.h"
 
 class StraightParallelepiped : public Drawable 
 {
@@ -11,7 +12,7 @@ public:
 						   const gmt::vec4& color = {0.0f, 0.0f, 0.0f, 1.0f});
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view);
-	void update(double_t deltaTime);
+	void update(sk_double deltaTime);
 	void resize(const gmt::vec3& size);
 
 	void setPosition(const gmt::vec3& position);

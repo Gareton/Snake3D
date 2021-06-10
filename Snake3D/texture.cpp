@@ -8,11 +8,11 @@ const std::vector<GLenum> Texture::_textureTypes = {
 	GL_TEXTURE10, GL_TEXTURE11, GL_TEXTURE12,
 	GL_TEXTURE13, GL_TEXTURE14, GL_TEXTURE15 };
 
-Texture::Texture(const Image& image, size_t textureNumber, int32_t internalFormat,
-				 int32_t wrapX, int32_t wrapY, int32_t minFilter, int32_t magFilter)
+Texture::Texture(const Image& image, sk_uint textureNumber, sk_int internalFormat,
+				 sk_int wrapX, sk_int wrapY, sk_int minFilter, sk_int magFilter)
 	: _textureNumber(textureNumber)
 {
-	GLuint id = 0;
+	sk_uint id = 0;
 
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -40,8 +40,8 @@ Texture::Texture(const Image& image, size_t textureNumber, int32_t internalForma
 	glTexImage2D(GL_TEXTURE_2D,
 		0,
 		internalFormat,
-		static_cast<GLuint>(image.width),
-		static_cast<GLuint>(image.height),
+		static_cast<sk_uint>(image.width),
+		static_cast<sk_uint>(image.height),
 		0,
 		format,
 		GL_UNSIGNED_BYTE,

@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <cmath>
 #include <vector>
+#include "skTypes.h"
 
 class VertexManager 
 {
@@ -12,13 +13,13 @@ public:
 	VertexManager(const VertexManager& o) = delete;
 	VertexManager& operator=(const VertexManager& o) = delete;
 
-	void init(const std::vector<GLfloat>& verticies, const std::vector<GLuint>& indicies,
-			  const std::vector<GLuint>& attributeCounts);
+	void init(const std::vector<sk_float>& verticies, const std::vector<sk_uint>& indicies,
+			  const std::vector<sk_uint>& attributeCounts);
 
 	void draw();
 private:
-	size_t _vertexArrayID;
-	size_t _indiciesCount;
+	sk_uint _vertexArrayID;
+	sk_uint _indiciesCount;
 };
 
 

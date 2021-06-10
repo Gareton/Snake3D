@@ -5,11 +5,11 @@ StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt:
 	:_shader("shaders/straightParallelepipedShader.vs", "shaders/straightParallelepipedShader.fs"),
 	 _position(position), _color(color), _size(size)
 {
-	GLfloat hx = 0.5f;
-	GLfloat hy = 0.5f;
-	GLfloat hz = 0.5f;
+	sk_float hx = 0.5f;
+	sk_float hy = 0.5f;
+	sk_float hz = 0.5f;
 
-	std::vector<GLfloat> verticies = {
+	std::vector<sk_float> verticies = {
 		//front
 
 		-hx, -hy, hz,
@@ -53,13 +53,13 @@ StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt:
 			-hx,  hy, -hz
 	};
 
-	std::vector<GLuint> indicies = { 0, 1, 2, 2, 3, 0 };
+	std::vector<sk_uint> indicies = { 0, 1, 2, 2, 3, 0 };
 
-	for (size_t i = 0; i < 5; ++i)
-		for (size_t j = 0; j < 6; ++j)
+	for (sk_uint i = 0; i < 5; ++i)
+		for (sk_uint j = 0; j < 6; ++j)
 			indicies.push_back(indicies[j] + (i + 1) * 4);
 
-	std::vector<GLuint> attributeCounts = { 3 };
+	std::vector<sk_uint> attributeCounts = { 3 };
 
 	_vertexManager.init(verticies, indicies, attributeCounts);
 }
@@ -79,7 +79,7 @@ void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& 
 	_vertexManager.draw();
 }
 
-void StraightParallelepiped::update(double_t deltaTime)
+void StraightParallelepiped::update(sk_double deltaTime)
 {
 
 }

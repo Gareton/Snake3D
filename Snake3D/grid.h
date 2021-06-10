@@ -5,45 +5,46 @@
 #include "vertexManager.h"
 #include "Shader.h"
 #include "texture.h"
+#include "skTypes.h"
 
 class Grid : public Drawable
 {
 public:
-	Grid(const gmt::vec3& position, float_t cubeSize, 
-		 size_t width, size_t height, size_t length, 
-		 float_t thickness, const gmt::vec4& color);
+	Grid(const gmt::vec3& position, sk_float cubeSize, 
+		 sk_uint width, sk_uint height, sk_uint length, 
+		 sk_float thickness, const gmt::vec4& color);
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) final;
-	void update(double_t deltaTime) final;
+	void update(sk_double deltaTime) final;
 
-	float_t getCubeSize() const;
+	sk_float getCubeSize() const;
 	gmt::vec3i worldToGridCoordinate(gmt::vec3 coord) const;
 	gmt::vec3 gridToWorldCoordinate(const gmt::vec3i& coord) const;
 	gmt::vec3 getOrigin() const;
-	float_t getWidth() const;
-	float_t getHeight() const;
-	float_t getLength() const;
+	sk_float getWidth() const;
+	sk_float getHeight() const;
+	sk_float getLength() const;
 	bool isInside(const gmt::vec3i& coord) const;
 private:
 	void addLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addXLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addYLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addZLine(const gmt::vec3& p1, const gmt::vec3& p2);
-	void addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, float_t ratio);
+	void addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord, sk_float ratio);
 	void addRectangle(const gmt::vec3& p1, const gmt::vec3& p2); // adds rectangle in a plane with opposing points p1 and p2
 
 	const gmt::vec3 _position;
 	gmt::vec3 _centerPosition;
-	const float_t _cubeSize;
-	const size_t _width;
-	const size_t _height;
-	const size_t _length;
-	const float_t _thickness;
+	const sk_float _cubeSize;
+	const sk_uint _width;
+	const sk_uint _height;
+	const sk_uint _length;
+	const sk_float _thickness;
 	const gmt::vec4 _color;
 	VertexManager _vertexManager;
 	Shader _shader;
-	std::vector<GLfloat> _verticies;
-	std::vector<GLuint> _indicies;
+	std::vector<sk_float> _verticies;
+	std::vector<sk_uint> _indicies;
 };
 
 #endif

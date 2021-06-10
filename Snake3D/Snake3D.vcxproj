@@ -152,7 +152,6 @@
     <ClInclude Include="straightParallelepiped.h" />
     <ClInclude Include="textRenderer.h" />
     <ClInclude Include="texture.h" />
-    <ClInclude Include="types.h" />
     <ClInclude Include="vertexManager.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

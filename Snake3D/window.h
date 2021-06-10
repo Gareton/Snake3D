@@ -3,12 +3,13 @@
 #include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "skTypes.h"
 
 class Window 
 {
 public:
-	Window(size_t windowWidth = 800,
-		   size_t windowHeight = 600,
+	Window(sk_uint windowWidth = 800,
+		   sk_uint windowHeight = 600,
 		   const std::string& windowTitle = "Snake3D");
 
 	Window(const Window& o) = delete;
@@ -17,16 +18,16 @@ public:
 	operator bool();
 	std::string what();
 	GLFWwindow* getWindowPtr();
-	size_t getWindowWidth();
-	size_t getWindowHeight();
-	void setWindowWidth(size_t width);
-	void setWindowHeight(size_t height);
+	sk_uint getWindowWidth();
+	sk_uint getWindowHeight();
+	void setWindowWidth(sk_uint width);
+	void setWindowHeight(sk_uint height);
 private:
 	GLFWwindow* _window;
 	bool _isValid;
 	std::string _errorMessage;
-	size_t _windowWidth;
-	size_t _windowHeight;
+	sk_uint _windowWidth;
+	sk_uint _windowHeight;
 	const std::string _windowTitle;
 	const bool _wireframeMode = false;
 };

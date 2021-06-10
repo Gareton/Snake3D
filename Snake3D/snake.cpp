@@ -2,7 +2,7 @@
 
 const std::vector<gmt::vec3> Snake::dirVectors = Snake::createDirVectors();
 
-Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, const float_t speed, const gmt::vec4& color)
+Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, const sk_float speed, const gmt::vec4& color)
 	: _grid(grid), _speed(speed), 
 	_segment(gmt::vec3(grid.getCubeSize()), { 0.0f, 0.0f, 0.0f }, color), _color(color)
 {
@@ -22,13 +22,13 @@ void Snake::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	_view = view;
 
 	for (const auto& chain : _chains)
-		for (size_t i = 0; i + 1 < chain.size(); ++i)
+		for (sk_uint i = 0; i + 1 < chain.size(); ++i)
 			drawPath(chain[i], chain[i + 1]);
 }
 
 void Snake::update(double_t deltaTime)
 {
-	float_t canTravel = deltaTime * _speed;
+	sk_float canTravel = deltaTime * _speed;
 
 	while (canTravel > 0.0f)
 		canTravel = goToTarget(canTravel);
@@ -94,19 +94,19 @@ void Snake::drawSegment(gmt::vec3 position)
 {
 	
 	position -= _grid.getOrigin();
-	float_t size = _grid.getCubeSize();
-	float_t hSize = size * 0.5f;
+	sk_float size = _grid.getCubeSize();
+	sk_float hSize = size * 0.5f;
 
-	float_t lx = std::max(position.x - hSize, 0.0f);
-	float_t rx = std::min(position.x + hSize, _grid.getWidth() * size);
-	float_t ly = std::max(position.y - hSize, 0.0f);
-	float_t ry = std::min(position.y + hSize, _grid.getHeight() * size);
-	float_t lz = std::max(position.z - hSize, 0.0f);
-	float_t rz = std::min(position.z + hSize, _grid.getLength() * size);
+	sk_float lx = std::max(position.x - hSize, 0.0f);
+	sk_float rx = std::min(position.x + hSize, _grid.getWidth() * size);
+	sk_float ly = std::max(position.y - hSize, 0.0f);
+	sk_float ry = std::min(position.y + hSize, _grid.getHeight() * size);
+	sk_float lz = std::max(position.z - hSize, 0.0f);
+	sk_float rz = std::min(position.z + hSize, _grid.getLength() * size);
 
-	float_t mx = (lx + rx) * 0.5f;
-	float_t my = (ly + ry) * 0.5f;
-	float_t mz = (lz + rz) * 0.5f;
+	sk_float mx = (lx + rx) * 0.5f;
+	sk_float my = (ly + ry) * 0.5f;
+	sk_float mz = (lz + rz) * 0.5f;
 
 	position = gmt::vec3{ mx, my, mz } + _grid.getOrigin();
 
@@ -139,15 +139,15 @@ DIRECTION Snake::deduceDirection(const gmt::vec3& v)
 	return v.z > 0.0f ? DIRECTION::SOUTH : DIRECTION::NORTH;
 }
 
-float_t Snake::goToTarget(float_t canTravel)
+sk_float Snake::goToTarget(sk_float canTravel)
 {
 	gmt::vec3 head = _chains.front().front();
 	gmt::vec3 tail = _chains.back().back();
 	gmt::vec3 target = _grid.gridToWorldCoordinate(_target);
 	gmt::vec3i wasGridHead = toBlockPosition(head);
 
-	float_t distanceToTarget = gmt::distance(head, target);
-	float_t travelled = std::min(distanceToTarget, canTravel);
+	sk_float distanceToTarget = gmt::distance(head, target);
+	sk_float travelled = std::min(distanceToTarget, canTravel);
 
 	head = moveInDirection(head, deduceDirection(target - head), travelled);
 
@@ -176,12 +176,12 @@ float_t Snake::goToTarget(float_t canTravel)
 	return canTravel - travelled;
 }
 
-gmt::vec3 Snake::moveInDirection(const gmt::vec3 &v, DIRECTION direction, float_t distance)
+gmt::vec3 Snake::moveInDirection(const gmt::vec3 &v, DIRECTION direction, sk_float distance)
 {
 	return v + dirVectors[direction] * distance;
 }
 
-void Snake::moveTail(float_t distanceTravelled)
+void Snake::moveTail(sk_float distanceTravelled)
 {
 	static bool wasPopped = false;
 
@@ -191,7 +191,7 @@ void Snake::moveTail(float_t distanceTravelled)
 		{
 			gmt::vec3 tail = _chains.back().back();
 			gmt::vec3 beforeTail = _chains.back()[_chains.back().size() - 2];
-			float_t distance = gmt::distance(tail, beforeTail);
+			sk_float distance = gmt::distance(tail, beforeTail);
 
 			if (wasPopped)
 			{

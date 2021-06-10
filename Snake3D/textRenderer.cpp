@@ -16,38 +16,38 @@ TextRenderer::TextRenderer(const std::string& fontPath)
 
 	FT_Set_Pixel_Sizes(face, 0, 48);
 
-	for (unsigned char c = 0; c < 128; ++c)
+	for (sk_uchar c = 0; c < 128; ++c)
 	{
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 			throw std::runtime_error("ERROR::TEXT_RENDERER::CHAR_LOADING_FAILED");
 
-		size_t width = face->glyph->bitmap.width;
-		size_t height = face->glyph->bitmap.rows;
+		sk_uint width = face->glyph->bitmap.width;
+		sk_uint height = face->glyph->bitmap.rows;
 
 		Texture texture(Image(face->glyph->bitmap.buffer, width, height, 1), 0, GL_RED,
 			GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE,
 			GL_LINEAR, GL_LINEAR);
 
-		gmt::vec2f bearing = {(float_t)face->glyph->bitmap_left, (float_t)face->glyph->bitmap_top};
-		gmt::vec2f size = { (float_t)width, (float_t)height };
+		gmt::vec2f bearing = {(sk_float)face->glyph->bitmap_left, (sk_float)face->glyph->bitmap_top};
+		gmt::vec2f size = { (sk_float)width, (sk_float)height };
 
-		float_t xoffset = bearing.x;
-		float_t yoffset = -(size.y - bearing.y);
+		sk_float xoffset = bearing.x;
+		sk_float yoffset = -(size.y - bearing.y);
 
-		std::vector<GLfloat> verticies = {
+		std::vector<sk_float> verticies = {
 			xoffset,		  yoffset + size.y,	0.0f, 0.0f,
 			xoffset + size.x, yoffset + size.y,	1.0f, 0.0f,
 			xoffset + size.x, yoffset,			1.0f, 1.0f,
 			xoffset,		  yoffset,			0.0f, 1.0f
 		};
 
-		std::vector<GLuint> indicies = { 0, 1, 2, 3, 2, 0 };
+		std::vector<sk_uint> indicies = { 0, 1, 2, 3, 2, 0 };
 
 		VertexManager vertexManager;
 		vertexManager.init(verticies, indicies, { 2, 2 });
 
 		_characters.push_back(Character{ std::move(texture), std::move(vertexManager), 
-							  (size_t)face->glyph->advance.x});
+							  (sk_uint)face->glyph->advance.x});
 	}
 
 	FT_Done_Face(face); // memory leak due to exceptions....
@@ -55,12 +55,12 @@ TextRenderer::TextRenderer(const std::string& fontPath)
 }
 
 void TextRenderer::render(const std::string& text, const gmt::mat4 &projection,
-	gmt::vec2 pos, float_t scale, const gmt::vec3 &color)
+	gmt::vec2 pos, sk_float scale, const gmt::vec3 &color)
 {
 	_shader.use();
 	_shader.setUniform("proj", projection);
 	_shader.setUniform("color", color);
-	_shader.setUniform("texture0", (GLuint)0);
+	_shader.setUniform("texture0", (sk_uint)0);
 
 	for (char c : text)
 	{
@@ -70,7 +70,7 @@ void TextRenderer::render(const std::string& text, const gmt::mat4 &projection,
 
 		_shader.setUniform("model", model);
 
-		size_t ind = *reinterpret_cast<unsigned char *>(&c);
+		sk_uint ind = *reinterpret_cast<sk_uchar *>(&c);
 
 		Character &character = _characters[ind];
 

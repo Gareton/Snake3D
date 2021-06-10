@@ -37,8 +37,8 @@ void Game::run()
 {
 	while (!glfwWindowShouldClose(_window.getWindowPtr()))
 	{
-		static double_t frameStartTime = 0.0f;
-		static double_t frameEndTime = 0.0f;
+		static sk_double frameStartTime = 0.0f;
+		static sk_double frameEndTime = 0.0f;
 		_deltaTime = frameEndTime - frameStartTime;
 
 		frameStartTime = glfwGetTime();
@@ -71,7 +71,7 @@ void Game::updateScene()
 void Game::renderFrame()
 {
 	gmt::mat4 projection = gmt::perspective(_camera.getFov(),
-								   (GLfloat)_window.getWindowWidth() / _window.getWindowHeight(),
+								   (sk_double)_window.getWindowWidth() / _window.getWindowHeight(),
 								   0.1f, 100.0f);
 
 	gmt::mat4 view = _camera.getViewMatrix();
@@ -85,22 +85,22 @@ void Game::renderFrame()
 	_textRenderer.render("Snake3D", textProjection, { 25.0f, 695.0f }, 2.8f, {0.9f, 0.4f, 0.7f});
 }
 
-void Game::framebufferSizeCallback(GLFWwindow* window, size_t width, size_t height)
+void Game::framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint height)
 {
 	_window.setWindowWidth(width);
 	_window.setWindowHeight(height);
 	glViewport(0, 0, width, height);
 }
 
-void Game::mouseCallback(GLFWwindow* window, double_t xpos, double_t ypos)
+void Game::mouseCallback(GLFWwindow* window, sk_double xpos, sk_double ypos)
 {
-	static double_t lastXpos = xpos;
-	static double_t lastYpos = ypos;
+	static sk_double lastXpos = xpos;
+	static sk_double lastYpos = ypos;
 
 	if (_mouseCallbackEnabled)
 	{
-		GLfloat pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
-		GLfloat yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
+		sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
+		sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
 
 		_camera.changePitch(pitchDelta);
 		_camera.changeYaw(yawDelta);
@@ -147,7 +147,7 @@ void Game::processInput()
 		_snake.setDirection(DIRECTION::DOWN);
 }
 
-void Game::scrollCallback(GLFWwindow* window, double_t xoffset, double_t yoffset)
+void Game::scrollCallback(GLFWwindow* window, sk_double xoffset, sk_double yoffset)
 {
 	_camera.zoom(-yoffset);
 }
