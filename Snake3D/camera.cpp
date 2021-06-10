@@ -1,14 +1,14 @@
 #include "camera.h"
 
-Camera::Camera(const gmt::vec3& target, float_t radius, float_t sensitivity, float_t fov, float_t pitch, 
-	           float_t yaw, const gmt::vec3& worldUp)
+Camera::Camera(const gmt::vec3& target, sk_float radius, sk_float sensitivity, sk_float fov, sk_float pitch, 
+	           sk_float yaw, const gmt::vec3& worldUp)
 	:_target(target), _radius(radius), _sensitivity(sensitivity), 
 	 _pitch(pitch), _yaw(yaw), _fov(fov), _worldUp(worldUp)
 {
 	recalculateSystem();
 }
 
-float_t Camera::getSensitivity()
+sk_float Camera::getSensitivity()
 {
 	return _sensitivity;
 }
@@ -23,7 +23,7 @@ gmt::mat4 Camera::getViewMatrix()
 	return gmt::translate(-_target) * look * gmt::translate(-_spherePosition);
 }
 
-void Camera::changePitch(float_t deltaPitch)
+void Camera::changePitch(sk_float deltaPitch)
 {
 	_pitch += deltaPitch;
 
@@ -33,7 +33,7 @@ void Camera::changePitch(float_t deltaPitch)
 	recalculateSystem();
 }
 
-void Camera::changeYaw(float_t deltaYaw)
+void Camera::changeYaw(sk_float deltaYaw)
 {
 	_yaw += deltaYaw;
 	_yaw = std::fmod(_yaw, 2.0f * gmt::PI);
@@ -51,17 +51,17 @@ void Camera::recalculateSystem()
 	_up = gmt::normalize(gmt::crossVector(_right, _front));
 }
 
-void Camera::setFov(float_t fov)
+void Camera::setFov(sk_float fov)
 {
 	_fov = gmt::clamp(fov, _fovLbound, _fovUbound);
 }
 
-float_t Camera::getFov()
+sk_float Camera::getFov()
 {
 	return _fov;
 }
 
-void Camera::zoom(float_t delta)
+void Camera::zoom(sk_float delta)
 {
 	_fov += delta * _zoomSpeed;
 	_fov = gmt::clamp(_fov, _fovLbound, _fovUbound);
