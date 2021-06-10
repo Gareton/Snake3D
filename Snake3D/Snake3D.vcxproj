@@ -146,6 +146,7 @@
     <ClInclude Include="gmath.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="skTypes.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="straightParallelepiped.h" />
