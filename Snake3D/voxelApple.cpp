@@ -57,6 +57,11 @@ void VoxelApple::setPosition(const gmt::vec3& pos)
 	VoxelSphere::setPosition(pos);
 }
 
+gmt::vec3 VoxelApple::getPosition()
+{
+	return VoxelSphere::getPosition();
+}
+
 void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view)
 {
 	_cube.setPosition(pos);

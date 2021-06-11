@@ -7,8 +7,8 @@ Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& head
 	_segment(gmt::vec3(grid.getCubeSize()), { 0.0f, 0.0f, 0.0f }, color), _color(color)
 {
 	_chains.push_back({});
-	_chains.back().push_back(_grid.gridToWorldCoordinate(headPos));
-	_chains.back().push_back(_grid.gridToWorldCoordinate(tailPos));
+	_chains.back().push_back(_grid.gridToWorldCoordinateBruh(headPos));
+	_chains.back().push_back(_grid.gridToWorldCoordinateBruh(tailPos));
 	_currentPositions.insert(headPos);
 	_currentPositions.insert(tailPos);
 
@@ -36,13 +36,18 @@ void Snake::update(double_t deltaTime)
 
 void Snake::setDirection(DIRECTION dir)
 {
-	if (-dirVectors[dir] != dirVectors[deduceDirection(_grid.gridToWorldCoordinate(_target) - _chains.front().front())])
+	if (-dirVectors[dir] != dirVectors[deduceDirection(_grid.gridToWorldCoordinateBruh(_target) - _chains.front().front())])
 		_direction = dir;
 }
 
 bool Snake::collided() const
 {
 	return _collided;
+}
+
+gmt::vec3i Snake::getFullHeadCell()
+{
+	return _grid.worldToGridCoordinate(_chains.front().front());
 }
 
 bool Snake::isUsedBySnake(const gmt::vec3i& pos)
@@ -60,8 +65,8 @@ void Snake::drawPath(gmt::vec3 p1, gmt::vec3 p2)
 
 	p1 += gmt::vec3(_grid.getCubeSize() * 0.5f);
 
-	gmt::vec3i v1 = _grid.worldToGridCoordinate(p1);
-	gmt::vec3i v2 = _grid.worldToGridCoordinate(p2);
+	gmt::vec3i v1 = _grid.worldToGridCoordinateBruh(p1);
+	gmt::vec3i v2 = _grid.worldToGridCoordinateBruh(p2);
 
 	if (v1.x != v2.x)
 	{
@@ -69,7 +74,7 @@ void Snake::drawPath(gmt::vec3 p1, gmt::vec3 p2)
 
 		while (v1.x <= v2.x)
 		{
-			drawSegment(_grid.gridToWorldCoordinate(v1));
+			drawSegment(_grid.gridToWorldCoordinateBruh(v1));
 			++v1.x;
 		}
 	}
@@ -79,7 +84,7 @@ void Snake::drawPath(gmt::vec3 p1, gmt::vec3 p2)
 
 		while (v1.y <= v2.y)
 		{
-			drawSegment(_grid.gridToWorldCoordinate(v1));
+			drawSegment(_grid.gridToWorldCoordinateBruh(v1));
 			++v1.y;
 		}
 	}
@@ -89,7 +94,7 @@ void Snake::drawPath(gmt::vec3 p1, gmt::vec3 p2)
 
 		while (v1.z <= v2.z)
 		{
-			drawSegment(_grid.gridToWorldCoordinate(v1));
+			drawSegment(_grid.gridToWorldCoordinateBruh(v1));
 			++v1.z;
 		}
 	}
@@ -148,7 +153,7 @@ sk_float Snake::goToTarget(sk_float canTravel)
 {
 	gmt::vec3 head = _chains.front().front();
 	gmt::vec3 tail = _chains.back().back();
-	gmt::vec3 target = _grid.gridToWorldCoordinate(_target);
+	gmt::vec3 target = _grid.gridToWorldCoordinateBruh(_target);
 	gmt::vec3i wasGridHead = toBlockPosition(head);
 
 	sk_float distanceToTarget = gmt::distance(head, target);
@@ -235,8 +240,8 @@ void Snake::moveTail(sk_float distanceTravelled)
 
 void Snake::changeTarget()
 {
-	gmt::vec3 targetWorld = _grid.gridToWorldCoordinate(_target);
-	gmt::vec3i newTarget = _grid.worldToGridCoordinate(moveInDirection(targetWorld, _direction, _grid.getCubeSize()));
+	gmt::vec3 targetWorld = _grid.gridToWorldCoordinateBruh(_target);
+	gmt::vec3i newTarget = _grid.worldToGridCoordinateBruh(moveInDirection(targetWorld, _direction, _grid.getCubeSize()));
 
 	if (_grid.isInside(newTarget))
 	{
@@ -253,7 +258,7 @@ void Snake::changeTarget()
 
 	_target = newTarget;
 
-	gmt::vec3 newPosition = moveInDirection(_grid.gridToWorldCoordinate(newTarget), 
+	gmt::vec3 newPosition = moveInDirection(_grid.gridToWorldCoordinateBruh(newTarget), 
 											opposite(_direction), 
 											_grid.getCubeSize());
 
@@ -294,5 +299,5 @@ DIRECTION Snake::opposite(DIRECTION direction)
 
 gmt::vec3i Snake::toBlockPosition(const gmt::vec3& position)
 {
-	return _grid.worldToGridCoordinate(position + gmt::vec3(_grid.getCubeSize() * 0.5f));
+	return _grid.worldToGridCoordinateBruh(position + gmt::vec3(_grid.getCubeSize() * 0.5f));
 }

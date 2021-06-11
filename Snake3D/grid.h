@@ -18,6 +18,8 @@ public:
 	void update(sk_double deltaTime) final;
 
 	sk_float getCubeSize() const;
+	gmt::vec3i worldToGridCoordinateBruh(gmt::vec3 coord) const;
+	gmt::vec3 gridToWorldCoordinateBruh(const gmt::vec3i& coord) const;
 	gmt::vec3i worldToGridCoordinate(gmt::vec3 coord) const;
 	gmt::vec3 gridToWorldCoordinate(const gmt::vec3i& coord) const;
 	gmt::vec3 getOrigin() const;

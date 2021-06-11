@@ -58,7 +58,7 @@ sk_float Grid::getCubeSize() const
 	return _cubeSize;
 }
 
-gmt::vec3i Grid::worldToGridCoordinate(gmt::vec3 coord) const
+gmt::vec3i Grid::worldToGridCoordinateBruh(gmt::vec3 coord) const
 {
 	sk_float halfCubeSize = _cubeSize * 0.5f;
 	coord -= getOrigin();
@@ -69,7 +69,7 @@ gmt::vec3i Grid::worldToGridCoordinate(gmt::vec3 coord) const
 	return gmt::vec3i{ x, y, z };
 }
 
-gmt::vec3 Grid::gridToWorldCoordinate(const gmt::vec3i& coord) const
+gmt::vec3 Grid::gridToWorldCoordinateBruh(const gmt::vec3i& coord) const
 {
 	gmt::vec3 worldCoord = gmt::vec3{ 1.0f * coord.x, 1.0f * coord.y, 1.0f * coord.z } * _cubeSize + 
 						   gmt::vec3{_cubeSize, _cubeSize, _cubeSize} * 0.5f;
@@ -77,6 +77,22 @@ gmt::vec3 Grid::gridToWorldCoordinate(const gmt::vec3i& coord) const
 	worldCoord += getOrigin();
 
 	return worldCoord;
+}
+
+gmt::vec3i Grid::worldToGridCoordinate(gmt::vec3 coord) const
+{
+	coord -= getOrigin();
+	sk_int x = coord.x / _cubeSize;
+	sk_int y = coord.y / _cubeSize;
+	sk_int z = coord.z / _cubeSize;
+
+	return gmt::vec3i{ x, y, z };
+}
+
+gmt::vec3 Grid::gridToWorldCoordinate(const gmt::vec3i& coord) const
+{
+	gmt::vec3 worldCoord = gmt::vec3{ 1.0f * coord.x, 1.0f * coord.y, 1.0f * coord.z } * _cubeSize;
+	return worldCoord + getOrigin();
 }
 
 gmt::vec3 Grid::getOrigin() const
