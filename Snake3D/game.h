@@ -38,6 +38,7 @@ private:
 	VoxelApple _apple;
 	bool _mouseCallbackEnabled = true;
 	bool _gameOver = false;
+	sk_uint _score = 0;
 };
 
 #endif

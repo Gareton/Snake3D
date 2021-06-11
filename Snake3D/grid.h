@@ -31,7 +31,7 @@ private:
 	void addYLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addZLine(const gmt::vec3& p1, const gmt::vec3& p2);
 	void addVertex(const gmt::vec3& p, const gmt::vec2& borderCoord);
-	void addRectangle(const gmt::vec3& p1, const gmt::vec3& p2); // adds rectangle in a plane with opposing points p1 and p2
+	void addRectangle(const gmt::vec3& p1, const gmt::vec3& p2); // adds rectangle in a plane with diagonal points p1 and p2
 
 	const gmt::vec3 _position;
 	gmt::vec3 _centerPosition;

@@ -87,7 +87,9 @@ void Game::renderFrame()
 	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWindowWidth(), 
 										  0.0f, _window.getWindowHeight());
 
-	_textRenderer.render("Snake3D", textProjection, { 25.0f, 695.0f }, 2.8f, {0.9f, 0.4f, 0.7f});
+	std::string scoreString = std::string("Score: ") + std::to_string(_score);
+
+	_textRenderer.render(scoreString, textProjection, { 800.0f, 750.0f }, 0.8f, gmt::vec3{ 0.0f });
 }
 
 void Game::framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint height)
