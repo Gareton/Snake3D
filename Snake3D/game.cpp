@@ -162,12 +162,14 @@ void Game::placeAppleRandomly()
 
 	for (sk_uint i = 0; i < 100; ++i)
 	{
-		appleCoord = gmt::vec3i{ (sk_int)gmt::randomUint() % (sk_int)_grid.getWidth(),
-								 (sk_int)gmt::randomUint() % (sk_int)_grid.getHeight(),
-								 (sk_int)gmt::randomUint() % (sk_int)_grid.getLength()};
+		appleCoord = gmt::vec3i{ (sk_int)gmt::randomUint() % (sk_int)(_grid.getWidth()),
+								 (sk_int)gmt::randomUint() % (sk_int)(_grid.getHeight()),
+								 (sk_int)gmt::randomUint() % (sk_int)(_grid.getLength())};
 
 		if (!_snake.isUsedBySnake(appleCoord))
 		{
+			appleCoord = { abs(appleCoord.x) / 2, abs(appleCoord.y) / 2, abs(appleCoord.z) / 2 };
+
 			_apple.setPosition(_grid.gridToWorldCoordinate(appleCoord));
 			break;
 		}
