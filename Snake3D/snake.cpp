@@ -26,12 +26,30 @@ void Snake::draw(const gmt::mat4& projection, const gmt::mat4& view)
 			drawPath(chain[i], chain[i + 1]);
 }
 
-void Snake::update(double_t deltaTime)
+void Snake::update(sk_double deltaTime)
 {
 	sk_float canTravel = deltaTime * _speed;
 
 	while (canTravel > 0.0f)
 		canTravel = goToTarget(canTravel);
+
+	sk_float lengthDelta = std::min((sk_float)(deltaTime * _growSpeed), _lengthToGrow);
+
+	_lengthToGrow -= lengthDelta;
+
+	if (lengthDelta != gmt::GLF_ZERO)
+	{
+		_chains.back().push_back(moveInDirection(_chains.back().back(),
+			deduceDirection(_chains.back().back() - _chains.back()[_chains.back().size() - 2]),
+			lengthDelta));
+
+		_currentPositions.insert(_grid.worldToGridCoordinate(_chains.back().back()));
+	}
+}
+
+void Snake::grow(sk_float deltaLength)
+{
+	_lengthToGrow += deltaLength;
 }
 
 void Snake::setDirection(DIRECTION dir)

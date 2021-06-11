@@ -6,7 +6,7 @@
 
 Game::Game(Window& window)
 	:_grid({ 0.0f, 0.0f, 0.0f }, 2.0f, 10, 1, 10, 0.06f, { 0.0f, 0.0f, 0.0f, 1.0f }),
-	_camera({ 0.0f, 0.0f, 0.0f }, 25.0f, 0.001f, gmt::radians(45.0f), gmt::radians(-87.0f)), _snake(_grid, { 0, 0, 9 }, { 0, 0, 1 }, 5.0f),
+	_camera({ 0.0f, 0.0f, 0.0f }, 25.0f, 0.001f, gmt::radians(45.0f), gmt::radians(-87.0f)), _snake(_grid, { 0, 0, 9 }, { 0, 0, 6 }, 5.0f),
 	_window(window), _textRenderer("fonts/futuram.ttf"), 
 	_apple(gmt::vec3{ 0.0f, 2.0f, 0.0f }, 8, 0.1f, 0.1f, 
 		   gmt::vec3{ 0.998f, 0.196f, 0.196f },
@@ -81,6 +81,7 @@ void Game::updateScene()
 		++_score;
 		scoreWasIncremented = true;
 		placeAppleRandomly();
+		_snake.grow(_grid.getCubeSize());
 	}
 	else
 		scoreWasIncremented = false;

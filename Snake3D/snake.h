@@ -17,6 +17,9 @@ public:
 		  const gmt::vec4& color = {0.0f, 1.0f, 0.0f, 1.0f});
 	void draw(const gmt::mat4& projection, const gmt::mat4& view);
 	void update(sk_double deltaTime);
+
+	void grow(sk_float deltaLength);
+
 	void setDirection(DIRECTION dir);
 	bool collided() const;
 	gmt::vec3i getFullHeadCell();
@@ -39,6 +42,7 @@ private:
 	StraightParallelepiped _segment;
 	std::deque<std::deque<gmt::vec3>> _chains;
 	const sk_float _speed;
+	const sk_float _growSpeed = 0.4f;
 	gmt::mat4 _projection;
 	gmt::mat4 _view;
 	gmt::vec4 _color;
@@ -46,6 +50,7 @@ private:
 	DIRECTION _direction;
 	std::multiset<gmt::vec3i> _currentPositions;
 	bool _collided = false;
+	sk_float _lengthToGrow = 0.0f;
 };
 
 #endif
