@@ -33,7 +33,7 @@ private:
 	Window &_window;
 	Camera _camera;
 	TextRenderer _textRenderer;
-	const gmt::vec4f _clearColor = { 9.0f / 256.0f, 248.0f / 256.0f, 255.0f / 256.0f, 1.0f };	
+	gmt::vec4f _clearColor = { 9.0f / 256.0f, 248.0f / 256.0f, 255.0f / 256.0f, 1.0f };	
 	Grid _grid;
 	Snake _snake;
 	sk_double _deltaTime;

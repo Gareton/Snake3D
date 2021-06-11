@@ -95,16 +95,31 @@ void Game::renderFrame()
 
 	gmt::mat4 view = _camera.getViewMatrix();
 
-	_grid.draw(projection, view);
-	_snake.draw(projection, view);
-	_apple.draw(projection, view);
+	if (!_gameOver)
+	{
+		_grid.draw(projection, view);
+		_snake.draw(projection, view);
+		_apple.draw(projection, view);
+	}
 
 	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWindowWidth(), 
 										  0.0f, _window.getWindowHeight());
 
 	std::string scoreString = std::string("Score: ") + std::to_string(_score);
 
-	_textRenderer.render(scoreString, textProjection, { 800.0f, 750.0f }, 0.8f, gmt::vec3{ 0.0f });
+	if (!_gameOver)
+		_textRenderer.render(scoreString, textProjection, { 800.0f, 750.0f }, 0.8f, gmt::vec3{ 0.0f });
+
+	if (_gameOver)
+	{
+		_textRenderer.render("Game Over", textProjection, { 78.0f, 420.0f }, 3.4f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
+		_textRenderer.render("((((4", textProjection, { 400.0f, 300.0f }, 2.6f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
+
+		scoreString = std::string("Your final score: " + std::to_string(_score));
+
+		_textRenderer.render(scoreString, textProjection, { 90.0f, 160.0f }, 1.9f, gmt::vec3{ 0.0f });
+		_clearColor = gmt::vec4{ 0.016f, 1.0f, 0.443f, 1.0f };
+	}
 }
 
 void Game::framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint height)
@@ -116,6 +131,9 @@ void Game::framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint he
 
 void Game::mouseCallback(GLFWwindow* window, sk_double xpos, sk_double ypos)
 {
+	if (_gameOver)
+		return;
+
 	static sk_double lastXpos = xpos;
 	static sk_double lastYpos = ypos;
 
@@ -189,5 +207,6 @@ void Game::placeAppleRandomly()
 
 void Game::scrollCallback(GLFWwindow* window, sk_double xoffset, sk_double yoffset)
 {
-	_camera.zoom(-yoffset);
+	if(!_gameOver)
+		_camera.zoom(-yoffset);
 }
