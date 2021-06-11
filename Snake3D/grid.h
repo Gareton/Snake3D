@@ -21,9 +21,9 @@ public:
 	gmt::vec3i worldToGridCoordinate(gmt::vec3 coord) const;
 	gmt::vec3 gridToWorldCoordinate(const gmt::vec3i& coord) const;
 	gmt::vec3 getOrigin() const;
-	sk_float getWidth() const;
-	sk_float getHeight() const;
-	sk_float getLength() const;
+	sk_uint getWidth() const;
+	sk_uint getHeight() const;
+	sk_uint getLength() const;
 	bool isInside(const gmt::vec3i& coord) const;
 private:
 	void addLine(const gmt::vec3& p1, const gmt::vec3& p2);

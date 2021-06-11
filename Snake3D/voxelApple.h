@@ -15,6 +15,8 @@ public:
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
 	void update(sk_double deltaTime) override;
+
+	void setPosition(const gmt::vec3& pos);
 private:
 	void drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view);
 

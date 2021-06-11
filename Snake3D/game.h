@@ -26,7 +26,9 @@ public:
 private:				
 	void updateScene();
 	void renderFrame();	
-	void processInput();																								
+	void processInput();	
+
+	void placeAppleRandomly();
 
 	Window &_window;
 	Camera _camera;

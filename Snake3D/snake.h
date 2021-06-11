@@ -19,6 +19,8 @@ public:
 	void update(sk_double deltaTime);
 	void setDirection(DIRECTION dir);
 	bool collided() const;
+	gmt::vec3i getFullHeadCell();
+	bool isUsedBySnake(const gmt::vec3i& pos);
 
 	static const std::vector<gmt::vec3> dirVectors;
 private:

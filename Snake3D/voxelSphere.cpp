@@ -35,6 +35,11 @@ void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view)
 
 void VoxelSphere::update(sk_double deltaTime) {}
 
+void VoxelSphere::setPosition(const gmt::vec3& pos)
+{
+	_pos = pos;
+}
+
 sk_uint VoxelSphere::getRadius()
 {
 	return _radius;

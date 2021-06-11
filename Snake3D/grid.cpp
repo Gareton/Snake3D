@@ -84,17 +84,17 @@ gmt::vec3 Grid::getOrigin() const
 	return _position - _centerPosition;
 }
 
-sk_float Grid::getWidth() const
+sk_uint Grid::getWidth() const
 {
 	return _width;
 }
 
-sk_float Grid::getHeight() const
+sk_uint Grid::getHeight() const
 {
 	return _height;
 }
 
-sk_float Grid::getLength() const
+sk_uint Grid::getLength() const
 {
 	return _length;
 }

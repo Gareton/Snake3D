@@ -13,6 +13,8 @@ Game::Game(Window& window)
 		   gmt::vec3{ 0.776f, 0.47f, 0.169f },
 		   gmt::vec3{ 0.36f, 0.718f, 0.27f })
 {
+	placeAppleRandomly();
+
 	glfwSetWindowUserPointer(_window.getWindowPtr(), this);
 
 	auto framebufferSizeCallbackLambda = [](GLFWwindow* window, int width, int height)
@@ -152,6 +154,24 @@ void Game::processInput()
 
 	if (glfwGetKey(windowPtr, GLFW_KEY_N) == GLFW_PRESS)
 		_snake.setDirection(DIRECTION::DOWN);
+}
+
+void Game::placeAppleRandomly()
+{
+	gmt::vec3i appleCoord = { 0, 0, 0 };
+
+	for (sk_uint i = 0; i < 100; ++i)
+	{
+		appleCoord = gmt::vec3i{ (sk_int)gmt::randomUint() % (sk_int)_grid.getWidth(),
+								 (sk_int)gmt::randomUint() % (sk_int)_grid.getHeight(),
+								 (sk_int)gmt::randomUint() % (sk_int)_grid.getLength()};
+
+		if (!_snake.isUsedBySnake(appleCoord))
+		{
+			_apple.setPosition(_grid.gridToWorldCoordinate(appleCoord));
+			break;
+		}
+	}
 }
 
 void Game::scrollCallback(GLFWwindow* window, sk_double xoffset, sk_double yoffset)

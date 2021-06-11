@@ -45,6 +45,11 @@ bool Snake::collided() const
 	return _collided;
 }
 
+bool Snake::isUsedBySnake(const gmt::vec3i& pos)
+{
+	return _currentPositions.find(pos) != _currentPositions.end();
+}
+
 void Snake::drawPath(gmt::vec3 p1, gmt::vec3 p2)
 {
 	drawSegment(p1);

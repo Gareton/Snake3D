@@ -52,6 +52,11 @@ void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view)
 
 void VoxelApple::update(sk_double deltaTime) {}
 
+void VoxelApple::setPosition(const gmt::vec3& pos)
+{
+	VoxelSphere::setPosition(pos);
+}
+
 void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view)
 {
 	_cube.setPosition(pos);

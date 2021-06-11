@@ -5,6 +5,8 @@
 #include <initializer_list>
 #include <iostream>
 #include "skTypes.h"
+#include <chrono>
+#include <random>
 
 namespace gmt
 {
@@ -296,6 +298,8 @@ namespace gmt
 	{
 		return val * val;
 	}
+
+	sk_uint randomUint();
 }
 
 #endif

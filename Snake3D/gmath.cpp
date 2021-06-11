@@ -423,4 +423,11 @@ namespace gmt
 
 		return std::atan2(crs, dt);
 	}
+
+	sk_uint randomUint()
+	{
+		static std::mt19937 rnd(std::chrono::high_resolution_clock::now().time_since_epoch().count());
+
+		return rnd();
+	}
 }
