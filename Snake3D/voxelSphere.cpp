@@ -18,19 +18,34 @@ void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view)
 
 						gmt::vec3 voxelPos = gmt::vec3{ 1.0f * i, 1.0f * j, 1.0f * k } * _voxelSize;
 
-						_cube.setPosition(voxelPos);
+						_cube.setPosition(_pos + voxelPos);
 						_cube.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * k, 1.0f * j, 1.0f * i } *_voxelSize;
 
-						_cube.setPosition(voxelPos);
+						_cube.setPosition(_pos + voxelPos);
 						_cube.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * i, 1.0f * k, 1.0f * j } *_voxelSize;
 
-						_cube.setPosition(voxelPos);
+						_cube.setPosition(_pos + voxelPos);
 						_cube.draw(projection, view);
 					}
 }
 
 void VoxelSphere::update(sk_double deltaTime) {}
+
+sk_uint VoxelSphere::getRadius()
+{
+	return _radius;
+}
+
+sk_float VoxelSphere::getVoxelSize()
+{
+	return _voxelSize;
+}
+
+gmt::vec3 VoxelSphere::getPosition()
+{
+	return _pos;
+}

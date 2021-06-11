@@ -89,6 +89,11 @@ void StraightParallelepiped::setPosition(const gmt::vec3& position)
 	_position = position;
 }
 
+void StraightParallelepiped::setColor(const gmt::vec4& color)
+{
+	_color = color;
+}
+
 void StraightParallelepiped::resize(const gmt::vec3& size)
 {
 	_size = size;

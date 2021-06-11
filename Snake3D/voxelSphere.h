@@ -15,6 +15,10 @@ public:
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
 	void update(sk_double deltaTime) override;
+
+	sk_uint getRadius();
+	sk_float getVoxelSize();
+	gmt::vec3 getPosition();
 private:
 	Cube _cube;
 	const gmt::vec3 _pos;

@@ -16,6 +16,7 @@ public:
 	void resize(const gmt::vec3& size);
 
 	void setPosition(const gmt::vec3& position);
+	void setColor(const gmt::vec4& color);
 private:
 	VertexManager _vertexManager;
 	Shader _shader;
