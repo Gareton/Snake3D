@@ -11,6 +11,7 @@
 #include "textRenderer.h"
 #include "snake.h"
 #include "skTypes.h"
+#include "voxelSphere.h"
 
 class Game {
 public:
@@ -34,6 +35,7 @@ private:
 	Grid _grid;
 	Snake _snake;
 	sk_double _deltaTime;
+	VoxelSphere _apple;
 	bool _mouseCallbackEnabled = true;
 	bool _gameOver = false;
 };

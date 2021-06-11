@@ -290,6 +290,12 @@ namespace gmt
 	{
 		return val >= lo && val < hi;
 	}
+
+	template<typename T>
+	T sqr(const T& val)
+	{
+		return val * val;
+	}
 }
 
 #endif

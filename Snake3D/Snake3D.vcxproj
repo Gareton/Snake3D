@@ -135,6 +135,7 @@
     <ClCompile Include="textRenderer.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="vertexManager.cpp" />
+    <ClCompile Include="voxelSphere.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="textRenderer.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="vertexManager.h" />
+    <ClInclude Include="voxelSphere.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

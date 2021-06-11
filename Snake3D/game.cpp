@@ -6,8 +6,9 @@
 
 Game::Game(Window& window)
 	:_grid({ 0.0f, 0.0f, 0.0f }, 2.0f, 10, 1, 10, 0.04f, { 0.0f, 0.0f, 0.0f, 1.0f }),
-	_camera({ 0.0f, 0.0f, 0.0f }, 25.0f, 0.001f, gmt::radians(45.0f), gmt::radians(-87.0f)), _snake(_grid, { 0, 0, 9 }, {0, 0, 1}, 5.0f),
-	 _window(window), _textRenderer("fonts/futuram.ttf")
+	_camera({ 0.0f, 0.0f, 0.0f }, 25.0f, 0.001f, gmt::radians(45.0f), gmt::radians(-87.0f)), _snake(_grid, { 0, 0, 9 }, { 0, 0, 1 }, 5.0f),
+	_window(window), _textRenderer("fonts/futuram.ttf"), 
+	_apple(gmt::vec3{ 0.0f, 0.0f, 0.0f }, 8, 0.1f, gmt::vec3{0.998f, 0.196f, 0.196f})
 {
 	glfwSetWindowUserPointer(_window.getWindowPtr(), this);
 
@@ -78,6 +79,7 @@ void Game::renderFrame()
 
 	_grid.draw(projection, view);
 	_snake.draw(projection, view);
+	_apple.draw(projection, view);
 
 	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWindowWidth(), 
 										  0.0f, _window.getWindowHeight());
