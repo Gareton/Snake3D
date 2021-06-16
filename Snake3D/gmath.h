@@ -7,85 +7,12 @@
 #include "skTypes.h"
 #include <chrono>
 #include <random>
-#include "gvector2.h"
+#include "gvector.h"
 
 namespace gmt
 {
-	const sk_float GLF_ZERO = static_cast<sk_float>(0);
+	const sk_float GLF_ZERO = static_cast<sk_float>(0); // TODO: get rid of it
 	const sk_float PI = static_cast<sk_float>(acos(-1.0f));
-
-	struct vec3f
-	{
-		vec3f() = default;
-		vec3f(sk_float x_, sk_float y_, sk_float z_);
-		vec3f(const vec3f& p1, const vec3f& p2);
-		explicit vec3f(sk_float val);
-
-		vec3f operator+(const vec3f& o) const;
-		vec3f operator-(const vec3f& o) const;
-		vec3f operator-() const;
-		vec3f operator*(sk_float k) const;
-		vec3f operator/(sk_float k) const;
-		vec3f& operator+=(const vec3f& o);
-		vec3f& operator-=(const vec3f& o);
-		vec3f& operator*=(sk_float k);
-		vec3f& operator/=(sk_float k);
-		bool operator==(const vec3f& o) const;
-		bool operator!=(const vec3f& o) const;
-		bool operator<(const vec3f& o) const;
-		bool operator>(const vec3f& o) const;
-
-		sk_float x, y, z;
-	};
-
-	struct vec4f
-	{
-		vec4f() = default;
-		vec4f(sk_float x_, sk_float y_, sk_float z_, sk_float w_);
-		vec4f(const vec4f& p1, const vec4f& p2);
-
-		vec4f operator+(const vec4f& o) const;
-		vec4f operator*(sk_float k) const;
-		vec4f operator/(sk_float k) const;
-		vec4f& operator+=(const vec4f& o);
-		vec4f& operator*=(sk_float k);
-		vec4f& operator/=(sk_float k);
-		bool operator==(const vec4f& o);
-
-		sk_float x, y, z, w;
-	};
-
-	struct vec3i
-	{
-		vec3i() = default;
-		vec3i(sk_int x_, sk_int y_, sk_int z_)
-		{
-			x = x_;
-			y = y_;
-			z = z_;
-		}
-
-		bool operator<(const vec3i& o) const;
-		bool operator==(const vec3i& o) const;
-		bool operator!=(const vec3i& o) const;
-
-		sk_int x, y, z;
-	};
-
-	struct vec2i
-	{
-		vec2i() = default;
-		vec2i(sk_int x_, sk_int y_)
-		{
-			x = x_;
-			y = y_;
-		}
-
-		sk_int x, y;
-	};
-
-	using vec2f = vec2_impl<sk_float>;
-	using vec2 = vec2f;
 
 	sk_float dot(const vec2f& v1, const vec2f& v2);
 	sk_float dot(const vec3f& v1, const vec3f& v2);
@@ -111,9 +38,6 @@ namespace gmt
 	vec3f getMiddle(const vec3f& p1, const vec3f& p2);
 
 	sk_float sqr(sk_float x);
-
-	using vec3 = vec3f;
-	using vec4 = vec4f;
 
 	template<typename T, sk_uint N, sk_uint M>
 	class mat

@@ -7,10 +7,11 @@ namespace gmt
 	struct vec2_impl
 	{
 		vec2_impl() = default;
+		vec2_impl(const vec2_impl& o) = default;
 		vec2_impl& operator=(const vec2_impl& o) = default;
 		explicit vec2_impl(const T& val);
 		vec2_impl(const T& x_, const T& y_);
-		vec2_impl(const vec2_impl& p1, const vec2_impl& p2); // from p1 to p2
+		vec2_impl(const vec2_impl& p1, const vec2_impl& p2);
 
 		vec2_impl operator-() const;
 		vec2_impl operator+(const vec2_impl& o) const;
@@ -33,22 +34,15 @@ namespace gmt
 
 	template<typename T>
 	vec2_impl<T>::vec2_impl(const T& val)
-	{
-		x = y = val;
-	}
+		: x(val), y(val) {}
 
 	template<typename T>
 	vec2_impl<T>::vec2_impl(const T& x_, const T& y_)
-	{
-		x = x_;
-		y = y_;
-	}
+		: x(x_), y(y_) {}
 
 	template<typename T>
 	vec2_impl<T>::vec2_impl(const vec2_impl& p1, const vec2_impl& p2)
-	{
-		*this = p2 - p1;
-	}
+		: x(p2.x - p1.x), y(p2.y - p1.y) {}
 
 	template<typename T>
 	vec2_impl<T> vec2_impl<T>::operator-() const
