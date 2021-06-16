@@ -7,28 +7,12 @@
 #include "skTypes.h"
 #include <chrono>
 #include <random>
+#include "gvector2.h"
 
 namespace gmt
 {
 	const sk_float GLF_ZERO = static_cast<sk_float>(0);
 	const sk_float PI = static_cast<sk_float>(acos(-1.0f));
-
-	struct vec2f
-	{
-		vec2f() = default;
-		vec2f(sk_float x_, sk_float y_);
-		vec2f(const vec2f &p1, const vec2f &p2);
-
-		vec2f operator+(const vec2f& o) const;
-		vec2f operator*(sk_float k) const;
-		vec2f operator/(sk_float k) const;
-		vec2f& operator+=(const vec2f& o);
-		vec2f& operator*=(sk_float k);
-		vec2f& operator/=(sk_float k);
-		bool operator==(const vec2f& o); 
-
-		sk_float x, y;
-	};
 
 	struct vec3f
 	{
@@ -100,6 +84,9 @@ namespace gmt
 		sk_int x, y;
 	};
 
+	using vec2f = vec2_impl<sk_float>;
+	using vec2 = vec2f;
+
 	sk_float dot(const vec2f& v1, const vec2f& v2);
 	sk_float dot(const vec3f& v1, const vec3f& v2);
 
@@ -125,7 +112,6 @@ namespace gmt
 
 	sk_float sqr(sk_float x);
 
-	using vec2 = vec2f;
 	using vec3 = vec3f;
 	using vec4 = vec4f;
 
@@ -254,11 +240,11 @@ namespace gmt
 		return o;
 	}
 
-	std::ostream& operator<<(std::ostream& o, const vec2& v);
+	std::ostream& operator<<(std::ostream& o, const vec2f& v);
 	std::ostream& operator<<(std::ostream& o, const vec3& v);
 	std::ostream& operator<<(std::ostream& o, const vec4& v);
 
-	vec2 operator*(const mat2& m, const vec2& v);
+	vec2f operator*(const mat2& m, const vec2f& v);
 	vec3 operator*(const mat3& m, const vec3& v);
 	vec4 operator*(const mat4& m, const vec4& v);
 

@@ -146,7 +146,12 @@
     <ClInclude Include="file_loader.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gmath.h" />
+    <ClInclude Include="gmatrix.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="gvector.h" />
+    <ClInclude Include="gvector2.h" />
+    <ClInclude Include="gvector3.h" />
+    <ClInclude Include="gvector4.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />
     <ClInclude Include="snake.h" />

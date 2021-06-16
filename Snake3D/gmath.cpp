@@ -5,56 +5,6 @@
 
 namespace gmt 
 {
-	vec2f::vec2f(sk_float x_, sk_float y_)
-	{
-		x = x_;
-		y = y_;
-	}
-
-	vec2f::vec2f(const vec2f& p1, const vec2f& p2)
-	{
-		x = p2.x - p1.x;
-		y = p2.y - p1.y;
-	}
-
-	vec2f vec2f::operator+(const vec2f& o) const
-	{
-		return vec2(x + o.x, y + o.y);
-	}
-
-	vec2f vec2f::operator*(sk_float k) const
-	{
-		return vec2f(x * k, y * k);
-	}
-
-	vec2f vec2f::operator/(sk_float k) const
-	{
-		if (k == GLF_ZERO)
-			throw std::runtime_error("Division by zero");
-
-		return vec2f(x / k, y / k);
-	}
-
-	vec2f& vec2f::operator+=(const vec2f& o)
-	{
-		return *this = *this + o;
-	}
-
-	vec2f& vec2f::operator*=(sk_float k)
-	{
-		return *this = *this * k;
-	}
-
-	vec2f& vec2f::operator/=(sk_float k)
-	{
-		return *this = *this / k;
-	}
-
-	bool vec2f::operator==(const vec2f& o)
-	{
-		return x == o.x && y == o.y;
-	}
-
 	vec3f::vec3f(sk_float x_, sk_float y_, sk_float z_)
 	{
 		x = x_;
@@ -257,18 +207,18 @@ namespace gmt
 		return x * x;
 	}
 
-	std::ostream& operator<<(std::ostream& o, const vec2& v)
+	std::ostream& operator<<(std::ostream& o, const vec2f& v)
 	{
 		o << v.x << " " << v.y << std::endl;
 
 		return o;
 	}
 
-	vec2 operator*(const mat2& m, const vec2& v)
+	vec2f operator*(const mat2& m, const vec2f& v)
 	{
 		auto res = m * mat<sk_float, 2, 1>({ {v.x}, {v.y} });
 
-		return vec2(res[0][0], res[1][0]);
+		return vec2f(res[0][0], res[1][0]);
 	}
 
 	vec3 operator*(const mat3& m, const vec3& v)
