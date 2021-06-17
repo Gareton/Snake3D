@@ -64,19 +64,19 @@ void Shader::setUniform(const std::string& name, sk_uint x) const
 void Shader::setUniform(const std::string& name, const gmt::mat2& m) const
 {
 	glUniformMatrix2fv(glGetUniformLocation(_programId, &name[0]), 
-					   1, GL_TRUE, &(m.get(0, 0)));
+					   1, GL_TRUE, &(m[0][0]));
 }
 
 void Shader::setUniform(const std::string& name, const gmt::mat3& m) const
 {
 	glUniformMatrix3fv(glGetUniformLocation(_programId, &name[0]),
-		1, GL_TRUE, &(m.get(0, 0)));
+		1, GL_TRUE, &(m[0][0]));
 }
 
 void Shader::setUniform(const std::string& name, const gmt::mat4& m) const
 {
 	glUniformMatrix4fv(glGetUniformLocation(_programId, &name[0]),
-		1, GL_TRUE, &(m.get(0, 0)));
+		1, GL_TRUE, &(m[0][0]));
 }
 
 bool Shader::genShader(sk_uint& id, GLenum type, const std::string& source)

@@ -8,6 +8,8 @@
 #include <chrono>
 #include <random>
 #include "gvector.h"
+#include "gmatrix.h"
+
 
 namespace gmt
 {
@@ -38,116 +40,6 @@ namespace gmt
 	vec3f getMiddle(const vec3f& p1, const vec3f& p2);
 
 	sk_float sqr(sk_float x);
-
-	template<typename T, sk_uint N, sk_uint M>
-	class mat
-	{
-	public:
-		mat() = default;
-
-		mat(const T(&ar)[N][M])
-		{
-			for (int i = 0; i < N; ++i)
-				for (int j = 0; j < M; ++j)
-					_data[i][j] = ar[i][j];
-		}
-
-		mat(const T& diagValue)
-		{
-			static_assert(N == M, "To initialize matrix with diagonal it must be sqare");
-
-			for (int i = 0; i < N; ++i)
-				for (int j = 0; j < N; ++j)
-					if (i == j)
-						_data[i][j] = diagValue;
-					else
-						_data[i][j] = T();
-		}
-
-		mat& operator=(const mat& o) 
-		{
-			if (this == &o) return *this;
-
-			for (sk_uint i = 0; i < N; ++i)
-				for (sk_uint j = 0; j < M; ++j)
-					_data[i][j] = o._data[i][j];
-
-			return *this;
-		}
-
-		mat operator+(const mat& o) const
-		{
-			mat rval;
-
-			for (sk_uint i = 0; i < N; ++i)
-				for (sk_uint j = 0; j < M; ++j)
-					rval[i][j] = _data[i][j] + o._data[i][j];
-
-			return std::move(rval);
-		}
-
-		mat operator-() const
-		{
-			mat rval;
-
-			for (sk_uint i = 0; i < N; ++i)
-				for (sk_uint j = 0; j < M; ++j)
-					rval[i][j] = -_data[i][j];
-
-			return std::move(rval);
-		}
-
-		mat operator-(const mat& o) const
-		{
-			return std::move(*this + (-o));
-		}
-
-		template<sk_uint Q>
-		mat<T, N, Q> operator*(const mat<T, M, Q>& o) const
-		{
-			mat<T, N, Q> rval;
-
-			for (sk_uint i = 0; i < N; ++i)
-				for (sk_uint j = 0; j < Q; ++j)
-					for (sk_uint k = 0; k < M; ++k)
-						rval[i][j] += _data[i][k] * o.get(k, j);
-			
-			return std::move(rval);
-		}
-
-		template<sk_uint Q>
-		mat<T, N, Q>& operator*=(const mat<T, M, Q>& o)
-		{
-			return (*this) = (*this) * o;
-		}
-
-		T* operator[](sk_uint row) 
-		{
-			if (row >= N)
-				throw std::runtime_error("gmath.h::mat::operator[]::index_out_of_bounds");
-
-			return _data[row];
-		}
-
-		const T& get(sk_uint row, sk_uint col) const
-		{
-			if (row >= N || col >= M)
-				throw std::runtime_error("gmath.h::mat::get::index_out_of_bounds");
-
-			return _data[row][col];
-		}
-
-	private:
-		T _data[N][M] = {};
-	};
-
-	using mat2f = mat<sk_float, 2, 2>;
-	using mat3f = mat<sk_float, 3, 3>;
-	using mat4f = mat<sk_float, 4, 4>;
-
-	using mat2 = mat2f;
-	using mat3 = mat3f;
-	using mat4 = mat4f;
 
 	template<typename T, sk_uint N, sk_uint M>
 	std::ostream& operator<<(std::ostream& o, const mat<T, N, M>& m)
