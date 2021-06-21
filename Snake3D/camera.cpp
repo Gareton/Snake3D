@@ -1,4 +1,5 @@
 #include "camera.h"
+#include <algorithm>
 
 Camera::Camera(const gmt::vec3& target, sk_float radius, sk_float sensitivity, sk_float fov, sk_float pitch, 
 	           sk_float yaw, const gmt::vec3& worldUp)
@@ -47,8 +48,8 @@ void Camera::recalculateSystem()
 	_spherePosition = -fromCenter * _radius;
 
 	_front = fromCenter;
-	_right = gmt::normalize(gmt::crossVector(_front, _worldUp));
-	_up = gmt::normalize(gmt::crossVector(_right, _front));
+	_right = gmt::normalize(gmt::cross(_front, _worldUp));
+	_up = gmt::normalize(gmt::cross(_right, _front));
 }
 
 void Camera::setFov(sk_float fov)

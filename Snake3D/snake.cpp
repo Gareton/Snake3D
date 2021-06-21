@@ -1,4 +1,6 @@
 #include "snake.h"
+#include <algorithm>
+#include <iostream>
 
 const std::vector<gmt::vec3> Snake::dirVectors = Snake::createDirVectors();
 

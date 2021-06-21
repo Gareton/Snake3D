@@ -19,6 +19,18 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{be655408-92a5-4b23-addb-ad5382118fb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\math\gvector">
+      <UniqueIdentifier>{d9e684d1-845e-4e9d-aa00-521f95b3cfef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math\gmatrix">
+      <UniqueIdentifier>{52e1659a-83e4-4c03-8bf2-2a403ea901f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math\gvector\utilities">
+      <UniqueIdentifier>{f4f9b958-d63b-46c3-a625-4f4dab5d26e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math\general">
+      <UniqueIdentifier>{ad95780a-da20-46b2-8971-738e406e91d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,7 +81,16 @@
     <ClCompile Include="voxelApple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gmath.cpp">
+    <ClCompile Include="gvector2_utilities.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="gvector3_utilities.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix_utilities.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="gutilities.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,23 +146,44 @@
     <ClInclude Include="voxelApple.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gmatrix.h">
+      <Filter>Header Files\math\gmatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="gmatrix_impl.h">
+      <Filter>Header Files\math\gmatrix</Filter>
+    </ClInclude>
     <ClInclude Include="gvector.h">
-      <Filter>Header Files\math</Filter>
+      <Filter>Header Files\math\gvector</Filter>
     </ClInclude>
     <ClInclude Include="gvector2.h">
-      <Filter>Header Files\math</Filter>
+      <Filter>Header Files\math\gvector</Filter>
     </ClInclude>
     <ClInclude Include="gvector3.h">
-      <Filter>Header Files\math</Filter>
+      <Filter>Header Files\math\gvector</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix_utilities.h">
+      <Filter>Header Files\math\gmatrix</Filter>
     </ClInclude>
     <ClInclude Include="gvector4.h">
-      <Filter>Header Files\math</Filter>
+      <Filter>Header Files\math\gvector</Filter>
+    </ClInclude>
+    <ClInclude Include="gvector2_utilities.h">
+      <Filter>Header Files\math\gvector\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="gvector3_utilities.h">
+      <Filter>Header Files\math\gvector\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="gvector4_utilities.h">
+      <Filter>Header Files\math\gvector\utilities</Filter>
     </ClInclude>
     <ClInclude Include="gmath.h">
-      <Filter>Header Files\math</Filter>
+      <Filter>Header Files\math\general</Filter>
     </ClInclude>
-    <ClInclude Include="gmatrix.h">
-      <Filter>Header Files\math</Filter>
+    <ClInclude Include="gutilities.h">
+      <Filter>Header Files\math\general</Filter>
+    </ClInclude>
+    <ClInclude Include="vector_utilities.h">
+      <Filter>Header Files\math\gvector\utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

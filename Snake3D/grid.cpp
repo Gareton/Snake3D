@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "file_loader.h"
+#include <algorithm>
 
 Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
 	sk_uint width, sk_uint height, sk_uint length,
@@ -259,7 +260,7 @@ void Grid::addRectangle(const gmt::vec3& p1, const gmt::vec3& p2)
 
 	std::vector<gmt::vec3> points = { p1, p2, p3, p4 };
 
-	sort(points.begin(), points.end());
+	std::sort(points.begin(), points.end());
 
 	addVertex(points[0], {lbx, lby});
 	addVertex(points[1], {lbx, rby});
