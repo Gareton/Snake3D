@@ -1,7 +1,7 @@
 #include "grid.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "file_loader.h"
+#include "fileLoader.h"
 #include <algorithm>
 
 Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
@@ -11,7 +11,7 @@ Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
 	:_position(position), _cubeSize(cubeSize),
 	_width(width), _height(height), _length(length),
 	_thickness(thickness), _color(color),
-	_shader(loadFromFile("shaders/gridShader.vs"), loadFromFile("shaders/gridShader.fs"))
+	_shader(FLoader::loadText("shaders/gridShader.vs"), FLoader::loadText("shaders/gridShader.fs"))
 {	
 	for (sk_uint z = 0; z <= length; ++z)
 		for (sk_uint y = 0; y <= height; ++y)

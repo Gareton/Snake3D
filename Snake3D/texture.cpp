@@ -25,27 +25,22 @@ Texture::Texture(const Image& image, sk_uint textureNumber, sk_int internalForma
 
 	GLenum format = GL_RGB;
 
-	if (image.channelsCount == 1)
+	if (image.getChannelsCount() == 1)
 		format = GL_RED;
-	else if (image.channelsCount == 2)
+	else if (image.getChannelsCount() == 2)
 		format = GL_RG;
-	else if (image.channelsCount == 4)
+	else if (image.getChannelsCount() == 4)
 		format = GL_RGBA;
-
-	const unsigned char *dataPtr = nullptr;
-
-	if (!image.data.empty())
-		dataPtr = &image.data[0];
 
 	glTexImage2D(GL_TEXTURE_2D,
 		0,
 		internalFormat,
-		static_cast<sk_uint>(image.width),
-		static_cast<sk_uint>(image.height),
+		static_cast<sk_uint>(image.getWidth()),
+		static_cast<sk_uint>(image.getHeight()),
 		0,
 		format,
 		GL_UNSIGNED_BYTE,
-		dataPtr);
+		image.getDataPtr());
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 

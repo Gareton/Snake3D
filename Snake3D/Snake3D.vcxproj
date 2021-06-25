@@ -123,12 +123,13 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cube.cpp" />
-    <ClCompile Include="file_loader.cpp" />
+    <ClCompile Include="fileLoader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="gutilities.cpp" />
     <ClCompile Include="gvector2_utilities.cpp" />
     <ClCompile Include="gvector3_utilities.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="matrix_utilities.cpp" />
@@ -146,7 +147,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="drawable.h" />
-    <ClInclude Include="file_loader.h" />
+    <ClInclude Include="fileLoader.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gmath.h" />
     <ClInclude Include="gmatrix.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="gvector3_utilities.h" />
     <ClInclude Include="gvector4.h" />
     <ClInclude Include="gvector4_utilities.h" />
+    <ClInclude Include="image.h" />
     <ClInclude Include="matrix_utilities.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />

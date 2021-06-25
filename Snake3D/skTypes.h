@@ -12,5 +12,6 @@ using sk_float = GLfloat;
 using sk_double = GLdouble;
 using sk_char = GLchar;
 using sk_uchar = GLubyte;
+using sk_byte = sk_uchar;
 
 #endif
