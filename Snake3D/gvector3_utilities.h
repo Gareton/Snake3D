@@ -12,6 +12,12 @@ namespace gmt
 	vec3 normalize(const vec3& v);
 	vec3 normal(const vec3& v1, const vec3& v2);
 	vec3 middle(const vec3& p1, const vec3& p2);
+
+	template<typename T>
+	const T* valuePtr(const vec3_impl<T>& v)
+	{
+		return &v[0];
+	}
 }
 
 #endif

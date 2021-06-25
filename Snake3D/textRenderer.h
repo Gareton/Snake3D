@@ -28,7 +28,7 @@ private:
 	};
 
 	std::vector<Character> _characters;
-	Shader _shader;
+	bge::Shader _shader;
 };
 
 #endif

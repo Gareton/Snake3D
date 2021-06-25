@@ -45,7 +45,7 @@ private:
 	const sk_float _borderRatio = 0.4f;
 	const gmt::vec4 _color;
 	VertexManager _vertexManager;
-	Shader _shader;
+	bge::Shader _shader;
 	std::vector<sk_float> _verticies;
 	std::vector<sk_uint> _indicies;
 };

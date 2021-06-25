@@ -11,7 +11,7 @@ Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
 	:_position(position), _cubeSize(cubeSize),
 	_width(width), _height(height), _length(length),
 	_thickness(thickness), _color(color),
-	_shader("shaders/gridShader.vs", "shaders/gridShader.fs")
+	_shader(loadFromFile("shaders/gridShader.vs"), loadFromFile("shaders/gridShader.fs"))
 {	
 	for (sk_uint z = 0; z <= length; ++z)
 		for (sk_uint y = 0; y <= height; ++y)

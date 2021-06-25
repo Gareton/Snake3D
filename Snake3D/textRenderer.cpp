@@ -1,8 +1,9 @@
 #include "textRenderer.h"
 #include "vertexManager.h"
+#include "file_loader.h"
 
 TextRenderer::TextRenderer(const std::string& fontPath)
-	: _shader("shaders/textShader.vs", "shaders/textShader.fs") 
+	: _shader(loadFromFile("shaders/textShader.vs"), loadFromFile("shaders/textShader.fs"))
 {
 	FT_Library freetypeLibrary = nullptr;
 

@@ -19,7 +19,7 @@ public:
 	void setColor(const gmt::vec4& color);
 private:
 	VertexManager _vertexManager;
-	Shader _shader;
+	bge::Shader _shader;
 	gmt::vec3 _position;
 	gmt::vec4 _color;
 	gmt::vec3 _size;

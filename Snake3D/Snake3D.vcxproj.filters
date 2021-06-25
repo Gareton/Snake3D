@@ -31,6 +31,18 @@
     <Filter Include="Header Files\math\general">
       <UniqueIdentifier>{ad95780a-da20-46b2-8971-738e406e91d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{0e0c0968-30b6-42b7-8cba-2ca9b69392b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\shader">
+      <UniqueIdentifier>{544a94af-2f60-4170-9bf7-1002d71b7883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine">
+      <UniqueIdentifier>{d3df48b3-98da-44d5-9cbd-9aa4c0cdde9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\shader">
+      <UniqueIdentifier>{e2417450-c372-4467-82af-10da0c71a0d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -46,9 +58,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vertexManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="file_loader.cpp">
@@ -93,6 +102,9 @@
     <ClCompile Include="gutilities.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Source Files\engine\shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -105,9 +117,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vertexManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_loader.h">
@@ -184,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="vector_utilities.h">
       <Filter>Header Files\math\gvector\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Header Files\engine\shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

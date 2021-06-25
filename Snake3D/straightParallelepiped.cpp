@@ -1,8 +1,9 @@
 #include "straightParallelepiped.h"
+#include "file_loader.h"
 
 StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& position,
 											   const gmt::vec4& color)
-	:_shader("shaders/straightParallelepipedShader.vs", "shaders/straightParallelepipedShader.fs"),
+	:_shader(loadFromFile("shaders/straightParallelepipedShader.vs"), loadFromFile("shaders/straightParallelepipedShader.fs")),
 	 _position(position), _color(color), _size(size)
 {
 	sk_float hx = 0.5f;

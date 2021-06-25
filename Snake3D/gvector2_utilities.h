@@ -11,6 +11,12 @@ namespace gmt
 	sk_float length(const vec2& v);
 	vec2 normalize(const vec2& v);
 	vec2 middle(const vec2& p1, const vec2& p2);
+
+	template<typename T>
+	const T* valuePtr(const vec2_impl<T>& v)
+	{
+		return &v[0];
+	}
 }
 
 #endif
