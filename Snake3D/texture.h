@@ -3,24 +3,26 @@
 #include "fileLoader.h"
 #include <glad/glad.h>
 #include "skTypes.h"
+#include "textureSettings.h"
 
-class Texture 
+namespace bge
 {
-public:
-	Texture(const Image& image, sk_uint textureNumber, sk_int internalFormat = GL_RGB,
-		    sk_int wrapX = GL_REPEAT, sk_int wrapY = GL_REPEAT,
-		    sk_int minFilter = GL_NEAREST_MIPMAP_NEAREST,
-			sk_int magFilter = GL_NEAREST);
-	//~Texture();
-	Texture(Texture& o) = delete;
-	Texture& operator=(Texture& o) = delete;
-	Texture(Texture&& o);
-	void activate();
-	void bind();
-private:
-	static const std::vector<GLenum> _textureTypes;
-	sk_uint _ID;
-	sk_uint _textureNumber;
-};
+	class Texture
+	{
+	public:
+		Texture(sk_uint textureIndex, const Image& image, const TextureSettings& settings);
+		~Texture();
+		Texture(Texture& o) = delete;
+		Texture& operator=(Texture& o) = delete;
+		Texture(Texture&& o);
+		void use();
+	private:
+		void destructorHelper();
+
+		static const std::vector<GLenum> _textureIndexTypes;
+		sk_uint _ID;
+		sk_uint _textureIndex;
+	};
+}
 
 #endif

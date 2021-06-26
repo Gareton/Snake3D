@@ -18,11 +18,11 @@ public:
 private:
 	struct Character
 	{
-		Texture texture;
+		bge::Texture texture;
 		VertexManager vertexManager;
 		sk_uint advance;
 
-		Character(Texture&& texture_, VertexManager&& vertexManager_, sk_uint advance_)
+		Character(bge::Texture&& texture_, VertexManager&& vertexManager_, sk_uint advance_)
 			: texture(std::move(texture_)), vertexManager(std::move(vertexManager_)), advance(advance_)
 		{}
 	};

@@ -25,9 +25,7 @@ TextRenderer::TextRenderer(const std::string& fontPath)
 		sk_uint width = face->glyph->bitmap.width;
 		sk_uint height = face->glyph->bitmap.rows;
 
-		Texture texture(Image(face->glyph->bitmap.buffer, width, height, 1), 0, GL_RED,
-			GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE,
-			GL_LINEAR, GL_LINEAR);
+		bge::Texture texture(0, Image(face->glyph->bitmap.buffer, width, height, 1), bge::TextureSettings(GL_TEXTURE_2D));
 
 		gmt::vec2f bearing = {(sk_float)face->glyph->bitmap_left, (sk_float)face->glyph->bitmap_top};
 		gmt::vec2f size = { (sk_float)width, (sk_float)height };
@@ -75,8 +73,7 @@ void TextRenderer::render(const std::string& text, const gmt::mat4 &projection,
 
 		Character &character = _characters[ind];
 
-		character.texture.bind();
-		character.texture.activate();
+		character.texture.use();
 
 		character.vertexManager.draw();
 

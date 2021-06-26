@@ -49,6 +49,12 @@
     <Filter Include="Source Files\tools">
       <UniqueIdentifier>{b0a9cb6e-6668-46da-ae9f-24c0eff85248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\texture">
+      <UniqueIdentifier>{c3472563-6921-4448-bd80-28c0b80f859d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\texture">
+      <UniqueIdentifier>{6d8816aa-1aeb-414f-9a40-1ad548d89104}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,9 +73,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
@@ -114,6 +117,12 @@
     <ClCompile Include="fileLoader.cpp">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files\engine\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="textureSettings.cpp">
+      <Filter>Source Files\engine\texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -132,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
@@ -208,6 +214,12 @@
     </ClInclude>
     <ClInclude Include="fileLoader.h">
       <Filter>Header Files\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files\engine\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="textureSettings.h">
+      <Filter>Header Files\engine\texture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

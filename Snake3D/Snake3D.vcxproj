@@ -138,6 +138,7 @@
     <ClCompile Include="straightParallelepiped.cpp" />
     <ClCompile Include="textRenderer.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="textureSettings.cpp" />
     <ClCompile Include="vertexManager.cpp" />
     <ClCompile Include="voxelApple.cpp" />
     <ClCompile Include="voxelSphere.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="straightParallelepiped.h" />
     <ClInclude Include="textRenderer.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="textureSettings.h" />
     <ClInclude Include="vector_utilities.h" />
     <ClInclude Include="vertexManager.h" />
     <ClInclude Include="voxelApple.h" />
