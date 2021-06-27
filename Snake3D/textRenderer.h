@@ -8,6 +8,7 @@
 #include "shader.h"
 #include "vertexManager.h"
 #include "skTypes.h"
+#include <memory>
 
 class TextRenderer
 {
@@ -19,10 +20,10 @@ private:
 	struct Character
 	{
 		bge::Texture texture;
-		VertexManager vertexManager;
+		bge::VertexManager vertexManager;
 		sk_uint advance;
 
-		Character(bge::Texture&& texture_, VertexManager&& vertexManager_, sk_uint advance_)
+		Character(bge::Texture&& texture_, bge::VertexManager&& vertexManager_, sk_uint advance_)
 			: texture(std::move(texture_)), vertexManager(std::move(vertexManager_)), advance(advance_)
 		{}
 	};

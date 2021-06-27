@@ -32,7 +32,7 @@ Grid::Grid(const gmt::vec3& position, sk_float cubeSize,
 
 	std::vector<sk_uint> attributeCounts = {3, 2};
 
-	_vertexManager.init(_verticies, _indicies, attributeCounts);
+	_vertexManager.reset(new bge::VertexManager(_verticies, attributeCounts, _indicies));
 }
 
 void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view)
@@ -46,7 +46,7 @@ void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	_shader.setUniform("model", model);
 	_shader.setUniform("view", view);
 	_shader.setUniform("proj", projection);
-	_vertexManager.draw();
+	_vertexManager->draw();
 }
 
 void Grid::update(sk_double deltaTime)

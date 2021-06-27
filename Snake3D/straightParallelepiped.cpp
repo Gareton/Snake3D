@@ -62,7 +62,7 @@ StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt:
 
 	std::vector<sk_uint> attributeCounts = { 3 };
 
-	_vertexManager.init(verticies, indicies, attributeCounts);
+	_vertexManager.reset(new bge::VertexManager(verticies, attributeCounts, indicies));
 }
 
 void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& view)
@@ -77,7 +77,7 @@ void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& 
 
 	_shader.setUniform("color", _color);
 
-	_vertexManager.draw();
+	_vertexManager->draw();
 }
 
 void StraightParallelepiped::update(sk_double deltaTime)

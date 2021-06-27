@@ -4,6 +4,7 @@
 #include "shader.h"
 #include "vertexManager.h"
 #include "skTypes.h"
+#include <memory>
 
 class StraightParallelepiped : public Drawable 
 {
@@ -18,7 +19,7 @@ public:
 	void setPosition(const gmt::vec3& position);
 	void setColor(const gmt::vec4& color);
 private:
-	VertexManager _vertexManager;
+	std::unique_ptr<bge::VertexManager> _vertexManager;
 	bge::Shader _shader;
 	gmt::vec3 _position;
 	gmt::vec4 _color;

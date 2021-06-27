@@ -55,6 +55,12 @@
     <Filter Include="Source Files\engine\texture">
       <UniqueIdentifier>{6d8816aa-1aeb-414f-9a40-1ad548d89104}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\engine\vertex_manager">
+      <UniqueIdentifier>{8b0afad8-deab-4c00-9d17-309da64cf5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\vertex_manager">
+      <UniqueIdentifier>{c265bb47-a994-47ba-bc26-dfad85c81366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,9 +73,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="grid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vertexManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="window.cpp">
@@ -123,6 +126,9 @@
     <ClCompile Include="textureSettings.cpp">
       <Filter>Source Files\engine\texture</Filter>
     </ClCompile>
+    <ClCompile Include="vertexManager.cpp">
+      <Filter>Source Files\engine\vertex_manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -132,9 +138,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="textureSettings.h">
       <Filter>Header Files\engine\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexManager.h">
+      <Filter>Header Files\engine\vertex_manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

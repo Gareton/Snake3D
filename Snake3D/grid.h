@@ -6,6 +6,7 @@
 #include "Shader.h"
 #include "texture.h"
 #include "skTypes.h"
+#include <memory>
 
 class Grid : public Drawable
 {
@@ -44,7 +45,7 @@ private:
 	const sk_float _thickness;
 	const sk_float _borderRatio = 0.4f;
 	const gmt::vec4 _color;
-	VertexManager _vertexManager;
+	std::unique_ptr<bge::VertexManager> _vertexManager;
 	bge::Shader _shader;
 	std::vector<sk_float> _verticies;
 	std::vector<sk_uint> _indicies;

@@ -42,8 +42,7 @@ TextRenderer::TextRenderer(const std::string& fontPath)
 
 		std::vector<sk_uint> indicies = { 0, 1, 2, 3, 2, 0 };
 
-		VertexManager vertexManager;
-		vertexManager.init(verticies, indicies, { 2, 2 });
+		bge::VertexManager vertexManager(verticies, { 2, 2 }, indicies);
 
 		_characters.push_back(Character{ std::move(texture), std::move(vertexManager), 
 							  (sk_uint)face->glyph->advance.x});
