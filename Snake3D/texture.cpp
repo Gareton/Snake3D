@@ -2,16 +2,8 @@
 
 namespace bge
 {
-	const std::vector<GLenum> Texture::_textureIndexTypes = {
-	GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2,
-	GL_TEXTURE3, GL_TEXTURE4, GL_TEXTURE5,
-	GL_TEXTURE6, GL_TEXTURE7, GL_TEXTURE8,
-	GL_TEXTURE7, GL_TEXTURE8, GL_TEXTURE9,
-	GL_TEXTURE10, GL_TEXTURE11, GL_TEXTURE12,
-	GL_TEXTURE13, GL_TEXTURE14, GL_TEXTURE15 };
-
-	Texture::Texture(sk_uint textureIndex, const Image& image, const TextureSettings& settings)
-		: _textureIndex(textureIndex)
+	Texture::Texture(sk_uint textureUnit, const Image& image, const TextureSettings& settings)
+		: _textureUnit(textureUnit)
 	{
 		glGenTextures(1, &_ID);
 		glBindTexture(GL_TEXTURE_2D, _ID);
@@ -42,7 +34,6 @@ namespace bge
 			image.getDataPtr());
 
 		glGenerateMipmap(GL_TEXTURE_2D);
-		glActiveTexture(_textureIndexTypes[_textureIndex]);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -55,12 +46,13 @@ namespace bge
 	Texture::Texture(Texture&& o)
 	{
 		_ID = o._ID;
-		_textureIndex = o._textureIndex;
+		_textureUnit = o._textureUnit;
 		o._ID = 0;
 	}
 
 	void Texture::use()
 	{
+		glActiveTexture(GL_TEXTURE0 + _textureUnit);
 		glBindTexture(GL_TEXTURE_2D, _ID);
 	}
 

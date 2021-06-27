@@ -10,7 +10,7 @@ namespace bge
 	class Texture
 	{
 	public:
-		Texture(sk_uint textureIndex, const Image& image, const TextureSettings& settings);
+		Texture(sk_uint textureUnit, const Image& image, const TextureSettings& settings);
 		~Texture();
 		Texture(Texture& o) = delete;
 		Texture& operator=(Texture& o) = delete;
@@ -19,9 +19,8 @@ namespace bge
 	private:
 		void destructorHelper();
 
-		static const std::vector<GLenum> _textureIndexTypes;
 		sk_uint _ID;
-		sk_uint _textureIndex;
+		sk_uint _textureUnit;
 	};
 }
 
