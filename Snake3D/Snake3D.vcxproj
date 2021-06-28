@@ -135,6 +135,7 @@
     <ClCompile Include="matrix_utilities.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="snake.cpp" />
+    <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="straightParallelepiped.cpp" />
     <ClCompile Include="textRenderer.cpp" />
     <ClCompile Include="texture.cpp" />

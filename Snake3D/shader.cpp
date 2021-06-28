@@ -119,6 +119,7 @@ namespace bge
 		if (!success)
 		{
 			glGetShaderInfoLog(id, _errorMessageSize, NULL, &_errorMessage[0]);
+			_isValid = false;
 			return false;
 		}
 

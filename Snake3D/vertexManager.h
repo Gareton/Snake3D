@@ -7,6 +7,7 @@
 
 namespace bge
 {
+	// TODO: improve
 	class VertexManager
 	{
 	public:
