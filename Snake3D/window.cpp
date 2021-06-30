@@ -1,9 +1,7 @@
 #include "window.h"
 
-Window::Window(sk_uint windowWidth,
-			   sk_uint windowHeight,
-			   const std::string& windowTitle)
-	: _windowWidth(windowWidth), _windowHeight(windowHeight), _windowTitle(windowTitle), _isValid(true)
+Window::Window(sk_uint width, sk_uint height, const std::string& title)
+	: _width(width), _height(height), _title(title)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -11,25 +9,27 @@ Window::Window(sk_uint windowWidth,
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	_window = glfwCreateWindow(windowWidth, windowHeight, windowTitle.c_str(), NULL, NULL);
+	_windowPtr = glfwCreateWindow(_width, _height, _title.c_str(), NULL, NULL);
 
-	if (_window == nullptr)
+	if (_windowPtr == nullptr)
 	{
 		_errorMessage = "ERROR::GAME::INIT::GLFW_WINDOW_CREATION_FAILED";
+		_isValid = false;
 		return;
 	}
 
-	glfwMakeContextCurrent(_window);
+	glfwMakeContextCurrent(_windowPtr);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		_errorMessage = "ERROR::GAME::INIT::GLAD_LOADER_FAILED";
+		_isValid = false;
 		return;
 	}
 
-	glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(_windowPtr, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	glViewport(0, 0, windowWidth, windowHeight);
+	glViewport(0, 0, _width, _height);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -41,38 +41,83 @@ Window::Window(sk_uint windowWidth,
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
-Window::operator bool()
+Window::operator bool() const
 {
 	return _isValid;
 }
 
-
-std::string Window::what()
+sk_uint Window::getWidth() const
 {
-	return _errorMessage;
+	return _width;
 }
 
-GLFWwindow* Window::getWindowPtr()
+sk_uint Window::getHeight() const
 {
-	return _window;
+	return _height;
 }
 
-sk_uint Window::getWindowWidth()
+bool Window::shouldClose() const
 {
-	return _windowWidth;
+	return glfwWindowShouldClose(_windowPtr);
 }
 
-sk_uint Window::getWindowHeight()
+bool Window::isPressed(sk_int key) const
 {
-	return _windowHeight;
+	return glfwGetKey(_windowPtr, key) == GLFW_PRESS;
 }
 
-void Window::setWindowWidth(sk_uint width)
+void Window::setWidth(sk_uint width)
 {
-	_windowWidth = width;
+	_width = width;
+	glViewport(0, 0, _width, _height);
 }
 
-void Window::setWindowHeight(sk_uint height)
+void Window::setHeight(sk_uint height)
 {
-	_windowHeight = height;
+	_height = height;
+	glViewport(0, 0, _width, _height);
+}
+
+void Window::setCallbacks(WindowCallbacksInterface& callbacks)
+{
+	glfwSetWindowUserPointer(_windowPtr, (void*) &callbacks);
+
+	auto resizeCallbackLambda = [](GLFWwindow* window, int width, int height)
+	{
+		static_cast<WindowCallbacksInterface *>(glfwGetWindowUserPointer(window))->resizeCallback(width, height);
+	};
+
+	auto mouseCallbackLambda = [](GLFWwindow* window, double xpos, double ypos)
+	{
+		static_cast<WindowCallbacksInterface *>(glfwGetWindowUserPointer(window))->mouseCallback(xpos, ypos);
+	};
+
+	auto scrollCallbackLambda = [](GLFWwindow* window, double xoffset, double yoffset)
+	{
+		static_cast<WindowCallbacksInterface *>(glfwGetWindowUserPointer(window))->scrollCallback(xoffset, yoffset);
+	};
+
+	glfwSetFramebufferSizeCallback(_windowPtr, resizeCallbackLambda);
+	glfwSetCursorPosCallback(_windowPtr, mouseCallbackLambda);
+	glfwSetScrollCallback(_windowPtr, scrollCallbackLambda);
+}
+
+void Window::setCursorMode(sk_int mode)
+{
+	glfwSetInputMode(_windowPtr, GLFW_CURSOR, mode);
+}
+
+void Window::swapBuffers()
+{
+	glfwSwapBuffers(_windowPtr);
+}
+
+void Window::pollEvents()
+{
+	glfwPollEvents();
+}
+
+void Window::close()
+{
+	glfwSetWindowShouldClose(_windowPtr, true);
 }

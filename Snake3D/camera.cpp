@@ -9,12 +9,12 @@ Camera::Camera(const gmt::vec3& target, sk_float radius, sk_float sensitivity, s
 	recalculateSystem();
 }
 
-sk_float Camera::getSensitivity()
+sk_float Camera::getSensitivity() const
 {
 	return _sensitivity;
 }
 
-gmt::mat4 Camera::getViewMatrix()
+gmt::mat4 Camera::getViewMatrix() const
 {
 	gmt::mat4 look({ {_right.x, _right.y, _right.z, 0.0f},
 					 {_up.x, _up.y, _up.z, 0.0f },
@@ -57,7 +57,7 @@ void Camera::setFov(sk_float fov)
 	_fov = gmt::clamp(fov, _fovLbound, _fovUbound);
 }
 
-sk_float Camera::getFov()
+sk_float Camera::getFov() const
 {
 	return _fov;
 }

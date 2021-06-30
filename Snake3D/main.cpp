@@ -11,7 +11,7 @@ int main()
 		Window window(1000, 800, "Snake3D");
 
 		if (!window)
-			throw std::runtime_error(window.what());
+			throw std::runtime_error("Window creation failed");
 
 		Game game(window);
 

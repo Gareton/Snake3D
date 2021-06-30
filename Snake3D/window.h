@@ -4,31 +4,37 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "skTypes.h"
+#include <functional>
+#include "windowCallbacksInterface.h"
 
-class Window 
+class Window
 {
 public:
-	Window(sk_uint windowWidth = 800,
-		   sk_uint windowHeight = 600,
-		   const std::string& windowTitle = "Snake3D");
-
+	Window(sk_uint width, sk_uint height, const std::string& title);
 	Window(const Window& o) = delete;
 	Window& operator=(const Window& o) = delete;
 
-	operator bool();
-	std::string what();
-	GLFWwindow* getWindowPtr();
-	sk_uint getWindowWidth();
-	sk_uint getWindowHeight();
-	void setWindowWidth(sk_uint width);
-	void setWindowHeight(sk_uint height);
+	operator bool() const;
+	sk_uint getWidth() const;
+	sk_uint getHeight() const;
+	bool shouldClose() const;
+	bool isPressed(sk_int key) const;
+
+	void setWidth(sk_uint width);
+	void setHeight(sk_uint height);
+	void setCallbacks(WindowCallbacksInterface& callbacks);
+	void setCursorMode(sk_int mode);
+
+	void swapBuffers();
+	void pollEvents();
+	void close();
 private:
-	GLFWwindow* _window;
-	bool _isValid;
+	GLFWwindow* _windowPtr;
+	bool _isValid = true;
 	std::string _errorMessage;
-	sk_uint _windowWidth;
-	sk_uint _windowHeight;
-	const std::string _windowTitle;
+	sk_uint _width;
+	sk_uint _height;
+	const std::string _title;
 	const bool _wireframeMode = false;
 };
 

@@ -236,5 +236,8 @@
     <ClInclude Include="skTypes.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
+    <ClInclude Include="windowCallbacksInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

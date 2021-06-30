@@ -3,6 +3,7 @@
 #include <iostream>
 #include "game.h"
 #include "cube.h"
+#include <functional>
 
 Game::Game(Window& window)
 	:_grid({ 0.0f, 0.0f, 0.0f }, 2.0f, 10, 1, 10, 0.06f, { 0.0f, 0.0f, 0.0f, 1.0f }),
@@ -13,35 +14,13 @@ Game::Game(Window& window)
 		   gmt::vec3{ 0.776f, 0.47f, 0.169f },
 		   gmt::vec3{ 0.36f, 0.718f, 0.27f })
 {
+	_window.setCallbacks(*this);
 	placeAppleRandomly();
-
-	glfwSetWindowUserPointer(_window.getWindowPtr(), this);
-
-	auto framebufferSizeCallbackLambda = [](GLFWwindow* window, int width, int height)
-	{
-		static_cast<Game*>(glfwGetWindowUserPointer(window))->framebufferSizeCallback(window, width, height);
-	};
-
-	glfwSetFramebufferSizeCallback(_window.getWindowPtr(), framebufferSizeCallbackLambda);
-
-	auto mouseCallbackLambda = [](GLFWwindow* window, double xpos, double ypos)
-	{
-		static_cast<Game*>(glfwGetWindowUserPointer(window))->mouseCallback(window, xpos, ypos);
-	};
-
-	glfwSetCursorPosCallback(_window.getWindowPtr(), mouseCallbackLambda);
-
-	auto scrollCallbackLambda = [](GLFWwindow* window, double xoffset, double yoffset)
-	{
-		static_cast<Game*>(glfwGetWindowUserPointer(window))->scrollCallback(window, xoffset, yoffset);
-	};
-
-	glfwSetScrollCallback(_window.getWindowPtr(), scrollCallbackLambda);
 }
 
 void Game::run()
 {
-	while (!glfwWindowShouldClose(_window.getWindowPtr()))
+	while (!_window.shouldClose())
 	{
 		static sk_double frameStartTime = 0.0f;
 		static sk_double frameEndTime = 0.0f;
@@ -56,11 +35,45 @@ void Game::run()
 		updateScene();
 		renderFrame();
 
-		glfwSwapBuffers(_window.getWindowPtr());
-		glfwPollEvents();
+		_window.swapBuffers();
+		_window.pollEvents();
 
 		frameEndTime = glfwGetTime();
 	}
+}
+
+void Game::resizeCallback(sk_uint width, sk_uint height) 
+{
+	_window.setWidth(width);
+	_window.setHeight(height);
+	glViewport(0, 0, width, height);
+}
+
+void Game::mouseCallback(sk_double xpos, sk_double ypos) 
+{
+	if (_gameOver)
+		return;
+
+	static sk_double lastXpos = xpos;
+	static sk_double lastYpos = ypos;
+
+	if (_mouseCallbackEnabled)
+	{
+		sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
+		sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
+
+		_camera.changePitch(pitchDelta);
+		_camera.changeYaw(yawDelta);
+	}
+
+	lastXpos = xpos;
+	lastYpos = ypos;
+}
+
+void Game::scrollCallback(sk_double xoffset, sk_double yoffset) 
+{
+	if (!_gameOver)
+		_camera.zoom(-yoffset);
 }
 
 void Game::updateScene()
@@ -90,7 +103,7 @@ void Game::updateScene()
 void Game::renderFrame()
 {
 	gmt::mat4 projection = gmt::perspective(_camera.getFov(),
-								   (sk_double)_window.getWindowWidth() / _window.getWindowHeight(),
+								   (sk_double)_window.getWidth() / _window.getHeight(),
 								   0.1f, 100.0f);
 
 	gmt::mat4 view = _camera.getViewMatrix();
@@ -102,8 +115,8 @@ void Game::renderFrame()
 		_apple.draw(projection, view);
 	}
 
-	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWindowWidth(), 
-										  0.0f, _window.getWindowHeight());
+	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWidth(), 
+										  0.0f, _window.getHeight());
 
 	std::string scoreString = std::string("Score: ") + std::to_string(_score);
 
@@ -122,68 +135,38 @@ void Game::renderFrame()
 	}
 }
 
-void Game::framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint height)
-{
-	_window.setWindowWidth(width);
-	_window.setWindowHeight(height);
-	glViewport(0, 0, width, height);
-}
-
-void Game::mouseCallback(GLFWwindow* window, sk_double xpos, sk_double ypos)
-{
-	if (_gameOver)
-		return;
-
-	static sk_double lastXpos = xpos;
-	static sk_double lastYpos = ypos;
-
-	if (_mouseCallbackEnabled)
-	{
-		sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
-		sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
-
-		_camera.changePitch(pitchDelta);
-		_camera.changeYaw(yawDelta);
-	}
-
-	lastXpos = xpos;
-	lastYpos = ypos;
-}
-
 void Game::processInput()
 {
-	GLFWwindow* windowPtr = _window.getWindowPtr();
+	if(_window.isPressed(GLFW_KEY_ESCAPE))
+		_window.close();
 
-	if(glfwGetKey(windowPtr, GLFW_KEY_ESCAPE))
-		glfwSetWindowShouldClose(windowPtr, true);
-
-	if (glfwGetKey(windowPtr, GLFW_KEY_LEFT_ALT) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_LEFT_ALT))
 	{
-		glfwSetInputMode(windowPtr, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		_window.setCursorMode(GLFW_CURSOR_NORMAL);
 		_mouseCallbackEnabled = false;
 	}
 	else
 	{
-		glfwSetInputMode(windowPtr, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		_window.setCursorMode(GLFW_CURSOR_DISABLED);
 		_mouseCallbackEnabled = true;
 	}
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_T) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_T))
 		_snake.setDirection(DIRECTION::NORTH);
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_G) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_G))
 		_snake.setDirection(DIRECTION::SOUTH);
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_H) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_H))
 		_snake.setDirection(DIRECTION::EAST);
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_F) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_F))
 		_snake.setDirection(DIRECTION::WEST);
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_C) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_C))
 		_snake.setDirection(DIRECTION::UP);
 
-	if (glfwGetKey(windowPtr, GLFW_KEY_N) == GLFW_PRESS)
+	if (_window.isPressed(GLFW_KEY_N))
 		_snake.setDirection(DIRECTION::DOWN);
 }
 
@@ -203,10 +186,4 @@ void Game::placeAppleRandomly()
 			break;
 		}
 	}
-}
-
-void Game::scrollCallback(GLFWwindow* window, sk_double xoffset, sk_double yoffset)
-{
-	if(!_gameOver)
-		_camera.zoom(-yoffset);
 }

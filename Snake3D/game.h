@@ -12,17 +12,19 @@
 #include "snake.h"
 #include "skTypes.h"
 #include "voxelApple.h"
+#include "windowCallbacksInterface.h"
 
-class Game {
+class Game : public WindowCallbacksInterface
+{
 public:
 	Game(Window& window);
 	Game(const Game& o) = delete;
 	Game& operator=(const Game& o) = delete;
 	void run();
 
-	void framebufferSizeCallback(GLFWwindow* window, sk_uint width, sk_uint height);
-	void mouseCallback(GLFWwindow* window, sk_double xpos, sk_double ypos);
-	void scrollCallback(GLFWwindow* window, sk_double xoffset, sk_double yoffset);																		
+	void resizeCallback(sk_uint width, sk_uint height) override;
+	void mouseCallback(sk_double xpos, sk_double ypos) override;
+	void scrollCallback(sk_double xoffset, sk_double yoffset) override;
 private:				
 	void updateScene();
 	void renderFrame();	

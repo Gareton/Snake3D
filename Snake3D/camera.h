@@ -14,9 +14,9 @@ public:
 	void setFov(sk_float fov);
 	void zoom(sk_float delta);
 
-	gmt::mat4 getViewMatrix();
-	sk_float getSensitivity();
-	sk_float getFov();
+	gmt::mat4 getViewMatrix() const;
+	sk_float getSensitivity() const;
+	sk_float getFov() const;
 private:
 	void recalculateSystem();
 
