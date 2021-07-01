@@ -3,7 +3,6 @@
 #include "game.h"
 #include "window.h"
 
-
 int main()
 {
 	try 
@@ -11,7 +10,7 @@ int main()
 		Window window(1000, 800, "Snake3D");
 
 		if (!window)
-			throw std::runtime_error("Window creation failed");
+			throw std::runtime_error(window.what());
 
 		Game game(window);
 

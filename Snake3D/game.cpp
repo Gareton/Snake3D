@@ -8,7 +8,8 @@
 Game::Game(Window& window)
 	:_grid({ 0.0f, 0.0f, 0.0f }, 2.0f, 10, 1, 10, 0.06f, { 0.0f, 0.0f, 0.0f, 1.0f }),
 	_camera({ 0.0f, 0.0f, 0.0f }, 25.0f, 0.001f, gmt::radians(45.0f), gmt::radians(-87.0f)), _snake(_grid, { 0, 0, 9 }, { 0, 0, 6 }, 5.0f),
-	_window(window), _textRenderer("fonts/futuram.ttf"), 
+	_window(window), 
+	_textRenderer("fonts/futuram.ttf", gmt::ortho(0.0f, _window.getWidth(), 0.0f, _window.getHeight()), _window.getWidth(), _window.getHeight()),
 	_apple(gmt::vec3{ 0.0f, 2.0f, 0.0f }, 8, 0.1f, 0.1f, 
 		   gmt::vec3{ 0.998f, 0.196f, 0.196f },
 		   gmt::vec3{ 0.776f, 0.47f, 0.169f },
@@ -46,7 +47,8 @@ void Game::resizeCallback(sk_uint width, sk_uint height)
 {
 	_window.setWidth(width);
 	_window.setHeight(height);
-	glViewport(0, 0, width, height);
+	_textRenderer.setProjectionMatrix(gmt::ortho(0.0f, width, 0.0f, height));
+	_textRenderer.setWindowSize(width, height);
 }
 
 void Game::mouseCallback(sk_double xpos, sk_double ypos) 
@@ -115,22 +117,14 @@ void Game::renderFrame()
 		_apple.draw(projection, view);
 	}
 
-	gmt::mat4 textProjection = gmt::ortho(0.0f, _window.getWidth(), 
-										  0.0f, _window.getHeight());
-
-	std::string scoreString = std::string("Score: ") + std::to_string(_score);
-
 	if (!_gameOver)
-		_textRenderer.render(scoreString, textProjection, { 800.0f, 750.0f }, 0.8f, gmt::vec3{ 0.0f });
-
-	if (_gameOver)
 	{
-		_textRenderer.render("Game Over", textProjection, { 78.0f, 420.0f }, 3.4f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
-		_textRenderer.render("((((4", textProjection, { 400.0f, 300.0f }, 2.6f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
-
-		scoreString = std::string("Your final score: " + std::to_string(_score));
-
-		_textRenderer.render(scoreString, textProjection, { 90.0f, 160.0f }, 1.9f, gmt::vec3{ 0.0f });
+		_textRenderer.renderUpRight(std::string("Score: ") + std::to_string(_score), {0.95f, 0.99f}, 0.8f);
+	}
+	else
+	{	
+		_textRenderer.renderMiddleDown("Game Over", { 0.5f, 0.5f }, 3.4f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
+		_textRenderer.renderMiddleUp(std::string("Your final score is: " + std::to_string(_score)), { 0.5f, 0.4f }, 1.9f);
 		_clearColor = gmt::vec4{ 0.016f, 1.0f, 0.443f, 1.0f };
 	}
 }

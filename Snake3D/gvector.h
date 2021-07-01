@@ -15,6 +15,10 @@ namespace gmt
 	using vec3i = vec3_impl<sk_int>;
 	using vec4i = vec4_impl<sk_int>;
 
+	using vec2ui = vec2_impl<sk_uint>;
+	using vec3ui = vec3_impl<sk_uint>;
+	using vec4ui = vec4_impl<sk_uint>;
+
 	using vec2 = vec2f;
 	using vec3 = vec3f;
 	using vec4 = vec4f;

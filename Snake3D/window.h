@@ -19,6 +19,7 @@ public:
 	sk_uint getHeight() const;
 	bool shouldClose() const;
 	bool isPressed(sk_int key) const;
+	std::string what() const;
 
 	void setWidth(sk_uint width);
 	void setHeight(sk_uint height);

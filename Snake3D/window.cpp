@@ -66,6 +66,11 @@ bool Window::isPressed(sk_int key) const
 	return glfwGetKey(_windowPtr, key) == GLFW_PRESS;
 }
 
+std::string Window::what() const
+{
+	return _errorMessage;
+}
+
 void Window::setWidth(sk_uint width)
 {
 	_width = width;
