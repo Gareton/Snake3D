@@ -52,6 +52,6 @@ namespace FLoader
 		std::copy(data, data + width * height * nrChannels, vector_data.begin());
 		stbi_image_free(data);
 
-		return Image(vector_data, width, height);
+		return Image(vector_data, width, height, nrChannels);
 	}
 }
