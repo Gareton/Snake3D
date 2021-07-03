@@ -22,12 +22,12 @@ void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	gmt::vec3 upPos = pos + gmt::vec3{ 0.0f, sphereVoxelSize, 0.0f } * (radius + 0.5f);
 	gmt::vec3 curPos = upPos + gmt::vec3(0.0f, 0.5f * _otherVoxelSize, 0.0f);
 
-	_cube.setColor({ _stickColor.x, _stickColor.y, _stickColor.z, 1.0f });
+	_cube.setColor(_stickColor);
 
 	for (sk_uint i = 0; i < 4; ++i, curPos.y += _otherVoxelSize)
 		drawCube(curPos, projection, view);
 
-	_cube.setColor({ _leavesColor.x, _leavesColor.y, _leavesColor.z, 1.0f });
+	_cube.setColor(_leavesColor);
 	
 	upPos.y += 0.5f * _otherVoxelSize;
 
@@ -50,8 +50,6 @@ void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	drawCube(upPos + gmt::vec3{ 3.0f, 3.0f, 0.0f } *_otherVoxelSize, projection, view);
 }
 
-void VoxelApple::update(sk_double deltaTime) {}
-
 void VoxelApple::setPosition(const gmt::vec3& pos)
 {
 	VoxelSphere::setPosition(pos);
@@ -64,6 +62,6 @@ gmt::vec3 VoxelApple::getPosition()
 
 void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view)
 {
-	_cube.setPosition(pos);
+	_cube.setPos(pos);
 	_cube.draw(projection, view);
 }

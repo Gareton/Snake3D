@@ -1,57 +1,48 @@
 #include "straightParallelepiped.h"
 #include "fileLoader.h"
 
-StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& position,
-											   const gmt::vec4& color)
-	:_shader(FLoader::loadText("shaders/straightParallelepipedShader.vs"), FLoader::loadText("shaders/straightParallelepipedShader.fs")),
-	 _position(position), _color(color), _size(size)
+StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& pos, const gmt::vec3& color)
+	:_shader(FLoader::loadText("shaders/straightParallelepipedShader.vs"), 
+			 FLoader::loadText("shaders/straightParallelepipedShader.fs")),
+	 _pos(pos), _color(color), _size(size)
 {
-	sk_float hx = 0.5f;
-	sk_float hy = 0.5f;
-	sk_float hz = 0.5f;
 
 	std::vector<sk_float> verticies = {
-		//front
+	//front
+		-0.5f, -0.5f, 0.5f,
+		-0.5f,  0.5f, 0.5f,
+		 0.5f,  0.5f, 0.5f,
+		 0.5f, -0.5f, 0.5f,
 
-		-hx, -hy, hz,
-		-hx,  hy, hz,
-		 hx,  hy, hz,
-		 hx, -hy, hz,
+	//right
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
 
-		 //right
+	//left
+		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f,  0.5f,
 
-		 hx, -hy,  hz,
-		 hx,  hy,  hz,
-		 hx,  hy, -hz,
-		 hx, -hy, -hz,
+	//bottom
+		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
 
-		 //left
+	//top
+		-0.5f, 0.5f,  0.5f,
+		-0.5f, 0.5f, -0.5f,
+		 0.5f, 0.5f, -0.5f,
+		 0.5f, 0.5f,  0.5f,
 
-		 -hx, -hy,  hz,
-		 -hx, -hy, -hz,
-		 -hx,  hy, -hz,
-		 -hx,  hy,  hz,
-
-		 //bottom
-
-		 -hx, -hy,  hz,
-		 -hx, -hy, -hz,
-		  hx, -hy, -hz,
-		  hx, -hy,  hz,
-
-		  //top
-
-		   -hx, hy,  hz,
-		   -hx, hy, -hz,
-			hx, hy, -hz,
-			hx, hy,  hz,
-
-			//back
-
-			-hx, -hy, -hz,
-			 hx, -hy, -hz,
-			 hx,  hy, -hz,
-			-hx,  hy, -hz
+	//back
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f
 	};
 
 	std::vector<sk_uint> indicies = { 0, 1, 2, 2, 3, 0 };
@@ -60,16 +51,14 @@ StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt:
 		for (sk_uint j = 0; j < 6; ++j)
 			indicies.push_back(indicies[j] + (i + 1) * 4);
 
-	std::vector<sk_uint> attributeCounts = { 3 };
-
-	_vertexManager.reset(new bge::VertexManager(verticies, attributeCounts, indicies));
+	_vertexManager.reset(new bge::VertexManager(verticies, {3}, indicies));
 }
 
 void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& view)
 {
-	_shader.use();
+	gmt::mat4 model = gmt::translate(_pos) * gmt::scale(_size);
 
-	gmt::mat4 model = gmt::translate(_position) * gmt::scale(_size);
+	_shader.use();
 
 	_shader.setUniform("model", model);
 	_shader.setUniform("view", view);
@@ -80,22 +69,17 @@ void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& 
 	_vertexManager->draw();
 }
 
-void StraightParallelepiped::update(sk_double deltaTime)
+void StraightParallelepiped::setPos(const gmt::vec3& pos)
 {
-
+	_pos = pos;
 }
 
-void StraightParallelepiped::setPosition(const gmt::vec3& position)
-{
-	_position = position;
-}
-
-void StraightParallelepiped::setColor(const gmt::vec4& color)
+void StraightParallelepiped::setColor(const gmt::vec3& color)
 {
 	_color = color;
 }
 
-void StraightParallelepiped::resize(const gmt::vec3& size)
+void StraightParallelepiped::setSize(const gmt::vec3& size)
 {
 	_size = size;
 }

@@ -16,7 +16,6 @@ public:
 		 sk_float thickness, const gmt::vec4& color);
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) final;
-	void update(sk_double deltaTime) final;
 
 	sk_float getCubeSize() const;
 	gmt::vec3i worldToGridCoordinateBruh(gmt::vec3 coord) const;

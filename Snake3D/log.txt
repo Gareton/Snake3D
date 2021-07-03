@@ -1,1 +1,3 @@
-ERROR::TEXT_RENDERER::CHAR_LOADING_FAILED
+ERROR: 0:9: 'assign' :  cannot convert from 'uniform 3-component vector of highp float' to 'FragUserData 4-component vector of highp float'
+
+

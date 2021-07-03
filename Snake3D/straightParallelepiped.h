@@ -9,20 +9,18 @@
 class StraightParallelepiped : public Drawable 
 {
 public:
-	explicit StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& position = { 0.0f, 0.0f, 0.0f }, 
-						   const gmt::vec4& color = {0.0f, 0.0f, 0.0f, 1.0f});
+	explicit StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& pos = {}, const gmt::vec3& color = {});
 
-	void draw(const gmt::mat4& projection, const gmt::mat4& view);
-	void update(sk_double deltaTime);
-	void resize(const gmt::vec3& size);
+	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
 
-	void setPosition(const gmt::vec3& position);
-	void setColor(const gmt::vec4& color);
+	void setSize(const gmt::vec3& size);
+	void setPos(const gmt::vec3& pos);
+	void setColor(const gmt::vec3& color);
 private:
 	std::unique_ptr<bge::VertexManager> _vertexManager;
 	bge::Shader _shader;
-	gmt::vec3 _position;
-	gmt::vec4 _color;
+	gmt::vec3 _pos;
+	gmt::vec3 _color;
 	gmt::vec3 _size;
 };
 

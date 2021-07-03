@@ -6,7 +6,7 @@ const std::vector<gmt::vec3> Snake::dirVectors = Snake::createDirVectors();
 
 Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, const sk_float speed, const gmt::vec4& color)
 	: _grid(grid), _speed(speed), 
-	_segment(gmt::vec3(grid.getCubeSize()), { 0.0f, 0.0f, 0.0f }, color), _color(color)
+	_segment(gmt::vec3(grid.getCubeSize()), {}, gmt::vec3(color.x, color.y, color.z)), _color(color)
 {
 	_chains.push_back({});
 	_chains.back().push_back(_grid.gridToWorldCoordinateBruh(headPos));
@@ -140,8 +140,8 @@ void Snake::drawSegment(gmt::vec3 position)
 
 	position = gmt::vec3{ mx, my, mz } + _grid.getOrigin();
 
-	_segment.setPosition(position);
-	_segment.resize({ rx - lx, ry - ly, rz - lz });
+	_segment.setPos(position);
+	_segment.setSize({ rx - lx, ry - ly, rz - lz });
 	_segment.draw(_projection, _view);
 }
 

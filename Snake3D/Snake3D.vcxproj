@@ -151,6 +151,7 @@
     <ClInclude Include="drawable.h" />
     <ClInclude Include="fileLoader.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameObject.h" />
     <ClInclude Include="gmath.h" />
     <ClInclude Include="gmatrix.h" />
     <ClInclude Include="gmatrix_impl.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="textRenderer.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="textureSettings.h" />
+    <ClInclude Include="updatable.h" />
     <ClInclude Include="vector_utilities.h" />
     <ClInclude Include="vertexManager.h" />
     <ClInclude Include="voxelApple.h" />

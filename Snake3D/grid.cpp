@@ -49,11 +49,6 @@ void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view)
 	_vertexManager->draw();
 }
 
-void Grid::update(sk_double deltaTime)
-{
-
-}
-
 sk_float Grid::getCubeSize() const
 {
 	return _cubeSize;

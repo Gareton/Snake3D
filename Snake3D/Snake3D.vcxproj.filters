@@ -67,6 +67,21 @@
     <Filter Include="Source Files\dependencies">
       <UniqueIdentifier>{5778950e-91de-4d80-b1e9-fe9c54bb9025}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\shapes">
+      <UniqueIdentifier>{4b6d2e38-81fa-41f6-8cd0-ddcdf86f9121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\window">
+      <UniqueIdentifier>{85850699-08cd-45d0-a399-d0e4d6b454d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\shapes">
+      <UniqueIdentifier>{b8f4d253-c706-4516-831b-a03972edde9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\window">
+      <UniqueIdentifier>{b384d63c-e6cb-4174-b246-366b35f06ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\shapes\core">
+      <UniqueIdentifier>{a6c6ed77-4874-42a3-9c28-b102ebbf918e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,16 +93,7 @@
     <ClCompile Include="grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="straightParallelepiped.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="snake.cpp">
@@ -138,27 +144,24 @@
     <ClCompile Include="image.cpp">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
+    <ClCompile Include="straightParallelepiped.cpp">
+      <Filter>Source Files\engine\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>Source Files\engine\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>Source Files\window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="drawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="straightParallelepiped.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="snake.h">
@@ -233,11 +236,29 @@
     <ClInclude Include="image.h">
       <Filter>Header Files\tools</Filter>
     </ClInclude>
-    <ClInclude Include="skTypes.h">
-      <Filter>Header Files\engine</Filter>
+    <ClInclude Include="straightParallelepiped.h">
+      <Filter>Header Files\engine\shapes</Filter>
     </ClInclude>
     <ClInclude Include="windowCallbacksInterface.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
+    <ClInclude Include="cube.h">
+      <Filter>Header Files\engine\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="skTypes.h">
+      <Filter>Header Files\engine\shapes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="drawable.h">
+      <Filter>Header Files\engine\shapes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="updatable.h">
+      <Filter>Header Files\engine\shapes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject.h">
+      <Filter>Header Files\engine\shapes\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

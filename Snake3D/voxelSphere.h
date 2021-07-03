@@ -14,7 +14,6 @@ public:
 						 const gmt::vec3& color = gmt::vec3(0.0f));
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
-	void update(sk_double deltaTime) override;
 	
 	void setPosition(const gmt::vec3& pos);
 

@@ -1,6 +1,6 @@
 #ifndef SNAKE_H
 #define SNAKE_H
-#include "drawable.h"
+#include "gameObject.h"
 #include "straightParallelepiped.h"
 #include "gmath.h"
 #include "grid.h"
@@ -10,13 +10,13 @@
 
 enum DIRECTION{NORTH, EAST, SOUTH, WEST, UP, DOWN};
 
-class Snake : Drawable
+class Snake : public GameObject
 {
 public:
 	Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, const sk_float speed = 5.0f, 
 		  const gmt::vec4& color = {0.0f, 1.0f, 0.0f, 1.0f});
-	void draw(const gmt::mat4& projection, const gmt::mat4& view);
-	void update(sk_double deltaTime);
+	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
+	void update(sk_double deltaTime) override;
 
 	void grow(sk_float deltaLength);
 

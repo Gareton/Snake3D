@@ -8,7 +8,8 @@ class Drawable
 {
 public:
 	virtual void draw(const gmt::mat4& projection, const gmt::mat4& view) = 0;
-	virtual void update(sk_double deltaTime) = 0;
+
+	virtual ~Drawable() {};
 };
 
 #endif
