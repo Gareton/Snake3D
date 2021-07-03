@@ -91,7 +91,7 @@ void Game::updateScene()
 	static bool scoreWasIncremented = false;
 
 	if (!scoreWasIncremented && 
-		_snake.getFullHeadCell() == _grid.worldToGridCoordinate(_apple.getPosition()))
+		_snake.getFullHeadCell() == _grid.worldToGridCoordinate(_apple.getPos()))
 	{
 		++_score;
 		scoreWasIncremented = true;
@@ -176,7 +176,7 @@ void Game::placeAppleRandomly()
 
 		if (!_snake.isUsedBySnake(_grid.worldToGridCoordinateBruh(_grid.gridToWorldCoordinate(appleCoord))))
 		{
-			_apple.setPosition(_grid.gridToWorldCoordinateBruh(_grid.worldToGridCoordinateBruh(_grid.gridToWorldCoordinate(appleCoord))));
+			_apple.setPos(_grid.gridToWorldCoordinateBruh(_grid.worldToGridCoordinateBruh(_grid.gridToWorldCoordinate(appleCoord))));
 			break;
 		}
 	}

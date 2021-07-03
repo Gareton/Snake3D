@@ -5,23 +5,21 @@
 #include "skTypes.h"
 #include "cube.h"
 
-class VoxelSphere : Drawable 
+class VoxelSphere : public Drawable 
 {
 public:
-	explicit VoxelSphere(const gmt::vec3& pos = gmt::vec3(0.0f),
-						 sk_uint radius = 4,
-						 sk_float voxelSize = 0.4f,
+	explicit VoxelSphere(const gmt::vec3& pos = gmt::vec3(0.0f), sk_uint radius = 4, sk_float voxelSize = 0.4f,
 						 const gmt::vec3& color = gmt::vec3(0.0f));
 
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
 	
-	void setPosition(const gmt::vec3& pos);
+	void setPos(const gmt::vec3& pos);
 
-	sk_uint getRadius();
-	sk_float getVoxelSize();
-	gmt::vec3 getPosition();
+	sk_uint getRadius() const;
+	sk_float getVoxelSize() const;
+	gmt::vec3 getPos() const;
 private:
-	Cube _cube;
+	bge::Cube _voxel;
 	gmt::vec3 _pos;
 	sk_uint _radius;
 	sk_float _voxelSize;

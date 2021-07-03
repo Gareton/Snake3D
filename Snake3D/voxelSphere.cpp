@@ -2,7 +2,7 @@
 
 VoxelSphere::VoxelSphere(const gmt::vec3& pos, sk_uint radius, sk_float voxelSize, const gmt::vec3& color)
 	: _pos(pos), _radius(radius), _voxelSize(voxelSize), 
-	_cube(voxelSize, gmt::vec3(0.0f), color)
+	_voxel(voxelSize, gmt::vec3(0.0f), color)
 {}
 
 void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view)
@@ -18,37 +18,37 @@ void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view)
 
 						gmt::vec3 voxelPos = gmt::vec3{ 1.0f * i, 1.0f * j, 1.0f * k } * _voxelSize;
 
-						_cube.setPos(_pos + voxelPos);
-						_cube.draw(projection, view);
+						_voxel.setPos(_pos + voxelPos);
+						_voxel.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * k, 1.0f * j, 1.0f * i } *_voxelSize;
 
-						_cube.setPos(_pos + voxelPos);
-						_cube.draw(projection, view);
+						_voxel.setPos(_pos + voxelPos);
+						_voxel.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * i, 1.0f * k, 1.0f * j } *_voxelSize;
 
-						_cube.setPos(_pos + voxelPos);
-						_cube.draw(projection, view);
+						_voxel.setPos(_pos + voxelPos);
+						_voxel.draw(projection, view);
 					}
 }
 
-void VoxelSphere::setPosition(const gmt::vec3& pos)
+void VoxelSphere::setPos(const gmt::vec3& pos)
 {
 	_pos = pos;
 }
 
-sk_uint VoxelSphere::getRadius()
+sk_uint VoxelSphere::getRadius() const
 {
 	return _radius;
 }
 
-sk_float VoxelSphere::getVoxelSize()
+sk_float VoxelSphere::getVoxelSize() const
 {
 	return _voxelSize;
 }
 
-gmt::vec3 VoxelSphere::getPosition()
+gmt::vec3 VoxelSphere::getPos() const
 {
 	return _pos;
 }

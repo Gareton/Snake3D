@@ -39,7 +39,7 @@ private:
 	gmt::vec3i toBlockPosition(const gmt::vec3& position);
 
 	const Grid &_grid;
-	StraightParallelepiped _segment;
+	bge::StraightParallelepiped _segment;
 	std::deque<std::deque<gmt::vec3>> _chains;
 	const sk_float _speed;
 	const sk_float _growSpeed = 0.4f;

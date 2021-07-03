@@ -79,35 +79,23 @@
     <Filter Include="Source Files\window">
       <UniqueIdentifier>{b384d63c-e6cb-4174-b246-366b35f06ac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine\shapes\core">
+    <Filter Include="Header Files\engine\core">
       <UniqueIdentifier>{a6c6ed77-4874-42a3-9c28-b102ebbf918e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\text">
+      <UniqueIdentifier>{27dc8d8f-ce45-4222-820e-f519d81c5c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{2a5cf257-518c-4100-a47c-e7eed945ba54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\text">
+      <UniqueIdentifier>{a4fef907-99a7-4c81-a2a4-65539b687c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{9e3e5561-cb5a-4368-953e-07a7118728dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="grid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="snake.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="textRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="voxelSphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="voxelApple.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gvector2_utilities.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
@@ -153,29 +141,32 @@
     <ClCompile Include="window.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
+    <ClCompile Include="textRenderer.cpp">
+      <Filter>Source Files\engine\text</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="grid.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="snake.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="voxelApple.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="voxelSphere.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="snake.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="voxelSphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="voxelApple.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gmatrix.h">
       <Filter>Header Files\math\gmatrix</Filter>
     </ClInclude>
@@ -249,16 +240,37 @@
       <Filter>Header Files\engine\shapes</Filter>
     </ClInclude>
     <ClInclude Include="skTypes.h">
-      <Filter>Header Files\engine\shapes\core</Filter>
+      <Filter>Header Files\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="drawable.h">
-      <Filter>Header Files\engine\shapes\core</Filter>
+      <Filter>Header Files\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="updatable.h">
-      <Filter>Header Files\engine\shapes\core</Filter>
+      <Filter>Header Files\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="gameObject.h">
-      <Filter>Header Files\engine\shapes\core</Filter>
+      <Filter>Header Files\engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="textRenderer.h">
+      <Filter>Header Files\engine\text</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="grid.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="snake.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="voxelApple.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="voxelSphere.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
