@@ -13,6 +13,9 @@ namespace gmt
 		vec2_impl(const T& x_, const T& y_);
 		vec2_impl(const vec2_impl& p1, const vec2_impl& p2);
 
+		template<typename Q>
+		explicit vec2_impl(const vec2_impl<Q>& o);
+
 		vec2_impl operator-() const;
 		vec2_impl operator+(const vec2_impl& o) const;
 		vec2_impl operator-(const vec2_impl& o) const;
@@ -43,6 +46,11 @@ namespace gmt
 	template<typename T>
 	vec2_impl<T>::vec2_impl(const vec2_impl& p1, const vec2_impl& p2)
 		: x(p2.x - p1.x), y(p2.y - p1.y) {}
+
+	template<typename T>
+	template<typename Q>
+	vec2_impl<T>::vec2_impl(const vec2_impl<Q>& o)
+		: x(T(o.x)), y(T(o.y)) {}
 
 	template<typename T>
 	vec2_impl<T> vec2_impl<T>::operator-() const

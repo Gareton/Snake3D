@@ -150,9 +150,6 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="grid.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -163,6 +160,24 @@
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="voxelSphere.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="gridModel.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="grid.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="appleSpawner.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="settings.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="collisions.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="directions.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -270,6 +285,21 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="voxelSphere.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="gridModel.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="directions.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="appleSpawner.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="collisions.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,7 @@ gmt::mat4 Camera::getViewMatrix() const
 					 {-_front.x, -_front.y, -_front.z, 0.0f},
 					 {0.0f, 0.0f, 0.0f, 1.0f }});
 
-	return gmt::translate(-_target) * look * gmt::translate(-_spherePosition);
+	return gmt::translate(-_target) * look * gmt::translate(-_spherePos);
 }
 
 void Camera::changePitch(sk_float deltaPitch)
@@ -45,7 +45,7 @@ void Camera::changeYaw(sk_float deltaYaw)
 void Camera::recalculateSystem()
 {
 	gmt::vec3 fromCenter = gmt::normalize({ cos(_pitch) * sin(_yaw), sin(_pitch), -cos(_pitch) * cos(_yaw) });
-	_spherePosition = -fromCenter * _radius;
+	_spherePos = -fromCenter * _radius;
 
 	_front = fromCenter;
 	_right = gmt::normalize(gmt::cross(_front, _worldUp));

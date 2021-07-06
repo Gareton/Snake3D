@@ -7,50 +7,46 @@
 #include <deque>
 #include <set>
 #include "skTypes.h"
-
-enum DIRECTION{NORTH, EAST, SOUTH, WEST, UP, DOWN};
+#include "directions.h"
 
 class Snake : public GameObject
 {
 public:
-	Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, const sk_float speed = 5.0f, 
-		  const gmt::vec4& color = {0.0f, 1.0f, 0.0f, 1.0f});
+	Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, 
+		  sk_float speed = 5.0f, const gmt::vec3& color = {0.0f, 1.0f, 0.0f});
+
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
-	void update(sk_double deltaTime) override;
+	void update(sk_double dt) override;
 
-	void grow(sk_float deltaLength);
-
+	void grow(sk_float dLength);
 	void setDirection(DIRECTION dir);
-	bool collided() const;
-	gmt::vec3i getFullHeadCell();
-	bool isUsedBySnake(const gmt::vec3i& pos);
 
-	static const std::vector<gmt::vec3> dirVectors;
+	bool occupyes(gmt::vec3i pos) const;
+	sk_uint occupyedCount(gmt::vec3i pos) const;
+	gmt::vec3i getHeadPos() const;
+	gmt::vec3i getTailPos() const;
+	gmt::vec3 getWorldHeadPos() const;
+	gmt::vec3 getWorldTailPos() const;
 private:
-	void drawPath(gmt::vec3 p1, gmt::vec3 p2);
-	void drawSegment(gmt::vec3 position);
-	static std::vector<gmt::vec3> createDirVectors();
-	DIRECTION deduceDirection(const gmt::vec3& v);
-	DIRECTION opposite(DIRECTION direction);
-	sk_float goToTarget(sk_float canTravel);
-	gmt::vec3 moveInDirection(const gmt::vec3 &v, DIRECTION direction, sk_float distance);
-	void moveTail(sk_float distanceTravelled);
-	void changeTarget();
-	gmt::vec3i toBlockPosition(const gmt::vec3& position);
+	void drawCube(const gmt::vec3i& pos, const gmt::mat4& projection, const gmt::mat4& view);
+	void drawCubeSlice(const gmt::vec3i& pos, DIRECTION sliceDir, sk_float fill, 
+					   const gmt::mat4& projection, const gmt::mat4& view);
 
-	const Grid &_grid;
+	gmt::vec3i nextPos(gmt::vec3i pos, DIRECTION dir);
+
+	const Grid& _grid;
+
+	sk_float _speed;
+	gmt::vec3 _color;
+	std::deque<gmt::vec3i> _segments;
+	std::multiset<gmt::vec3i> _segmentsSet;
+	std::deque<DIRECTION> _directions;
+	DIRECTION _nextDir;
+	sk_float _tailFill = 1.0f, _headFill = 1.0f;
+	sk_float _growSpeed = 1.0f;
+	sk_float _needsToGrow = 0.0f;
+	
 	bge::StraightParallelepiped _segment;
-	std::deque<std::deque<gmt::vec3>> _chains;
-	const sk_float _speed;
-	const sk_float _growSpeed = 0.4f;
-	gmt::mat4 _projection;
-	gmt::mat4 _view;
-	gmt::vec4 _color;
-	gmt::vec3i _target;
-	DIRECTION _direction;
-	std::multiset<gmt::vec3i> _currentPositions;
-	bool _collided = false;
-	sk_float _lengthToGrow = 0.0f;
 };
 
 #endif

@@ -7,6 +7,8 @@ namespace gmt
 {
 	sk_uint random();
 
+	sk_int mod(sk_int val, sk_int m);
+
 	sk_float sqrt(sk_float val);
 	sk_float radians(sk_float degrees);
 	sk_float fmod(sk_float val, sk_float m);

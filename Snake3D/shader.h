@@ -7,6 +7,8 @@
 
 namespace bge
 {
+	// TODO: add to some of setUnifrom proper suffixies  
+
 	class Shader {
 	public:
 		Shader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource) noexcept;

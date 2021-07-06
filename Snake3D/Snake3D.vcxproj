@@ -121,11 +121,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="appleSpawner.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="collisions.cpp" />
     <ClCompile Include="cube.cpp" />
+    <ClCompile Include="directions.cpp" />
     <ClCompile Include="fileLoader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="grid.cpp" />
+    <ClCompile Include="gridModel.cpp" />
     <ClCompile Include="gutilities.cpp" />
     <ClCompile Include="gvector2_utilities.cpp" />
     <ClCompile Include="gvector3_utilities.cpp" />
@@ -133,6 +137,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="matrix_utilities.cpp" />
+    <ClCompile Include="settings.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -146,8 +151,11 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="appleSpawner.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="collisions.h" />
     <ClInclude Include="cube.h" />
+    <ClInclude Include="directions.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="fileLoader.h" />
     <ClInclude Include="game.h" />
@@ -156,6 +164,7 @@
     <ClInclude Include="gmatrix.h" />
     <ClInclude Include="gmatrix_impl.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="gridModel.h" />
     <ClInclude Include="gutilities.h" />
     <ClInclude Include="gvector.h" />
     <ClInclude Include="gvector2.h" />
@@ -166,6 +175,7 @@
     <ClInclude Include="gvector4_utilities.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="matrix_utilities.h" />
+    <ClInclude Include="settings.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />
     <ClInclude Include="snake.h" />

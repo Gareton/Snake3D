@@ -16,14 +16,19 @@ namespace gmt
 		vec3_impl(const vec2_impl<T>& xy, const T& z_);
 		vec3_impl(const vec3_impl& p1, const vec3_impl& p2); 
 
+		template<typename Q>
+		explicit vec3_impl(const vec3_impl<Q>& o);
+
 		vec3_impl operator-() const;
 		vec3_impl operator+(const vec3_impl& o) const;
 		vec3_impl operator-(const vec3_impl& o) const;
+		vec3_impl operator*(const vec3_impl& o) const;
 		vec3_impl operator*(const T& val) const;
 		vec3_impl operator/(const T& val) const;
 
 		vec3_impl& operator+=(const vec3_impl& o);
 		vec3_impl& operator-=(const vec3_impl& o);
+		vec3_impl& operator*=(const vec3_impl& o);
 		vec3_impl& operator*=(const T& val);
 		vec3_impl& operator/=(const T& val);
 
@@ -57,6 +62,11 @@ namespace gmt
 		: x(p2.x - p1.x), y(p2.y - p1.y), z(p2.z - p1.z) {}
 
 	template<typename T>
+	template<typename Q>
+	vec3_impl<T>::vec3_impl(const vec3_impl<Q>& o)
+		: x(T(o.x)), y(T(o.y)), z(T(o.z)) {}
+
+	template<typename T>
 	vec3_impl<T> vec3_impl<T>::operator-() const
 	{
 		return {-x, -y, -z};
@@ -72,6 +82,12 @@ namespace gmt
 	vec3_impl<T> vec3_impl<T>::operator-(const vec3_impl& o) const
 	{
 		return {x - o.x, y - o.y, z - o.z};
+	}
+
+	template<typename T>
+	vec3_impl<T> vec3_impl<T>::operator*(const vec3_impl& o) const
+	{
+		return { x * o.x, y * o.y, z * o.z };
 	}
 
 	template<typename T>
@@ -96,6 +112,12 @@ namespace gmt
 	vec3_impl<T>& vec3_impl<T>::operator-=(const vec3_impl& o)
 	{
 		return *this = (*this) - o;
+	}
+
+	template<typename T>
+	vec3_impl<T>& vec3_impl<T>::operator*=(const vec3_impl& o)
+	{
+		return *this = (*this) * o;
 	}
 
 	template<typename T>

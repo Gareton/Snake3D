@@ -18,6 +18,9 @@ namespace gmt
 		vec4_impl(const vec3_impl<T>& xyz, const T& w_);
 		vec4_impl(const vec4_impl& p1, const vec4_impl& p2); 
 
+		template<typename Q>
+		explicit vec4_impl(const vec4_impl<Q>& o);
+
 		vec4_impl operator-() const;
 		vec4_impl operator+(const vec4_impl& o) const;
 		vec4_impl operator-(const vec4_impl& o) const;
@@ -64,6 +67,11 @@ namespace gmt
 	template<typename T>
 	vec4_impl<T>::vec4_impl(const vec4_impl& p1, const vec4_impl& p2)
 		: x(p2.x - p1.x), y(p2.y - p1.y), z(p2.z - p1.z), w(p2.w - p1.w) {}
+
+	template<typename T>
+	template<typename Q>
+	vec4_impl<T>::vec4_impl(const vec4_impl<Q>& o)
+		: x(T(o.x)), y(T(o.y)), z(T(o.z)), w(T(o.w)) {}
 
 	template<typename T>
 	vec4_impl<T> vec4_impl<T>::operator-() const

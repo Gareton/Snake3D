@@ -2,17 +2,19 @@
 #include <fstream>
 #include "game.h"
 #include "window.h"
+#include "settings.h"
 
 int main()
 {
 	try 
 	{
 		Window window(1000, 800, "Snake3D");
+		
 
 		if (!window)
 			throw std::runtime_error(window.what());
 
-		Game game(window);
+		Game game(window, Settings());
 
 		game.run();
 	}

@@ -14,6 +14,12 @@ namespace gmt
 	vec3 middle(const vec3& p1, const vec3& p2);
 
 	template<typename T>
+	vec3_impl<T> abs(const vec3_impl<T>& v)
+	{
+		return { std::abs(v.x), std::abs(v.y), std::abs(v.z) };
+	}
+
+	template<typename T>
 	const T* valuePtr(const vec3_impl<T>& v)
 	{
 		return &v[0];

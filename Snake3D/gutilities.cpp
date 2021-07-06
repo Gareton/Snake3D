@@ -13,6 +13,14 @@ namespace gmt
 		return generator();
 	}
 
+	sk_int mod(sk_int val, sk_int m)
+	{
+		if (val >= 0)
+			return val % m;
+
+		return val + m * ((-val + m - 1) / m);
+	}
+
 	sk_float sqrt(sk_float val)
 	{
 		return std::sqrt(val);
