@@ -135,11 +135,12 @@
     <ClCompile Include="gvector3_utilities.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="matrix_utilities.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="snake.cpp" />
+    <ClCompile Include="snakeCameraController.cpp" />
+    <ClCompile Include="snakeWorldController.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="straightParallelepiped.cpp" />
     <ClCompile Include="textRenderer.cpp" />
@@ -179,6 +180,8 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />
     <ClInclude Include="snake.h" />
+    <ClInclude Include="snakeCameraController.h" />
+    <ClInclude Include="snakeWorldController.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="straightParallelepiped.h" />
     <ClInclude Include="textRenderer.h" />

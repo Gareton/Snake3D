@@ -62,7 +62,7 @@ namespace gmt
 
 	template<typename T>
 	vec4_impl<T>::vec4_impl(const vec3_impl<T>& xyz, const T& w_)
-		: x(xyz.x), y(xyz.y), w(xyz.z), w(w_) {}
+		: x(xyz.x), y(xyz.y), z(xyz.z), w(w_) {}
 
 	template<typename T>
 	vec4_impl<T>::vec4_impl(const vec4_impl& p1, const vec4_impl& p2)

@@ -1,4 +1,5 @@
 #include "directions.h"
+#include <algorithm>
 
 DIRECTION deduceDir(const gmt::vec3i& v)
 {
@@ -9,6 +10,19 @@ DIRECTION deduceDir(const gmt::vec3i& v)
 		return v.y > 0 ? UP : DOWN;
 
 	return v.z > 0 ? SOUTH : NORTH;
+}
+
+DIRECTION snapToClosestDir(const gmt::vec3& v)
+{
+	sk_float max = std::max({ abs(v.x), abs(v.y), abs(v.z) });
+
+	if (abs(v.x) == max)
+		return deduceDir({ (v.x < 0.0f ? -1 : 1), 0, 0 });
+	
+	if (abs(v.y) == max)
+		return deduceDir({ 0, (v.y < 0.0f ? -1 : 1), 0 });
+
+	return deduceDir({ 0, 0, (v.z < 0.0f ? -1 : 1) });
 }
 
 gmt::vec3i deduceVec(DIRECTION dir)

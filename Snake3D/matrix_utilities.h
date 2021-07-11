@@ -16,6 +16,18 @@ namespace gmt
 	mat4 ortho(sk_float minX, sk_float maxX, sk_float minY, sk_float maxY);
 	
 	template<typename T, sk_uint N, sk_uint M>
+	mat<T, M, N> transpose(const mat<T, N, M>& m)
+	{
+		mat<T, M, N> res;
+
+		for (sk_uint i = 0; i < M; ++i)
+			for (sk_uint j = 0; j < N; ++j)
+				res[i][j] = m[j][i];
+
+		return std::move(res);
+	}
+
+	template<typename T, sk_uint N, sk_uint M>
 	const T* valuePtr(const mat<T, N, M> &m)
 	{
 		return &m[0][0];

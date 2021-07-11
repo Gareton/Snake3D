@@ -46,16 +46,16 @@ private:
 
 // Grid 
 	gmt::vec3 _gridPos = gmt::vec3(0.0f);
-	sk_uint _gridWidth = 10;
-	sk_uint _gridHeight = 1;
-	sk_uint _gridLenght = 10;
+	sk_uint _gridWidth = 5;
+	sk_uint _gridHeight = 5;
+	sk_uint _gridLenght = 5;
 	sk_float _gridCubeSize = 2.0f;
 	sk_float _gridThickness = 0.06f;
 	gmt::vec3 _gridColor = gmt::vec3(0.0f);
 
 // Snake
-	gmt::vec3i _snakeTailPos = { 0, 0, 9 };
-	gmt::vec3i _snakeHeadPos = { 0, 0, 6 };
+	gmt::vec3i _snakeTailPos = { 0, 0, 4 };
+	gmt::vec3i _snakeHeadPos = { 0, 0, 3 };
 	sk_float _snakeSpeed = 5.0f;
 	gmt::vec3 _snakeColor = { 0.0f, 1.0f, 0.0f };
 
