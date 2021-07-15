@@ -4,14 +4,15 @@
 #include "snake.h"
 #include "window.h"
 #include "camera.h"
+#include "snakeControllerInterface.h"
 
-class SnakeCameraController
+class SnakeCameraController : public SnakeControllerInterface
 {
 public:
-	void linkCameraToController(const Camera& camera);
-	void processSnakeMovement(const Window& window, Snake& snake);
-protected:
-	~SnakeCameraController() {}
+	SnakeCameraController() = delete;
+	SnakeCameraController(const Camera& camera);
+
+	void processSnakeMovement(const Window& window, Snake& snake) override;
 private:
 	const Camera* _camera;
 };

@@ -11,14 +11,12 @@ int main()
 	try 
 	{
 		Window window(1000, 800, "Snake3D");
-		
+			
 
 		if (!window)
 			throw std::runtime_error(window.what());
 
-		Game<SnakeCameraController> game(window, Settings());
-
-		game.linkCameraToController(game.getCamera());
+		Game game(window, Settings());
 
 		game.run();
 	}

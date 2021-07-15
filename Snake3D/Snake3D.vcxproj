@@ -127,6 +127,7 @@
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="directions.cpp" />
     <ClCompile Include="fileLoader.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="gridModel.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="skTypes.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="snakeCameraController.h" />
+    <ClInclude Include="snakeControllerInterface.h" />
     <ClInclude Include="snakeWorldController.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="straightParallelepiped.h" />

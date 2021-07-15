@@ -1,6 +1,6 @@
 #include "snakeCameraController.h"
 
-void SnakeCameraController::linkCameraToController(const Camera& camera)
+SnakeCameraController::SnakeCameraController(const Camera& camera)
 {
 	_camera = &camera;
 }

@@ -183,6 +183,9 @@
     <ClCompile Include="snakeWorldController.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gmatrix.h">
@@ -309,6 +312,9 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="snakeCameraController.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="snakeControllerInterface.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>

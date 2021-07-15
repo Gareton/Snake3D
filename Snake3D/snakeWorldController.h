@@ -3,13 +3,12 @@
 #include "skTypes.h"
 #include "snake.h"
 #include "window.h"
+#include "snakeControllerInterface.h"
 
-class SnakeWorldController
+class SnakeWorldController : public SnakeControllerInterface
 {
 public:
-	void processSnakeMovement(const Window& window, Snake& snake);
-protected:
-	~SnakeWorldController() {}
+	void processSnakeMovement(const Window& window, Snake& snake) override;
 };
 
 #endif
