@@ -57,7 +57,7 @@ namespace bge
 		_vertexManager.reset(new bge::VertexManager(verticies, { 3 }, indicies));
 	}
 
-	void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& view)
+	void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 	{
 		gmt::mat4 model = gmt::translate(_pos) * gmt::scale(_size);
 

@@ -16,7 +16,7 @@ public:
 	Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, 
 		  sk_float speed = 5.0f, const gmt::vec3& color = {0.0f, 1.0f, 0.0f});
 
-	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
+	void draw(const gmt::mat4& projection, const gmt::mat4& view) const override;
 	void update(sk_double dt) override;
 
 	void grow(sk_float dLength);
@@ -29,9 +29,9 @@ public:
 	gmt::vec3 getWorldHeadPos() const;
 	gmt::vec3 getWorldTailPos() const;
 private:
-	void drawCube(const gmt::vec3i& pos, const gmt::mat4& projection, const gmt::mat4& view);
+	void drawCube(const gmt::vec3i& pos, const gmt::mat4& projection, const gmt::mat4& view) const;
 	void drawCubeSlice(const gmt::vec3i& pos, DIRECTION sliceDir, sk_float fill, 
-					   const gmt::mat4& projection, const gmt::mat4& view);
+					   const gmt::mat4& projection, const gmt::mat4& view) const;
 
 	gmt::vec3i nextPos(gmt::vec3i pos, DIRECTION dir);
 
@@ -47,7 +47,7 @@ private:
 	sk_float _growSpeed = 1.0f;
 	sk_float _needsToGrow = 0.0f;
 	
-	bge::StraightParallelepiped _segment;
+	mutable bge::StraightParallelepiped _segment;
 };
 
 #endif

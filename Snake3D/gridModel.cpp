@@ -6,7 +6,7 @@ GridModel::GridModel(const gmt::vec3& pos, sk_uint width, sk_uint height, sk_uin
 	  _thickness(thickness), _color(color), _part({}, {}, color)
 {}
 
-void GridModel::draw(const gmt::mat4& projection, const gmt::mat4& view)
+void GridModel::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	gmt::vec3 origin = _pos - gmt::vec3(gmt::vec3ui{ _width, _height, _length }) * _cellSize * 0.5f;
 

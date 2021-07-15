@@ -27,7 +27,7 @@ Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& head
 	_directions = std::deque<DIRECTION>(_segments.size(), _nextDir);
 }
 
-void Snake::draw(const gmt::mat4& projection, const gmt::mat4& view)
+void Snake::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	for (sk_uint i = 0; i < _segments.size(); ++i)
 	{
@@ -146,14 +146,14 @@ gmt::vec3 Snake::getWorldTailPos() const
 	return _grid.convertGridPos(getTailPos());
 }
 
-void Snake::drawCube(const gmt::vec3i& pos, const gmt::mat4& projection, const gmt::mat4& view)
+void Snake::drawCube(const gmt::vec3i& pos, const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	_segment.setPos(_grid.convertGridPos(pos));
 	_segment.draw(projection, view);
 }
 
 void Snake::drawCubeSlice(const gmt::vec3i& pos, DIRECTION sliceDir, sk_float fill,
-						  const gmt::mat4& projection, const gmt::mat4& view)
+						  const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	gmt::vec3 delta = gmt::vec3(deduceVec(sliceDir)) * _grid.getCellSize() * (1.0f - fill);
 

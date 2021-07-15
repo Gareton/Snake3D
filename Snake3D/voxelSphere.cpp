@@ -5,7 +5,7 @@ VoxelSphere::VoxelSphere(const gmt::vec3& pos, sk_uint radius, sk_float voxelSiz
 	_voxel(voxelSize, gmt::vec3(0.0f), color)
 {}
 
-void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view)
+void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	sk_int intRadius = _radius;
 

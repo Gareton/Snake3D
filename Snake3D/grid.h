@@ -9,7 +9,7 @@ public:
 	Grid(const gmt::vec3& pos, sk_uint width, sk_uint height, sk_uint length,
 		 sk_float cellSize, sk_float thickness, const gmt::vec3& color);
 
-	void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
+	void draw(const gmt::mat4& projection, const gmt::mat4& view) const override;
 
 	sk_float getCellSize() const;
 	sk_uint getWidth() const;

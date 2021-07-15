@@ -13,7 +13,7 @@ namespace bge
 	public:
 		explicit StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& pos = {}, const gmt::vec3& color = {});
 
-		void draw(const gmt::mat4& projection, const gmt::mat4& view) override;
+		void draw(const gmt::mat4& projection, const gmt::mat4& view) const override;
 
 		void setSize(const gmt::vec3& size);
 		void setPos(const gmt::vec3& pos);

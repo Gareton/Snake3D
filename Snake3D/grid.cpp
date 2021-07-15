@@ -15,7 +15,7 @@ Grid::Grid(const gmt::vec3& pos, sk_uint width, sk_uint height, sk_uint length,
 	_origin = pos - gmt::vec3(gmt::vec3ui{ width, height, length }) * cellSize * 0.5f;
 }
 
-void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view)
+void Grid::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	_model.draw(projection, view);
 }

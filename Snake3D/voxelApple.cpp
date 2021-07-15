@@ -6,7 +6,7 @@ VoxelApple::VoxelApple(const gmt::vec3& pos, sk_uint radius, sk_float sphereVoxe
 	  _leavesColor(leavesColor)
 {}
 
-void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view) 
+void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	gmt::vec3 pos = VoxelSphere::getPos();
 	sk_float sphereVoxelSize = VoxelSphere::getVoxelSize();
@@ -30,7 +30,7 @@ gmt::vec3 VoxelApple::getPos() const
 	return VoxelSphere::getPos();
 }
 
-void VoxelApple::drawStick(const gmt::vec3& upPos, float_t voxelSize, const gmt::mat4& projection, const gmt::mat4& view)
+void VoxelApple::drawStick(const gmt::vec3& upPos, float_t voxelSize, const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	gmt::vec3 curPos = upPos + gmt::vec3(0.0f, 0.5f * voxelSize, 0.0f);
 
@@ -40,7 +40,7 @@ void VoxelApple::drawStick(const gmt::vec3& upPos, float_t voxelSize, const gmt:
 		drawCube(curPos, projection, view);
 }
 
-void VoxelApple::drawLeaves(gmt::vec3 upPos, float_t voxelSize, const gmt::mat4& projection, const gmt::mat4& view)
+void VoxelApple::drawLeaves(gmt::vec3 upPos, float_t voxelSize, const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	_voxel.setColor(_leavesColor);
 
@@ -65,7 +65,7 @@ void VoxelApple::drawLeaves(gmt::vec3 upPos, float_t voxelSize, const gmt::mat4&
 	drawCube(upPos + gmt::vec3{ 3.0f, 3.0f, 0.0f } * voxelSize, projection, view);
 }
 
-void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view)
+void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view) const
 {
 	_voxel.setPos(pos);
 	_voxel.draw(projection, view);
