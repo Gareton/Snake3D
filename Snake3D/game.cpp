@@ -1,22 +1,18 @@
 #include "game.h"
 #include "snakeCameraController.h"
+#include "settings.h"
 
-Game::Game(Window& window, const Settings& settings)
-	: _window(window), _settings(settings),
-	_camera(settings.getCameraTarget(), settings.getCameraRadius(), settings.getCameraSensitivity(), settings.getFov(),
-		settings.getCameraPitch(), settings.getCameraYaw(), settings.getWorldUp()),
-	_grid(settings.getGridPos(), settings.getGridWidth(), settings.getGridHeight(), settings.getGridLength(),
-		settings.getGridCubeSize(), settings.getGridThickness(), settings.getGridColor()),
-	_snake(_grid, settings.getSnakeTailPos(), settings.getSnakeHeadPos(), settings.getSnakeSpeed(), settings.getSnakeColor()),
+Game::Game(Window& window)
+	: _window(window), 
+	_snake(_grid),
 	_appleSpawner(_grid, _snake),
-	_textRenderer(settings.getFontPath(), gmt::ortho(0.0f, _window.getWidth(), 0.0f, _window.getHeight()),
+	_textRenderer(Settings::getFontPath(), gmt::ortho(0.0f, _window.getWidth(), 0.0f, _window.getHeight()),
 		_window.getWidth(), _window.getHeight()),
 	_snakeController(std::make_unique<SnakeCameraController>(_camera)),
-	_clearColor(settings.getClearColor())
+	_clearColor(Settings::getClearColor())
 {
 	_window.setCallbacks(*this);
 	
-
 	_drawables.push_back(std::ref(_grid));
 	_drawables.push_back(std::ref(_snake));
 	_drawables.push_back(std::ref(_appleSpawner));

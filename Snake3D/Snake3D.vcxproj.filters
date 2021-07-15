@@ -168,9 +168,6 @@
     <ClCompile Include="appleSpawner.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="settings.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="collisions.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -184,6 +181,9 @@
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="settings.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>

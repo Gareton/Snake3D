@@ -5,6 +5,7 @@
 class Grid : public Drawable
 {
 public:
+	Grid();
 	Grid(const gmt::vec3& pos, sk_uint width, sk_uint height, sk_uint length,
 		 sk_float cellSize, sk_float thickness, const gmt::vec3& color);
 

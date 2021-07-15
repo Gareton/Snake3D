@@ -12,6 +12,7 @@
 class Snake : public GameObject
 {
 public:
+	explicit Snake(const Grid& grid);
 	Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, 
 		  sk_float speed = 5.0f, const gmt::vec3& color = {0.0f, 1.0f, 0.0f});
 

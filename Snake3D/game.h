@@ -20,7 +20,7 @@
 class Game : public WindowCallbacksInterface 
 {
 public:
-	Game(Window& window, const Settings& settings);
+	Game(Window& window);
 	Game(const Game& o) = delete;
 	Game& operator=(const Game& o) = delete;
 
@@ -41,7 +41,6 @@ private:
 	void processInput();
 
 	Window &_window;
-	const Settings& _settings;
 	Camera _camera;
 	Grid _grid;
 	Snake _snake;

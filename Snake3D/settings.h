@@ -6,61 +6,64 @@
 class Settings
 {
 public:
-	Settings() = default;
+	Settings() = delete;
 
-	gmt::vec3 getClearColor() const;
+	static void loadSettingsFromJSON(const std::string& path);
 
-	gmt::vec3 getCameraTarget() const;
-	sk_float getCameraRadius() const;
-	sk_float getCameraSensitivity() const;
-	sk_float getFov() const;
-	sk_float getCameraPitch() const;
-	sk_float getCameraYaw() const;
-	gmt::vec3 getWorldUp() const;
+	static gmt::vec3 getClearColor();
 
-	gmt::vec3 getGridPos() const;
-	sk_uint getGridWidth() const;
-	sk_uint getGridHeight() const;
-	sk_uint getGridLength() const;
-	sk_float getGridCubeSize() const;
-	sk_float getGridThickness() const;
-	gmt::vec3 getGridColor() const;
+	static gmt::vec3 getCameraTarget();
+	static sk_float getCameraRadius();
+	static sk_float getCameraSensitivity();
+	static sk_float getFov();
+	static sk_float getCameraPitch();
+	static sk_float getCameraYaw();
+	static gmt::vec3 getWorldUp();
 
-	gmt::vec3i getSnakeTailPos() const;
-	gmt::vec3i getSnakeHeadPos() const;
-	sk_float getSnakeSpeed() const;
-	gmt::vec3 getSnakeColor() const;
+	static gmt::vec3 getGridPos();
+	static sk_uint getGridWidth();
+	static sk_uint getGridHeight();
+	static sk_uint getGridLength();
+	static sk_float getGridCubeSize();
+	static sk_float getGridThickness();
+	static gmt::vec3 getGridColor();
 
-	std::string getFontPath() const;
+	static gmt::vec3i getSnakeTailPos();
+	static gmt::vec3i getSnakeHeadPos();
+	static sk_float getSnakeSpeed();
+	static gmt::vec3 getSnakeColor();
+
+	static std::string getFontPath();
 private:
-	gmt::vec3 _clearColor = { 9.0f / 256.0f, 248.0f / 256.0f, 255.0f / 256.0f };
+// Window
+	static gmt::vec3 _clearColor;
 
 // Camera 
-	gmt::vec3 _cameraTarget = gmt::vec3(0.0f);
-	sk_float _cameraRadius = 25.0f;
-	sk_float _cameraSensitivity = 0.001f;
-	sk_float _fov = gmt::radians(45.0f);
-	sk_float _cameraPitch = 0.0f;
-	sk_float _cameraYaw = 0.0f;
-	gmt::vec3 _worldUp = { 0.0f, 1.0f, 0.0f };
+	static gmt::vec3 _cameraTarget;
+	static sk_float _cameraRadius;
+	static sk_float _cameraSensitivity;
+	static sk_float _fov;
+	static sk_float _cameraPitch;
+	static sk_float _cameraYaw;
+	static gmt::vec3 _worldUp;
 
 // Grid 
-	gmt::vec3 _gridPos = gmt::vec3(0.0f);
-	sk_uint _gridWidth = 5;
-	sk_uint _gridHeight = 5;
-	sk_uint _gridLenght = 5;
-	sk_float _gridCubeSize = 2.0f;
-	sk_float _gridThickness = 0.06f;
-	gmt::vec3 _gridColor = gmt::vec3(0.0f);
+	static gmt::vec3 _gridPos;
+	static sk_uint _gridWidth;
+	static sk_uint _gridHeight;
+	static sk_uint _gridLenght;
+	static sk_float _gridCubeSize;
+	static sk_float _gridThickness;
+	static gmt::vec3 _gridColor;
 
 // Snake
-	gmt::vec3i _snakeTailPos = { 0, 0, 4 };
-	gmt::vec3i _snakeHeadPos = { 0, 0, 3 };
-	sk_float _snakeSpeed = 5.0f;
-	gmt::vec3 _snakeColor = { 0.0f, 1.0f, 0.0f };
+	static gmt::vec3i _snakeTailPos;
+	static gmt::vec3i _snakeHeadPos;
+	static sk_float _snakeSpeed;
+	static gmt::vec3 _snakeColor;
 
 // Text renderer
-	std::string _fontPath = "fonts/futuram.ttf";
+	static std::string _fontPath;
 };
 
 #endif

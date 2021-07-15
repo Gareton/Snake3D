@@ -1,4 +1,11 @@
 #include "grid.h"
+#include "settings.h"
+
+Grid::Grid()
+	: Grid(Settings::getGridPos(), Settings::getGridWidth(), Settings::getGridHeight(), Settings::getGridLength(),
+	  Settings::getGridCubeSize(), Settings::getGridThickness(), Settings::getGridColor())
+{
+}
 
 Grid::Grid(const gmt::vec3& pos, sk_uint width, sk_uint height, sk_uint length,
 		   sk_float cellSize, sk_float thickness, const gmt::vec3& color)

@@ -6,6 +6,7 @@
 class Camera
 {
 public:
+	Camera();
 	Camera(const gmt::vec3& target, sk_float radius, sk_float sensitivity = 0.01f, sk_float fov = gmt::radians(45.0f), 
 		   sk_float pitch = 0.0f, sk_float yaw = 0.0f, const gmt::vec3& worldUp = {0.0f, 1.0f, 0.0f});
 

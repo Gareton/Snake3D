@@ -1,6 +1,12 @@
 #include "snake.h"
 #include <algorithm>
 #include <iostream>
+#include "settings.h"
+
+Snake::Snake(const Grid& grid)
+	: Snake(grid, Settings::getSnakeTailPos(), Settings::getSnakeHeadPos(), Settings::getSnakeSpeed(),
+	  Settings::getSnakeColor()) 
+{}
 
 Snake::Snake(const Grid& grid, const gmt::vec3i& tailPos, const gmt::vec3i& headPos, sk_float speed, const gmt::vec3& color)
 	: _grid(grid), _speed(speed), _color(color), _segment(gmt::vec3(grid.getCellSize()), {}, color)

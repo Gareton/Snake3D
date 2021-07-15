@@ -16,7 +16,7 @@ int main()
 		if (!window)
 			throw std::runtime_error(window.what());
 
-		Game game(window, Settings());
+		Game game(window);
 
 		game.run();
 	}

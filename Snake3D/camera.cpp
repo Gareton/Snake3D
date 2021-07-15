@@ -1,5 +1,14 @@
 #include "camera.h"
 #include <algorithm>
+#include "settings.h"
+
+Camera::Camera()
+	:_target(Settings::getCameraTarget()), _radius(Settings::getCameraRadius()),
+	 _sensitivity(Settings::getCameraSensitivity()), _pitch(Settings::getCameraPitch()), 
+	 _yaw(Settings::getCameraYaw()), _fov(Settings::getFov()), _worldUp(Settings::getWorldUp())
+{
+	recalculateSystem();
+}
 
 Camera::Camera(const gmt::vec3& target, sk_float radius, sk_float sensitivity, sk_float fov, sk_float pitch, 
 	           sk_float yaw, const gmt::vec3& worldUp)
