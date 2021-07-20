@@ -103,6 +103,14 @@ namespace bge
 		}
 	}
 
+	void TextRenderer::renderMiddle(const std::string& text, gmt::vec2 pos, sk_float scale, const gmt::vec3 &color)
+	{
+		sk_float length = getTextLength(text, scale) / (sk_float)_windowWidth;
+		sk_float height = getTextHeight(text, scale) / (sk_float)_windowHeight;
+
+		render(text, { pos.x - (length * 0.5f), pos.y - (height * 0.5f) }, scale, color);
+	}
+
 	void TextRenderer::renderMiddleUp(const std::string& text, gmt::vec2 pos, sk_float scale, const gmt::vec3 &color)
 	{
 		sk_float length = getTextLength(text, scale) / (sk_float)_windowWidth;

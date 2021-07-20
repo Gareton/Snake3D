@@ -15,7 +15,7 @@ namespace bge
 		Texture(Texture& o) = delete;
 		Texture& operator=(Texture& o) = delete;
 		Texture(Texture&& o);
-		void use();
+		void use() const;
 	private:
 		void destructorHelper();
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -137,6 +137,12 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix_utilities.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="menuButton.cpp" />
+    <ClCompile Include="menuMajorScreen.cpp" />
+    <ClCompile Include="menuQuad.cpp" />
+    <ClCompile Include="menuSelector.cpp" />
+    <ClCompile Include="menuSettingsScreen.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="snake.cpp" />
@@ -177,6 +183,14 @@
     <ClInclude Include="gvector4_utilities.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="matrix_utilities.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="menuButton.h" />
+    <ClInclude Include="menuCallbacksInterface.h" />
+    <ClInclude Include="menuMajorScreen.h" />
+    <ClInclude Include="menuQuad.h" />
+    <ClInclude Include="menuScreen.h" />
+    <ClInclude Include="menuSelector.h" />
+    <ClInclude Include="menuSettingsScreen.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />

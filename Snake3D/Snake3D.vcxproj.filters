@@ -94,6 +94,24 @@
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{9e3e5561-cb5a-4368-953e-07a7118728dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\menu">
+      <UniqueIdentifier>{9b734f53-5d1e-476b-84f1-769ba5f7993c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\menu\screens">
+      <UniqueIdentifier>{0f2a074b-ca04-43bc-a825-8cfbb2654156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\menu\clickables">
+      <UniqueIdentifier>{8ce10a06-9852-4104-bc1e-200271e6cf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\menu">
+      <UniqueIdentifier>{91d76917-4cfc-4237-8ebe-e73da29b4b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\menu\clickables">
+      <UniqueIdentifier>{5871cce7-c8c0-4d5d-9e3e-8e3512e623fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\menu\screens">
+      <UniqueIdentifier>{8a7d2758-7bf8-4d36-8697-d650c1a8efe5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gvector2_utilities.cpp">
@@ -185,6 +203,24 @@
     </ClCompile>
     <ClCompile Include="settings.cpp">
       <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\game\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menuQuad.cpp">
+      <Filter>Source Files\game\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menuMajorScreen.cpp">
+      <Filter>Source Files\game\menu\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="menuButton.cpp">
+      <Filter>Source Files\game\menu\clickables</Filter>
+    </ClCompile>
+    <ClCompile Include="menuSettingsScreen.cpp">
+      <Filter>Source Files\game\menu\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="menuSelector.cpp">
+      <Filter>Source Files\game\menu\clickables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +352,30 @@
     </ClInclude>
     <ClInclude Include="snakeControllerInterface.h">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\game\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menuCallbacksInterface.h">
+      <Filter>Header Files\game\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menuScreen.h">
+      <Filter>Header Files\game\menu\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="menuButton.h">
+      <Filter>Header Files\game\menu\clickables</Filter>
+    </ClInclude>
+    <ClInclude Include="menuSelector.h">
+      <Filter>Header Files\game\menu\clickables</Filter>
+    </ClInclude>
+    <ClInclude Include="menuMajorScreen.h">
+      <Filter>Header Files\game\menu\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="menuSettingsScreen.h">
+      <Filter>Header Files\game\menu\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="menuQuad.h">
+      <Filter>Header Files\game\menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

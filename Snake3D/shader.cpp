@@ -77,6 +77,12 @@ namespace bge
 		glUniform1ui(glGetUniformLocation(_programId, &name[0]), x);
 	}
 
+	void Shader::setUniform(const std::string& name, sk_int x) const
+	{
+		checkInvalidity();
+		glUniform1i(glGetUniformLocation(_programId, &name[0]), x);
+	}
+
 	void Shader::setUniform(const std::string& name, const gmt::mat2& m) const
 	{
 		checkInvalidity();

@@ -50,7 +50,7 @@ namespace bge
 		o._ID = 0;
 	}
 
-	void Texture::use()
+	void Texture::use() const
 	{
 		glActiveTexture(GL_TEXTURE0 + _textureUnit);
 		glBindTexture(GL_TEXTURE_2D, _ID);

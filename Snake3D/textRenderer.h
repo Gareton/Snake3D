@@ -22,6 +22,7 @@ namespace bge
 		void render(const std::string& text, gmt::vec2 pos, sk_float scale = 1.0f, const gmt::vec3 &color = gmt::vec3(0.0f));
 
 		// have different pos meaning based on function name
+		void renderMiddle(const std::string& text, gmt::vec2 pos, sk_float scale = 1.0f, const gmt::vec3 &color = gmt::vec3(0.0f));
 		void renderMiddleUp(const std::string& text, gmt::vec2 pos, sk_float scale = 1.0f, const gmt::vec3 &color = gmt::vec3(0.0f));
 		void renderMiddleDown(const std::string& text, gmt::vec2 pos, sk_float scale = 1.0f, const gmt::vec3 &color = gmt::vec3(0.0f));
 		void renderDownRight(const std::string& text, gmt::vec2 pos, sk_float scale = 1.0f, const gmt::vec3 &color = gmt::vec3(0.0f));

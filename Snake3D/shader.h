@@ -24,6 +24,7 @@ namespace bge
 		void setUniform(const std::string& name, const gmt::mat4& m) const;
 		void setUniform(const std::string& name, sk_float x) const;
 		void setUniform(const std::string& name, sk_uint x) const;
+		void setUniform(const std::string& name, sk_int x) const;
 		bool isValid() const;
 	private:
 		bool genShader(sk_uint& id, GLenum type, const std::string& source);

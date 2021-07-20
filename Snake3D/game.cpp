@@ -1,15 +1,17 @@
 #include "game.h"
 #include "snakeCameraController.h"
 #include "settings.h"
+#include "snakeWorldController.h"
 
 Game::Game(Window& window)
 	: _window(window), 
 	_snake(_grid),
 	_appleSpawner(_grid, _snake),
 	_textRenderer(Settings::getFontPath(), gmt::ortho(0.0f, _window.getWidth(), 0.0f, _window.getHeight()),
-		_window.getWidth(), _window.getHeight()),
+				  _window.getWidth(), _window.getHeight()),
 	_snakeController(std::make_unique<SnakeCameraController>(_camera)),
-	_clearColor(Settings::getClearColor())
+	_clearColor(Settings::getClearColor()),
+	_menu(*this)
 {
 	_window.setCallbacks(*this);
 	
@@ -62,20 +64,25 @@ void Game::resizeCallback(sk_uint width, sk_uint height)
 
 void Game::mouseCallback(sk_double xpos, sk_double ypos)
 {
-	if (_gameOver)
+	if (_gameStatus == GAME_OVER)
 		return;
+
+	if (_gameStatus == GAME_MENU)
+	{
+		_lastXCursorPos = xpos;
+		_lastYCursorPos = ypos;
+		_menu.updateCursorPos(xpos / _window.getWidth(), 1.0f - ypos / _window.getHeight());
+		return;
+	}
 
 	static sk_double lastXpos = xpos;
 	static sk_double lastYpos = ypos;
 
-	if (_mouseCallbackEnabled)
-	{
-		sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
-		sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
+	sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
+	sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
 
-		_camera.changePitch(pitchDelta);
-		_camera.changeYaw(yawDelta);
-	}
+	_camera.changePitch(pitchDelta);
+	_camera.changeYaw(yawDelta);	
 
 	lastXpos = xpos;
 	lastYpos = ypos;
@@ -83,13 +90,57 @@ void Game::mouseCallback(sk_double xpos, sk_double ypos)
 
 void Game::scrollCallback(sk_double xoffset, sk_double yoffset)
 {
-	if (!_gameOver)
+	if (_gameStatus == GAME_RUNNING)
 		_camera.zoom(-yoffset);
+}
+
+void Game::mouseButtonCallback(sk_int button, sk_int action, sk_int mods)
+{
+	if (_gameStatus != GAME_MENU)
+		return;
+
+	static bool prevPress = false;
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		if (action == GLFW_PRESS)
+		{
+			if (!prevPress)
+			{
+				prevPress = true;
+				_menu.processClick(_lastXCursorPos / _window.getWidth(), 1.0f - _lastYCursorPos / _window.getHeight());
+			}
+		}
+		else
+			prevPress = false;
+	}
+}
+
+void Game::switchSnakeController(SNAKE_CONTROLLER_TYPE controllerType)
+{
+	switch (controllerType)
+	{
+	case CameraController:
+		_snakeController.reset(new SnakeCameraController(_camera));
+		break;
+
+	case WorldController:
+		_snakeController.reset(new SnakeWorldController());
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Game::switchGameStatus(GAME_STATUS gameStatus)
+{
+	_gameStatus = gameStatus;
 }
 
 void Game::onUpdate()
 {
-	if (_gameOver)
+	if (_gameStatus != GAME_RUNNING)
 		return;
 
 	for (Updatable& updatable : _updatables)
@@ -98,12 +149,16 @@ void Game::onUpdate()
 
 void Game::onRender()
 {
-	if (!_gameOver)
+	if (_gameStatus == GAME_RUNNING)
 	{
 		onRenderScene();
 		onRenderText();
 	}
-	else
+	else if (_gameStatus == GAME_MENU)
+	{
+		_menu.render();
+	}
+	else if(_gameStatus == GAME_OVER)
 	{
 		_textRenderer.renderMiddleDown("Game Over", { 0.5f, 0.5f }, 3.4f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
 		_textRenderer.renderMiddleUp(std::string("Your final score is: " + std::to_string(_score)), { 0.5f, 0.4f }, 1.9f);
@@ -126,11 +181,11 @@ void Game::onRenderText()
 
 void Game::onCollisions()
 {
-	if (_gameOver)
+	if (_gameStatus != GAME_RUNNING)
 		return;
 
 	if (CollisionDetecter::selfCollide(_snake))
-		_gameOver = true;
+		_gameStatus = GAME_OVER;
 
 	if (CollisionDetecter::collide(_snake, _appleSpawner))
 	{
@@ -142,19 +197,27 @@ void Game::onCollisions()
 
 void Game::processInput()
 {
+
 	if (_window.isPressed(GLFW_KEY_ESCAPE))
 		_window.close();
 
-	if (_window.isPressed(GLFW_KEY_LEFT_ALT))
+	switch (_gameStatus)
 	{
+	case GAME_MENU:
 		_window.setCursorMode(GLFW_CURSOR_NORMAL);
-		_mouseCallbackEnabled = false;
-	}
-	else
-	{
+		break;
+
+	case GAME_RUNNING:
 		_window.setCursorMode(GLFW_CURSOR_DISABLED);
-		_mouseCallbackEnabled = true;
+		break;
+
+	case GAME_OVER:
+		_window.setCursorMode(GLFW_CURSOR_DISABLED);
 	}
 
-	_snakeController->processSnakeMovement(_window, _snake);
+	if (_window.isPressed(GLFW_KEY_LEFT_ALT))
+		_window.setCursorMode(GLFW_CURSOR_NORMAL);
+
+	if(_gameStatus == GAME_RUNNING)
+		_snakeController->processSnakeMovement(_window, _snake);
 }

@@ -27,7 +27,7 @@ Window::Window(sk_uint width, sk_uint height, const std::string& title)
 		return;
 	}
 
-	glfwSetInputMode(_windowPtr, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(_windowPtr, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	glViewport(0, 0, _width, _height);
 
@@ -102,9 +102,16 @@ void Window::setCallbacks(WindowCallbacksInterface& callbacks)
 		static_cast<WindowCallbacksInterface *>(glfwGetWindowUserPointer(window))->scrollCallback(xoffset, yoffset);
 	};
 
+	auto mouseButtonLambda = [](GLFWwindow* window, int button, int action, int mods)
+	{
+		static_cast<WindowCallbacksInterface *>(glfwGetWindowUserPointer(window))->
+												mouseButtonCallback(button, action, mods);
+	};
+
 	glfwSetFramebufferSizeCallback(_windowPtr, resizeCallbackLambda);
 	glfwSetCursorPosCallback(_windowPtr, mouseCallbackLambda);
 	glfwSetScrollCallback(_windowPtr, scrollCallbackLambda);
+	glfwSetMouseButtonCallback(_windowPtr, mouseButtonLambda);
 }
 
 void Window::setCursorMode(sk_int mode)

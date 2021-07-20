@@ -1,3 +1,1 @@
-ERROR: 0:9: 'assign' :  cannot convert from 'uniform 3-component vector of highp float' to 'FragUserData 4-component vector of highp float'
-
-
+ERROR::FLOADER::LOAD_IMAGE::LOAD_FAILED
