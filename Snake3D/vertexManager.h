@@ -18,7 +18,7 @@ namespace bge
 		VertexManager(const VertexManager& o) = delete;
 		VertexManager& operator=(const VertexManager& o) = delete;
 
-		void draw();
+		void draw() const;
 
 		bool isValid() const;
 	private:

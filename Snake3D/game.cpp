@@ -11,13 +11,15 @@ Game::Game(Window& window)
 				  _window.getWidth(), _window.getHeight()),
 	_snakeController(std::make_unique<SnakeCameraController>(_camera)),
 	_clearColor(Settings::getClearColor()),
-	_menu(*this)
+	_menu(*this),
+	_skybox("resources/space_skybox.png")
 {
 	_window.setCallbacks(*this);
 	
 	_drawables.push_back(std::ref(_grid));
 	_drawables.push_back(std::ref(_snake));
 	_drawables.push_back(std::ref(_appleSpawner));
+	_drawables.push_back(std::ref(_skybox));
 
 	_updatables.push_back(std::ref(_snake));
 }

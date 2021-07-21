@@ -145,6 +145,7 @@
     <ClCompile Include="menuSettingsScreen.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="skybox.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="snakeCameraController.cpp" />
     <ClCompile Include="snakeWorldController.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="settings.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="skTypes.h" />
+    <ClInclude Include="skybox.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="snakeCameraController.h" />
     <ClInclude Include="snakeControllerInterface.h" />

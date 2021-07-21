@@ -222,6 +222,9 @@
     <ClCompile Include="menuSelector.cpp">
       <Filter>Source Files\game\menu\clickables</Filter>
     </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gmatrix.h">
@@ -376,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="menuQuad.h">
       <Filter>Header Files\game\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,6 +17,7 @@
 #include "collisions.h"
 #include "snakeControllerInterface.h"
 #include "menu.h"
+#include "skybox.h"
 
 enum GAME_STATUS { GAME_MENU, GAME_OVER, GAME_RUNNING };
 enum SNAKE_CONTROLLER_TYPE { CameraController, WorldController };
@@ -57,6 +58,7 @@ private:
 	std::unique_ptr<SnakeControllerInterface> _snakeController; 
 	AppleSpawner _appleSpawner;
 	bge::TextRenderer _textRenderer;
+	Skybox _skybox;
 
 	std::vector<std::reference_wrapper<Drawable>> _drawables;
 	std::vector<std::reference_wrapper<Updatable>> _updatables;

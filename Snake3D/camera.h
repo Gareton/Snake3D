@@ -25,7 +25,7 @@ private:
 	const gmt::vec3 _worldUp;
 	const sk_float _pitchUbound = gmt::radians(88.0f);
 	const sk_float _pitchLbound = gmt::radians(-88.0f);
-	const sk_float _fovUbound = gmt::radians(70.0f);
+	const sk_float _fovUbound = gmt::radians(50.0f);
 	const sk_float _fovLbound = gmt::radians(1.0f);
 	const sk_float _zoomSpeed = 0.05f;
 

@@ -37,9 +37,9 @@ namespace FLoader
 		return std::move(res);
 	}
 
-	Image loadImage(const std::string& path)
+	Image loadImage(const std::string& path, bool flip)
 	{
-		stbi_set_flip_vertically_on_load(true);
+		stbi_set_flip_vertically_on_load(flip);
 
 		int width = 0, height = 0, nrChannels = 0;
 		sk_uchar *data = stbi_load(&path[0], &width, &height, &nrChannels, 0);
@@ -53,5 +53,16 @@ namespace FLoader
 		stbi_image_free(data);
 
 		return Image(vector_data, width, height, nrChannels);
+	}
+
+	std::vector<sk_float> loadFloats(const std::string& path)
+	{
+		std::vector<sk_float> rval;
+		std::ifstream in(path);
+		sk_float curFloat = 0.0f;
+
+		while (in >> curFloat) rval.push_back(curFloat);
+
+		return std::move(rval);
 	}
 }

@@ -36,6 +36,7 @@ Window::Window(sk_uint width, sk_uint height, const std::string& title)
 	glEnable(GL_MULTISAMPLE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glDepthFunc(GL_LEQUAL);
 
 	if(_wireframeMode)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

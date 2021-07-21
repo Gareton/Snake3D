@@ -42,6 +42,23 @@ Image::Image(std::vector<sk_uchar> &&data_, sk_uint width_, sk_uint height_, sk_
 	: data(data_), width(width_), height(height_), channelsCount(channelsCount_)
 {}
 
+void Image::flip()
+{
+	std::reverse(data.begin(), data.end());
+
+	if(channelsCount > 1)
+		for (sk_uint i = 0; i < data.size(); i += channelsCount)
+			if (channelsCount == 2)
+				std::swap(data[i], data[i + 1]);
+			else if (channelsCount == 3)
+				std::swap(data[i], data[i + 2]);
+			else
+			{
+				std::swap(data[i], data[i + 3]);
+				std::swap(data[i + 1], data[i + 2]);
+			}
+}
+
 const sk_byte* Image::getDataPtr() const
 {
 	if (data.empty()) return nullptr;

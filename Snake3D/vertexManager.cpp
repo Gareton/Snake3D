@@ -95,7 +95,7 @@ namespace bge
 		o._vertexArrayID = 0;
 	}
 
-	void VertexManager::draw()
+	void VertexManager::draw() const
 	{
 		if (!_isValid) throw std::invalid_argument(_errorMessage);
 

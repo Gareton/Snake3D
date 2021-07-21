@@ -15,6 +15,8 @@ public:
 	Image(const sk_uchar *data_, sk_uint width_, sk_uint height_, sk_uint channelsCount_ = 3);
 	Image(std::vector<sk_byte> &&data_, sk_uint width_, sk_uint height_, sk_uint channelsCount_ = 3);
 
+	void flip();
+
 	const sk_byte* getDataPtr() const;
 	sk_uint getWidth() const;
 	sk_uint getHeight() const;
