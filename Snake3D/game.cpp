@@ -81,6 +81,14 @@ void Game::mouseCallback(sk_double xpos, sk_double ypos)
 	static sk_double lastXpos = xpos;
 	static sk_double lastYpos = ypos;
 
+	if (_pressedAlt)
+	{
+		lastXpos = xpos;
+		lastYpos = ypos;
+		return;
+	}
+
+
 	sk_float pitchDelta = (lastYpos - ypos) * _camera.getSensitivity();
 	sk_float yawDelta = (xpos - lastXpos) * _camera.getSensitivity();
 
@@ -210,22 +218,31 @@ void Game::processInput()
 	if (_window.isPressed(GLFW_KEY_ESCAPE))
 		_window.close();
 
+	sk_int cursorMode = GLFW_CURSOR_NORMAL;
+
 	switch (_gameStatus)
 	{
 	case GAME_MENU:
-		_window.setCursorMode(GLFW_CURSOR_NORMAL);
+		cursorMode = GLFW_CURSOR_NORMAL;
 		break;
 
 	case GAME_RUNNING:
-		_window.setCursorMode(GLFW_CURSOR_DISABLED);
+		cursorMode = GLFW_CURSOR_DISABLED;
 		break;
 
 	case GAME_OVER:
-		_window.setCursorMode(GLFW_CURSOR_DISABLED);
+		cursorMode = GLFW_CURSOR_DISABLED;
 	}
 
 	if (_window.isPressed(GLFW_KEY_LEFT_ALT))
-		_window.setCursorMode(GLFW_CURSOR_NORMAL);
+	{
+		cursorMode = GLFW_CURSOR_NORMAL;
+		_pressedAlt = true;
+	}
+	else
+		_pressedAlt = false;
+
+	_window.setCursorMode(cursorMode);
 
 	if(_gameStatus == GAME_RUNNING)
 		_snakeController->processSnakeMovement(_window, _snake);

@@ -64,7 +64,7 @@ bool Window::shouldClose() const
 
 bool Window::isPressed(sk_int key) const
 {
-	return glfwGetKey(_windowPtr, key) == GLFW_PRESS;
+	return glfwGetKey(_windowPtr, key) != GLFW_RELEASE;
 }
 
 std::string Window::what() const

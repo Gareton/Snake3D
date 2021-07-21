@@ -71,6 +71,8 @@ private:
 
 	sk_double _lastXCursorPos;
 	sk_double _lastYCursorPos;
+
+	bool _pressedAlt = false;
 };
 
 #endif
