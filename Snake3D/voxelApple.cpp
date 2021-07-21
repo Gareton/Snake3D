@@ -15,9 +15,17 @@ void VoxelApple::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 
 	gmt::vec3 upPos = pos + gmt::vec3{ 0.0f, sphereVoxelSize, 0.0f } * (radius + 0.5f);
 
+	VoxelSphere::applyTransform(_tform);
 	VoxelSphere::draw(projection, view);
 	drawStick(upPos, otherVoxelSize, projection, view);
 	drawLeaves(upPos, otherVoxelSize, projection, view);
+}
+
+void VoxelApple::update(sk_double dt)
+{
+	_passed += dt;
+	_tform = gmt::translate({0.0f, sk_float(sin(_passed * _floatSpeed) * _floatRange), 0.0f});
+	_tform *= gmt::rotateY(_passed * _rotateSpeed);
 }
 
 void VoxelApple::setPos(const gmt::vec3& pos)
@@ -37,7 +45,7 @@ void VoxelApple::drawStick(const gmt::vec3& upPos, float_t voxelSize, const gmt:
 	_voxel.setColor(_stickColor);
 
 	for (sk_uint i = 0; i < 4; ++i, curPos.y += voxelSize)
-		drawCube(curPos, projection, view);
+		drawCube(upPos, curPos - upPos, projection, view);
 }
 
 void VoxelApple::drawLeaves(gmt::vec3 upPos, float_t voxelSize, const gmt::mat4& projection, const gmt::mat4& view) const
@@ -46,27 +54,28 @@ void VoxelApple::drawLeaves(gmt::vec3 upPos, float_t voxelSize, const gmt::mat4&
 
 	upPos.y += 0.5f * voxelSize;
 
-	drawCube(upPos + gmt::vec3{ 1.0f, -1.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 1.0f, 0.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 1.0f, 1.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 1.0f, 2.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 1.0f, 3.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 1.0f, 4.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, -1.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, 0.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, 1.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, 2.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, 3.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 1.0f, 4.0f, 0.0f } * voxelSize, projection, view);
 
-	drawCube(upPos + gmt::vec3{ 2.0f, 0.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 2.0f, 1.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 2.0f, 2.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 2.0f, 3.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 2.0f, 4.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 2.0f, 5.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 0.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 1.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 2.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 3.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 4.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 2.0f, 5.0f, 0.0f } * voxelSize, projection, view);
 
-	drawCube(upPos + gmt::vec3{ 3.0f, 1.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 3.0f, 2.0f, 0.0f } * voxelSize, projection, view);
-	drawCube(upPos + gmt::vec3{ 3.0f, 3.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 3.0f, 1.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 3.0f, 2.0f, 0.0f } * voxelSize, projection, view);
+	drawCube(upPos, gmt::vec3{ 3.0f, 3.0f, 0.0f } * voxelSize, projection, view);
 }
 
-void VoxelApple::drawCube(const gmt::vec3& pos, const gmt::mat4& projection, const gmt::mat4& view) const
+void VoxelApple::drawCube(const gmt::vec3& gPos, const gmt::vec3& rPos, const gmt::mat4& projection, const gmt::mat4& view) const
 {
-	_voxel.setPos(pos);
+	_voxel.applyTransform(_tform * gmt::translate(rPos));
+	_voxel.setPos(gPos);
 	_voxel.draw(projection, view);
 }

@@ -7,7 +7,7 @@ namespace bge
 	StraightParallelepiped::StraightParallelepiped(const gmt::vec3& size, const gmt::vec3& pos, const gmt::vec3& color)
 		:_shader(FLoader::loadText("shaders/straightParallelepipedShader.vs"),
 			FLoader::loadText("shaders/straightParallelepipedShader.fs")),
-		_pos(pos), _color(color), _size(size)
+		_pos(pos), _color(color), _size(size), _tform(1.0f)
 	{
 
 		std::vector<sk_float> verticies = {
@@ -59,7 +59,7 @@ namespace bge
 
 	void StraightParallelepiped::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 	{
-		gmt::mat4 model = gmt::translate(_pos) * gmt::scale(_size);
+		gmt::mat4 model = gmt::translate(_pos) * _tform * gmt::scale(_size);
 
 		_shader.use();
 
@@ -85,6 +85,11 @@ namespace bge
 	void StraightParallelepiped::setSize(const gmt::vec3& size)
 	{
 		_size = size;
+	}
+
+	void StraightParallelepiped::applyTransform(const gmt::mat4& tform)
+	{
+		_tform = tform;
 	}
 
 	gmt::vec3 StraightParallelepiped::getSize() const

@@ -1,7 +1,7 @@
 #include "voxelSphere.h"
 
 VoxelSphere::VoxelSphere(const gmt::vec3& pos, sk_uint radius, sk_float voxelSize, const gmt::vec3& color)
-	: _pos(pos), _radius(radius), _voxelSize(voxelSize), 
+	: _pos(pos), _radius(radius), _voxelSize(voxelSize), _tform(1.0f),
 	_voxel(voxelSize, gmt::vec3(0.0f), color)
 {}
 
@@ -18,17 +18,20 @@ void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 
 						gmt::vec3 voxelPos = gmt::vec3{ 1.0f * i, 1.0f * j, 1.0f * k } * _voxelSize;
 
-						_voxel.setPos(_pos + voxelPos);
+						_voxel.applyTransform(_tform * gmt::translate(voxelPos));
+						_voxel.setPos(_pos);
 						_voxel.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * k, 1.0f * j, 1.0f * i } *_voxelSize;
 
-						_voxel.setPos(_pos + voxelPos);
+						_voxel.applyTransform(_tform * gmt::translate(voxelPos));
+						_voxel.setPos(_pos);
 						_voxel.draw(projection, view);
 
 						voxelPos = gmt::vec3{ 1.0f * i, 1.0f * k, 1.0f * j } *_voxelSize;
 
-						_voxel.setPos(_pos + voxelPos);
+						_voxel.applyTransform(_tform * gmt::translate(voxelPos));
+						_voxel.setPos(_pos);
 						_voxel.draw(projection, view);
 					}
 }
@@ -36,6 +39,11 @@ void VoxelSphere::draw(const gmt::mat4& projection, const gmt::mat4& view) const
 void VoxelSphere::setPos(const gmt::vec3& pos)
 {
 	_pos = pos;
+}
+
+void VoxelSphere::applyTransform(const gmt::mat4& tform) const
+{
+	_tform = tform;
 }
 
 sk_uint VoxelSphere::getRadius() const

@@ -14,6 +14,7 @@ public:
 	void draw(const gmt::mat4& projection, const gmt::mat4& view) const override;
 	
 	void setPos(const gmt::vec3& pos);
+	void applyTransform(const gmt::mat4& tform) const;
 
 	sk_uint getRadius() const;
 	sk_float getVoxelSize() const;
@@ -23,6 +24,8 @@ private:
 	gmt::vec3 _pos;
 	sk_uint _radius;
 	sk_float _voxelSize;
+
+	mutable gmt::mat4 _tform;
 };
 
 #endif

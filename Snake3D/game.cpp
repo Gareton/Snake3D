@@ -22,6 +22,7 @@ Game::Game(Window& window)
 	_drawables.push_back(std::ref(_skybox));
 
 	_updatables.push_back(std::ref(_snake));
+	_updatables.push_back(std::ref(_appleSpawner));
 }
 
 void Game::run()
@@ -163,7 +164,13 @@ void Game::onRender()
 	else if(_gameStatus == GAME_OVER)
 	{
 		_textRenderer.renderMiddleDown("Game Over", { 0.5f, 0.5f }, 3.4f, gmt::vec3{ 1.0f, 0.314f, 0.016f });
-		_textRenderer.renderMiddleUp(std::string("Your final score is: " + std::to_string(_score)), { 0.5f, 0.4f }, 1.9f);
+
+		std::string fourStr = "))0)";
+
+		if (_score != 4)
+			fourStr = "";
+
+		_textRenderer.renderMiddleUp(std::string("Your final score is: " + std::to_string(_score)) + fourStr, { 0.5f, 0.4f }, 1.9f);
 		_clearColor = gmt::vec3{ 0.016f, 1.0f, 0.443f };
 	}
 }

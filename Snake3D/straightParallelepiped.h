@@ -19,6 +19,8 @@ namespace bge
 		void setPos(const gmt::vec3& pos);
 		void setColor(const gmt::vec3& color);
 
+		void applyTransform(const gmt::mat4& tform);
+
 		gmt::vec3 getSize() const;
 	private:
 		std::unique_ptr<bge::VertexManager> _vertexManager;
@@ -26,6 +28,7 @@ namespace bge
 		gmt::vec3 _pos;
 		gmt::vec3 _color;
 		gmt::vec3 _size;
+		gmt::mat4 _tform;
 	};
 }
 
